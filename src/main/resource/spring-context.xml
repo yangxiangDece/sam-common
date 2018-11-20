@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    		http://www.springframework.org/schema/beans/spring-beans.xsd
+    		http://www.springframework.org/schema/aop
+    		http://www.springframework.org/schema/aop/spring-aop.xsd
+       		http://www.springframework.org/schema/context
+     		http://www.springframework.org/schema/context/spring-context.xsd
+     		http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx.xsd"
+        default-autowire="byName">
+
+    <!-- bean扫描 当使用include-filter的时候use-default-filters必须false，因为use-default-filters默认为true表示他使用默认过滤规则
+    注意：include-filter和exclude-filter只能同时出现其中一个 -->
+    <context:component-scan base-package="com.yang.spring">
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <!--<context:include-filter type="assignable" expression="com.yang.spring.service.impl.UserServiceImpl"/>-->
+        <!--<context:exclude-filter type="assignable" expression="com.yang.spring.service.impl.UserServiceImpl"/>-->
+    </context:component-scan>
+
+    <!-- bean的后置处理器
+     postProcessBeforeInitialization：bean在初始化之前调用
+     postProcessAfterInitialization：bean在初始化后调用-->
+    <bean class="com.yang.spring.processor.MyBeanPostProcessor"/>
+
+    <!-- 静态工厂 createService方法返回的对象是userService接口的实现类，静态方法直接创建对象 -->
+    <!--<bean id="userService" class="com.yang.spring.service.impl.UserServiceImpl" factory-method="createUserService" />-->
+    <!-- 实例工厂 方法返回的对象是userService接口的实现类，通过factory-bean先拿到实例，再创建对象 -->
+    <!--<bean id="userServiceBean" class="com.yang.spring.service.impl.UserServiceImpl" />-->
+    <!--<bean id="userService" factory-bean="userServiceBean" factory-method="createUserService" />-->
+
+    <!-- 导入属性文件 -->
+    <context:property-placeholder location="jdbc.properties"/>
+
+    <!-- 自定义数据源配置 -->
+    <!--<bean id="dataSource" class="com.yang.spring.MySqlDataSource">-->
+        <!--<property name="url" value="${jdbc.url}"/>-->
+        <!--<property name="user" value="${jdbc.user}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+        <!--<property name="driverClass" value="${jdbc.driverClass}"/>-->
+    <!--</bean>-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="filters" value="stat"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <!--<property name="initialSize" value="${jdbc.initialSize}"/>-->
+        <!--<property name="maxWait" value="${jdbc.maxWait}"/>-->
+        <!--<property name="minIdle" value="${jdbc.minIdle}"/>-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>-->
+        <!--<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>-->
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="false"/>
+    </bean>
+
+    <!-- 开启注解事务 proxy-target-class为true表示使用cglib代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <!-- 基于xml配置的aop -->
+    <!-- 配置切面的bean，也可以使用扫描的bean，loggingAspect也可以通过@Component注解被spring扫描注入，都可以 -->
+    <!--<bean id="loggingAspect" class="com.yang.spring.aop.LoggingAspect" />-->
+    <!-- 切面配置 proxy-target-class=true 表示使用cglib动态代理 -->
+    <!--<aop:config proxy-target-class="true">-->
+        <!-- 配置切入点表达式
+        execution(* com.yang.spring..*.*(..))
+            1、execution(): 表达式主体。
+            2、第一个*号：表示返回类型，*号表示所有的类型。
+            3、包名：表示需要拦截的包名，后面的两个句点表示当前包和当前包的所有子包，com.yang.spring包、子孙包下所有类的方法。
+            4、第二个*号：表示类名，*号表示所有的类。
+            5、*(..):最后这个星号表示方法名，*号表示所有的方法，后面括弧里面表示方法的参数，两个句点表示任何参数。
+        -->
+        <!--<aop:pointcut id="pointCutExpression" expression="execution(* com.yang.spring..*.*(..))"/>-->
+        <!-- 配置切面以及通知 -->
+        <!--<aop:aspect ref="loggingAspect" order="1">-->
+            <!--<aop:before method="before" pointcut-ref="pointCutExpression"/>-->
+        <!--</aop:aspect>-->
+        <!--<aop:aspect ref="loggingAspect" order="2">-->
+            <!--<aop:around method="around" pointcut-ref="pointCutExpression"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <!-- 事务
+        声明式事务（注解的方式）：这里配置好了以后，就可以通过@Transactional注解使用了
+        @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = {Exception.class},readOnly = true,timeout = 3)
+        事务传播行为：
+            Spring事务传播行为默认是：Propagation.REQUIRED
+            常用的两个事务：
+                Propagation.REQUIRED：有事务就加入事务，否则创建新的事务
+                Propagation.REQUIRES_NEW：总是创建新的事务，有事务，当前事务则需要在方法执行期间被挂起
+        事务隔离级别：
+            Spring事务隔离级别默认是：Isolation.READ_COMMITTED 不可重复读，具体还是要看底层数据库支持的隔离级别
+        rollbackFor：表示什么样的异常执行事务回滚操作
+        readOnly=true：表示这个事务只读取数据不更新数据，这样可以帮助数据库引擎优化事务
+        timeout = 3：指定强制回滚事务之前事务可以占用的时间，这样可以防止长期运行的事务占用资源，单位是秒 -->
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 启用事务注解 如果名字是transactionManager，那么这个transaction-manager就可以省略不写 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 编程式事务（基于xml的方式） -->
+    <!-- 配置事务属性 -->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!-- 根据方法名指定事务的属性 -->
+            <!--<tx:method name="add" propagation="REQUIRES_NEW"/>-->
+            <!--<tx:method name="add*" propagation="REQUIRES_NEW" isolation="READ_COMMITTED"/>-->
+            <!--<tx:method name="*"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!-- 配置事务切入点，以及把事务切入点和事务关联起来 -->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="txPointCut" expression="execution(* com.yang.spring..*.*(..))"/>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>-->
+    <!--</aop:config>-->
+
+</beans>
