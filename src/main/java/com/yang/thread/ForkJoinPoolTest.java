@@ -18,6 +18,7 @@ public class ForkJoinPoolTest {
 
     static class AddTask extends RecursiveTask<Long> {
 
+        private static final long serialVersionUID = -3512413036710723615L;
         int start,end;
 
         public AddTask(int start, int end) {

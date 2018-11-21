@@ -32,10 +32,16 @@ public class SpringTest {
 //        Resource resource = new ClassPathResource("spring-context.xml");
 //        BeanFactory beanFactory=new XmlBeanFactory(resource);
 
-        ApplicationContext ctx=new ClassPathXmlApplicationContext("spring-context.xml");
-        UserService userService = (UserService) ctx.getBean("userService");
-        int add = userService.add(12, 112);
-        System.out.println(add);
+//        ApplicationContext ctx=new ClassPathXmlApplicationContext("spring-context.xml");
+//        UserService userService = (UserService) ctx.getBean("userService");
+//        int add = userService.add(12, 112);
+//        System.out.println(add);
 
+        System.out.println("开始初始化spring容器");
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("spring-context-life.xml");
+        System.out.println("spring容器初始化完成");
+        applicationContext.getBean("student");
+        System.out.println("关闭spring容器");
+        ((ClassPathXmlApplicationContext)applicationContext).registerShutdownHook();
     }
 }

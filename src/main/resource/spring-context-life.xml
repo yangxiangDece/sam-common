@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean的生命周期 -->
+    <bean id="student" class="com.yang.spring.Student" init-method="beanInit" destroy-method="beanDestroy">
+        <property name="name" value="张三"/>
+        <property name="address" value="成都软件园"/>
+        <property name="phone" value="156854792"/>
+    </bean>
+
+    <bean class="com.yang.spring.processor.MyBeanPostProcessor"/>
+    <bean class="com.yang.spring.processor.MyBeanFactoryPostProcessor"/>
+    <bean class="com.yang.spring.processor.MyInstantiationAwareBeanPostProcessor"/>
+
+</beans>
