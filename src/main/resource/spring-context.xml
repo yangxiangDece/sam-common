@@ -51,11 +51,11 @@
         <property name="driverClassName" value="${jdbc.driverClass}"/>
         <property name="filters" value="stat"/>
         <property name="maxActive" value="${jdbc.maxActive}"/>
-        <!--<property name="initialSize" value="${jdbc.initialSize}"/>-->
-        <!--<property name="maxWait" value="${jdbc.maxWait}"/>-->
-        <!--<property name="minIdle" value="${jdbc.minIdle}"/>-->
-        <!--<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>-->
-        <!--<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>-->
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
         <property name="validationQuery" value="SELECT 1"/>
         <property name="testWhileIdle" value="true"/>
         <property name="testOnBorrow" value="true"/>
