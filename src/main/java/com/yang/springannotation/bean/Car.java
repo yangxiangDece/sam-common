@@ -12,11 +12,11 @@ public class Car implements InitializingBean,DisposableBean {
     }
 
     public void initMethod(){
-        System.out.println("initMethod invoke...");
+        System.out.println("initMethod car invoke...");
     }
 
     public void destroyMethod(){
-        System.out.println("destroyMethod invoke...");
+        System.out.println("destroyMethod car invoke...");
     }
 
     public String getName() {
@@ -29,11 +29,11 @@ public class Car implements InitializingBean,DisposableBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("[InitializingBean] afterPropertiesSet invoke...");
+        System.out.println("[InitializingBean] car afterPropertiesSet invoke...");
     }
 
     @Override
     public void destroy() throws Exception {
-        System.out.println("[DisposableBean] destroy invoke...");
+        System.out.println("[DisposableBean] car destroy invoke...");
     }
 }
