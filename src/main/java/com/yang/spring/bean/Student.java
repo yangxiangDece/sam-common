@@ -1,4 +1,4 @@
-package com.yang.spring;
+package com.yang.spring.bean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;

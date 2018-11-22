@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean的生命周期 -->
-    <bean id="student" class="com.yang.spring.Student" init-method="beanInit" destroy-method="beanDestroy">
+    <bean id="student" class="com.yang.spring.bean.Student" init-method="beanInit" destroy-method="beanDestroy">
         <property name="name" value="张三"/>
         <property name="address" value="成都软件园"/>
         <property name="phone" value="156854792"/>

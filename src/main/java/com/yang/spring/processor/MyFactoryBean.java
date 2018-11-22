@@ -1,6 +1,6 @@
 package com.yang.spring.processor;
 
-import com.yang.spring.User;
+import com.yang.spring.bean.User;
 import org.springframework.beans.factory.FactoryBean;
 
 /**

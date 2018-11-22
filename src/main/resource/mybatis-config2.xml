@@ -17,6 +17,9 @@
      mappers：映射器
      -->
 <configuration>
+    <!-- 配置数据源的连接信息 -->
+    <properties resource="jdbc.properties"/>
+    <!-- 全局配置 -->
     <settings>
         <!-- 这个配置使全局的映射器启用或禁用 缓存 -->
         <setting name="cacheEnabled" value="false" />
@@ -43,5 +46,25 @@
     <typeAliases>
         <typeAlias type="com.yang.spring.bean.User" alias="user"/>
     </typeAliases>
+    <!-- 插件配置 -->
+    <plugins>
+        <plugin interceptor="com.yang.spring.plugin.MyInterceptor"/>
+    </plugins>
+    <!-- 环境配置 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClass}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 映射器 -->
+    <mappers>
+        <mapper resource="mapper/AccountMapper.xml"/>
+    </mappers>
 
 </configuration>

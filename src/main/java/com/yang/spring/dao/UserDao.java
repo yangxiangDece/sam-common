@@ -1,8 +1,7 @@
 package com.yang.spring.dao;
 
-import com.yang.spring.User;
+import com.yang.spring.bean.User;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

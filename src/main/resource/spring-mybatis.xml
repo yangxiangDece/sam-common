@@ -39,7 +39,7 @@
     </bean>
     <!-- 集成Mybatis -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--<property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -48,6 +48,9 @@
         1、采用MapperScannerConfigurer，它将会查找类路径下的映射器并自动将它们创建成MapperFactoryBean。
         2、采用接口org.apache.ibatis.session.SqlSession的实现类org.mybatis.spring.SqlSessionTemplate。
     -->
+    <!--<bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+    <!--<constructor-arg name="sqlSessionFactory" value="sqlSessionFactory"/>-->
+    <!--</bean>-->
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 ,包下的类需要使用@MapperScan注解,否则容器注入会失败 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

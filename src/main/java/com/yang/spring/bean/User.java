@@ -1,4 +1,4 @@
-package com.yang.spring;
+package com.yang.spring.bean;
 
 public class User {
 

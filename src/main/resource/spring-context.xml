@@ -37,13 +37,7 @@
     <!-- 导入属性文件 -->
     <context:property-placeholder location="jdbc.properties"/>
 
-    <!-- 自定义数据源配置 -->
-    <!--<bean id="dataSource" class="com.yang.spring.MySqlDataSource">-->
-        <!--<property name="url" value="${jdbc.url}"/>-->
-        <!--<property name="user" value="${jdbc.user}"/>-->
-        <!--<property name="password" value="${jdbc.password}"/>-->
-        <!--<property name="driverClass" value="${jdbc.driverClass}"/>-->
-    <!--</bean>-->
+    <!-- 数据源配置 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.user}"/>
