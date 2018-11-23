@@ -61,9 +61,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-
     <!-- spring mvc configuration end -->
-
-
 
 </beans>

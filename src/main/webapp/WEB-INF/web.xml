@@ -16,6 +16,14 @@
         <filter-name>hiddenHttpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!-- 配置上下文载入器，作用：载入除DispatcherServlet载入的配置文件之外的其他上下文配置文件，最常用的上下文载入器是一个Servlet监听器，即ContextLoaderListener
+        ContextLoaderListener的作用就是启动web容器时，自动装配ApplicationContext的配置信息，因为它实现了ServletContextListener接口，在web.xml配置这个监听器，
+        启动容器时，就会默认执行它实现的方法，使用ServletContextListener接口，开发者能够在为客户端请求提供服务之前向ServletContext中添加任意的对象。
+        每一个Web应用都有一个ServletContext与之相关联，ServletContext对象在应用启动时被创建，在应用关闭时被销毁。ServletContext在全局范围内有效，类似于应用中的一个全局变量。
+        在ServletContextListener中的核心逻辑便是初始化WebApplicationContext 实例并存放至ServletContext中。 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <!-- 配置DispatcherServlet -->
     <servlet>

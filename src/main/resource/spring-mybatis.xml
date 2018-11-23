@@ -39,11 +39,12 @@
     </bean>
     <!-- 集成Mybatis -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 下面这行可以去掉，spring可以直接支持在这里配置SqlSessionFactoryBean的所有属性值，不过我们一般还是将spring、mybatis配置分开独立写
+                比如：<property name="plugins" value=""/> <property name="typeAliases" value=""/> -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
     <!-- spring集成mybatis常用的两种方式：
         1、采用MapperScannerConfigurer，它将会查找类路径下的映射器并自动将它们创建成MapperFactoryBean。
         2、采用接口org.apache.ibatis.session.SqlSession的实现类org.mybatis.spring.SqlSessionTemplate。

@@ -100,5 +100,9 @@ public class SpringTest {
         applicationContext.getBean("student");
         System.out.println("关闭spring容器");
         ((ClassPathXmlApplicationContext)applicationContext).registerShutdownHook();
+
+//        ClassPathXmlApplicationContext classPathXmlApplicationContext=new ClassPathXmlApplicationContext();
+//        classPathXmlApplicationContext.setConfigLocation("spring-context-life.xml");
+//        classPathXmlApplicationContext.refresh();
     }
 }
