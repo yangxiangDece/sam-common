@@ -14,5 +14,6 @@
     <bean class="com.yang.spring.processor.MyBeanFactoryPostProcessor"/>
     <bean class="com.yang.spring.processor.MyInstantiationAwareBeanPostProcessor"/>
     <bean class="com.yang.spring.processor.MyApplicationContext"/>
+    <bean class="com.yang.spring.processor.MyBeanDefinitionRegistryPostProcessor"/>
 
 </beans>

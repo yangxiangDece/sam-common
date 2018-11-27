@@ -95,7 +95,7 @@ public class LoggingAspect {
      * @return
      */
 //    @Around("execution(* com.yang.spring.service..*.*(..))")
-    @Around("joinPointExpression()")
+    @Around(value = "joinPointExpression()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint){
         //环绕的意思是可以像动态代理一样灵活的在方法的各个切入点植入自己的逻辑
         System.out.println("around invoke...");
