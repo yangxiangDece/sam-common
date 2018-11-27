@@ -1,8 +1,11 @@
 package com.yang.dubbo.api.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Order {
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = -5050031815463072030L;
 
     private String orderId;
 
@@ -27,5 +30,13 @@ public class Order {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId='" + orderId + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
