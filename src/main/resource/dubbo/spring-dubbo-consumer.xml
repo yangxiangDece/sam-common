@@ -8,9 +8,9 @@
             http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
-    <dubbo:application name="consumer-test"  />
+    <dubbo:application name="consumer-test"/>
     <!-- 配置注册中心，这里使用zookeeper -->
-    <dubbo:registry address="zookeeper://192.168.75.128:2181"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.75.128:2181"/>
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
     <dubbo:reference id="orderService" interface="com.yang.dubbo.api.service.OrderService"/>
 

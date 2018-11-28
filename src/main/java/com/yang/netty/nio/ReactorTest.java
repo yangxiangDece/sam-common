@@ -32,7 +32,7 @@ class Reactor implements Runnable {
 
     /**
      * 也可以使用spi的方式
-     * SelectorProvider p=SelectorProvider.provider();
+     * SelectorProvider p=SelectorProvider.service();
      * selector=p.openSelector();
      * serverSocket=p.openServerSocketChannel();
      */

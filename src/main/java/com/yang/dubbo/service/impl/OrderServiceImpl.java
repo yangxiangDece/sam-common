@@ -1,4 +1,4 @@
-package com.yang.dubbo.provider;
+package com.yang.dubbo.service.impl;
 
 import com.yang.dubbo.api.entity.Order;
 import com.yang.dubbo.api.service.OrderService;

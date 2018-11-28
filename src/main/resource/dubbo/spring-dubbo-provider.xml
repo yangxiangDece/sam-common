@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://dubbo.apache.org/schema/dubbo
+            http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!-- 用于配置当前应用信息，不管该应用是提供者还是消费者 -->
+    <dubbo:application name="provider-test"/>
+    <!-- 配置注册中心，这里使用zookeeper -->
+    <dubbo:registry protocol="zookeeper" address="192.168.75.128:2181"/>
+    <!-- 用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受 -->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <!-- 用于暴露一个服务，定义服务的元信息，一个服务可以用多个协议暴露，一个服务也可以注册到多个注册中心 -->
+    <dubbo:service interface="com.yang.dubbo.api.service.OrderService" ref="orderService"/>
+    <bean id="orderService" class="com.yang.dubbo.service.impl.OrderServiceImpl"/>
+
+</beans>
