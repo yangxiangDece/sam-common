@@ -13,6 +13,8 @@
     <dubbo:registry protocol="zookeeper" address="192.168.75.128:2181"/>
     <!-- 用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受 -->
     <dubbo:protocol name="dubbo" port="20880"/>
+    <!-- 配置当前服务提供者的统一规则 -->
+    <dubbo:provider timeout="3000"/>
     <!-- 用于暴露一个服务，定义服务的元信息，一个服务可以用多个协议暴露，一个服务也可以注册到多个注册中心 -->
     <dubbo:service interface="com.yang.dubbo.api.service.OrderService" ref="orderService"/>
     <bean id="orderService" class="com.yang.dubbo.service.impl.OrderServiceImpl"/>

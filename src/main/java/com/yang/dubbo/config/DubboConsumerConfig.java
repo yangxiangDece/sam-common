@@ -8,10 +8,17 @@ import com.yang.dubbo.api.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * dubbo原理：
+ *
+ *
+ */
 @DubboComponentScan(basePackages = "com.yang.dubbo.api.service")
 @Configuration
 public class DubboConsumerConfig {
 
+    //消费者可以直接连服务提供者
+//    @Reference(url = "127.0.0.1:20881")
     @Reference
     private UserService userService;
 
