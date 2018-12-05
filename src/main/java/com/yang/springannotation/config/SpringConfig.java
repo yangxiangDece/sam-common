@@ -68,6 +68,9 @@ public class SpringConfig {
         return new ColorFactoryBean();
     }
 
+    //也可以使用@PostConstruct 和 @PreDestroy
+    //@PostConstruct 和 initMethod：在构造函数执行完之后执行
+    //@PreDestroy 和 destroyMethod：在Bean销毁之前执行
     @Bean(initMethod = "initMethod",destroyMethod = "destroyMethod")
     public Car car(){
         return new Car();
