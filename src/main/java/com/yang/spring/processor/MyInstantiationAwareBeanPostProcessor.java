@@ -16,15 +16,15 @@ public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBea
 
     /**
      * 接口方法、实例化Bean之前调用
-     * @param bean
+     * @param beanClass
      * @param beanName
      * @return
      * @throws BeansException
      */
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("[InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessBeforeInitialization()...");
-        return super.postProcessBeforeInitialization(bean, beanName);
+    public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
+        System.out.println("[InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessBeforeInstantiation()...");
+        return super.postProcessBeforeInstantiation(beanClass, beanName);
     }
 
     /**
@@ -35,13 +35,13 @@ public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBea
      * @throws BeansException
      */
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("[InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessAfterInitialization()...");
-        return super.postProcessAfterInitialization(bean, beanName);
+    public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+        System.out.println("[InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessAfterInstantiation()...");
+        return super.postProcessAfterInstantiation(bean, beanName);
     }
 
     /**
-     * 接口方法、设置某个属性时调用
+     * 接口方法、设置某个属性时调用，设置每一个属性都会调用
      * @param pvs
      * @param bean
      * @param beanName
