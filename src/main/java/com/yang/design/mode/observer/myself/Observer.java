@@ -1,5 +1,8 @@
 package com.yang.design.mode.observer.myself;
 
+/**
+ * Observer（观察者）
+ */
 public interface Observer {
     /**
      * 所有观察者都必须实现update()方法，以实现观察者接口

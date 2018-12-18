@@ -1,5 +1,8 @@
 package com.yang.design.mode.observer.myself;
 
+/**
+ * Subject（目标）
+ */
 public interface Subject {
     void registerObserver(Observer observer);
     void removeObserver(Observer observer);

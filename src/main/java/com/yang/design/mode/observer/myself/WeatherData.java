@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * ConcreteSubject（具体目标）
  * 主题的具体实现
  */
 public class WeatherData implements Subject {

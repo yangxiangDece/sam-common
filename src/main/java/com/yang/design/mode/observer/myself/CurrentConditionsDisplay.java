@@ -1,6 +1,7 @@
 package com.yang.design.mode.observer.myself;
 
 /**
+ * ConcreteObserver（具体观察者）
  * 实现自定义Observer、DisplayElement接口
  */
 public class CurrentConditionsDisplay implements Observer,DisplayElement {

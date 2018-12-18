@@ -1,5 +1,8 @@
 package com.yang.design.mode.strategy;
 
+/**
+ * Context（环境类）
+ */
 public abstract class Duck {
 
     FlyBehavior flyBehavior;

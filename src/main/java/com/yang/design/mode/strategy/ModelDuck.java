@@ -1,5 +1,8 @@
 package com.yang.design.mode.strategy;
 
+/**
+ * ConcreteStrategy（具体策略类）
+ */
 public class ModelDuck extends Duck {
 
     //定义MallardDuck的默认行为实现，也可以通过父类的setter方法，动态设置行为
