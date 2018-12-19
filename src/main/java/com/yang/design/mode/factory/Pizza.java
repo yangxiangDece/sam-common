@@ -5,8 +5,9 @@ import java.util.List;
 
 /**
  * 产品类（product），工厂生产产品，对PizzaStore来说，产品就是Pizza
+ * 从一个抽象比萨类开始，所有的具体比萨都必须派生自这个类
  */
-public class Pizza {
+public abstract class Pizza {
 
     String name;
     String dough;
