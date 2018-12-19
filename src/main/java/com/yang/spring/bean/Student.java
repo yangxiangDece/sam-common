@@ -24,7 +24,7 @@ import org.springframework.context.ApplicationContextAware;
         [BeanPostProcessor] postProcessBeforeInitialization bean:student
         [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessBeforeInitialization()...
         [InitializingBean] 调用 afterPropertiesSet()... ：Student{name='张三', address='成都软件园', phone=12456, beanFactory=org.springframework.beans.factory.support.DefaultListableBeanFactory@685cb137: defining beans [student,com.yang.spring.processor.MyBeanPostProcessor#0,com.yang.spring.processor.MyBeanFactoryPostProcessor#0,com.yang.spring.processor.MyInstantiationAwareBeanPostProcessor#0,com.yang.spring.processor.MyApplicationContext#0]; root of factory hierarchy, beanName='student'}
-        调用了 bean 的 init-method ....
+        调用了 bean 的 init-abstracts ....
         [BeanPostProcessor] postProcessAfterInitialization bean:student
         [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessAfterInitialization()...
 
@@ -38,7 +38,7 @@ import org.springframework.context.ApplicationContextAware;
         spring容器初始化完成
         关闭spring容器
         [DisposableBean] 调用了 destroy()...
-        调用了 bean 的 destroy-method ...
+        调用了 bean 的 destroy-abstracts ...
  *
  *
  *
@@ -58,7 +58,7 @@ import org.springframework.context.ApplicationContextAware;
  * 7、Bean定义文件中定义的init-method方法
  * 8、BeanPostProcessors的processAfterInitialization()：容器中如果有实现org.springframework.beans.factory.BeanPostProcessors接口的实例，则任何Bean在初始化之前都会执行这个实例的processAfterInitialization()方法。
  * 9、DisposableBean的destroy()：在容器关闭时，如果Bean类实现了org.springframework.beans.factory.DisposableBean接口，则执行它的destroy()方法。
- * 10、Bean定义文件中定义destroy-method
+ * 10、Bean定义文件中定义destroy-abstracts
  *
  * 如果使用ApplicationContext来维护一个Bean的生命周期，则基本上与上边的流程相同，只不过在执行BeanNameAware的setBeanName()后，
  * 若有Bean类实现了org.springframework.context.ApplicationContextAware接口，则执行其setApplicationContext()方法，
@@ -128,11 +128,11 @@ public class Student implements BeanFactoryAware,InitializingBean,BeanNameAware,
     }
 
     public void beanInit(){
-        System.out.println("调用了 bean 的 init-method ....");
+        System.out.println("调用了 bean 的 init-abstracts ....");
     }
 
     public void beanDestroy(){
-        System.out.println("调用了 bean 的 destroy-method ...");
+        System.out.println("调用了 bean 的 destroy-abstracts ...");
     }
 
     @Override

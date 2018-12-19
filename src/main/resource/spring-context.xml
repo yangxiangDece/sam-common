@@ -29,10 +29,10 @@
     <bean class="com.yang.spring.processor.MyBeanPostProcessor"/>
 
     <!-- 静态工厂 createService方法返回的对象是userService接口的实现类，静态方法直接创建对象 -->
-    <!--<bean id="userService" class="com.yang.spring.service.impl.UserServiceImpl" factory-method="createUserService" />-->
+    <!--<bean id="userService" class="com.yang.spring.service.impl.UserServiceImpl" factory-abstracts="createUserService" />-->
     <!-- 实例工厂 方法返回的对象是userService接口的实现类，通过factory-bean先拿到实例，再创建对象 -->
     <!--<bean id="userServiceBean" class="com.yang.spring.service.impl.UserServiceImpl" />-->
-    <!--<bean id="userService" factory-bean="userServiceBean" factory-method="createUserService" />-->
+    <!--<bean id="userService" factory-bean="userServiceBean" factory-abstracts="createUserService" />-->
 
     <!-- 导入属性文件 -->
     <context:property-placeholder location="jdbc.properties"/>
@@ -75,10 +75,10 @@
         <!--<aop:pointcut id="pointCutExpression" expression="execution(* com.yang.spring..*.*(..))"/>-->
         <!-- 配置切面以及通知 -->
         <!--<aop:aspect ref="loggingAspect" order="1">-->
-            <!--<aop:before method="before" pointcut-ref="pointCutExpression"/>-->
+            <!--<aop:before abstracts="before" pointcut-ref="pointCutExpression"/>-->
         <!--</aop:aspect>-->
         <!--<aop:aspect ref="loggingAspect" order="2">-->
-            <!--<aop:around method="around" pointcut-ref="pointCutExpression"/>-->
+            <!--<aop:around abstracts="around" pointcut-ref="pointCutExpression"/>-->
         <!--</aop:aspect>-->
     <!--</aop:config>-->
 
@@ -107,9 +107,9 @@
     <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
         <!--<tx:attributes>-->
             <!-- 根据方法名指定事务的属性 -->
-            <!--<tx:method name="add" propagation="REQUIRES_NEW"/>-->
-            <!--<tx:method name="add*" propagation="REQUIRES_NEW" isolation="READ_COMMITTED"/>-->
-            <!--<tx:method name="*"/>-->
+            <!--<tx:abstracts name="add" propagation="REQUIRES_NEW"/>-->
+            <!--<tx:abstracts name="add*" propagation="REQUIRES_NEW" isolation="READ_COMMITTED"/>-->
+            <!--<tx:abstracts name="*"/>-->
         <!--</tx:attributes>-->
     <!--</tx:advice>-->
     <!-- 配置事务切入点，以及把事务切入点和事务关联起来 -->

@@ -104,7 +104,7 @@ public class LoggingAspect {
         try {
             //前置通知
             System.out.println("around 前置通知...");
-            System.out.println("this method name:"+methodName);
+            System.out.println("this abstracts name:"+methodName);
             //执行目标方法
             result=proceedingJoinPoint.proceed();
             //后置通知
