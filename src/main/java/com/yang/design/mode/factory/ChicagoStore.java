@@ -1,5 +1,8 @@
 package com.yang.design.mode.factory;
 
+/**
+ * 具体工厂创建者（ConcreteCreator），createPizza(String type)就是工厂方法，能够实际产生产品
+ */
 public class ChicagoStore extends PizzaStore {
 
     @Override

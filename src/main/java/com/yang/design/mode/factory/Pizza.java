@@ -3,6 +3,9 @@ package com.yang.design.mode.factory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 产品类（product），工厂生产产品，对PizzaStore来说，产品就是Pizza
+ */
 public class Pizza {
 
     String name;
