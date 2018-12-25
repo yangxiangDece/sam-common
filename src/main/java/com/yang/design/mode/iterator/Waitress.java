@@ -1,21 +1,19 @@
 package com.yang.design.mode.iterator;
 
+/**
+ * 这里运用了迭代器模式和组合模式
+ */
 public class Waitress {
-    private PancakeHouseMenu pancakeHouseMenu;
-    private DinerMenu dinerMenu;
+    private CreateIterator[] iterators;
 
-    public Waitress(PancakeHouseMenu pancakeHouseMenu, DinerMenu dinerMenu) {
-        this.pancakeHouseMenu = pancakeHouseMenu;
-        this.dinerMenu = dinerMenu;
+    public Waitress(CreateIterator... iterators) {
+        this.iterators = iterators;
     }
 
     public void printMenu(){
-        MyIterator pancakeIterator=pancakeHouseMenu.createIterator();
-        MyIterator dinerMenuIterator=dinerMenu.createIterator();
-        System.out.println("Menu\n-----\nBreakFast");
-        printMenu(pancakeIterator);
-        System.out.println("\nlunch");
-        printMenu(dinerMenuIterator);
+        for (CreateIterator iterator:iterators) {
+            printMenu(iterator.createIterator());
+        }
     }
 
     private void printMenu(MyIterator iterator){

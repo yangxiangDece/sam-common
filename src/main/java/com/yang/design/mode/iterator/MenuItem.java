@@ -2,10 +2,10 @@ package com.yang.design.mode.iterator;
 
 public class MenuItem {
 
-    String name;
-    String description;
-    boolean vegetarian;
-    double price;
+    private String name;
+    private String description;
+    private boolean vegetarian;
+    private double price;
 
     public MenuItem(String name, String description, boolean vegetarian, double price) {
         this.name = name;

@@ -1,6 +1,6 @@
 package com.yang.design.mode.iterator;
 
-public class DinerMenu {
+public class DinerMenu implements CreateIterator {
     private static final int MAX_ITEMS=4;
     private int numberOfItems=0;
     private MenuItem[] menuItems;
@@ -25,6 +25,7 @@ public class DinerMenu {
         return menuItems;
     }
 
+    @Override
     public MyIterator createIterator(){
         return new DinerMenuIterator(menuItems);
     }
