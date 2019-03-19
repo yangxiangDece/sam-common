@@ -5,28 +5,30 @@ package com.yang.arithmetic;
  */
 public class SingleLinked<E> {
 
-    private Linked<E> first;
+    private Node<E> first;
 
     public SingleLinked() {
     }
 
-    private void addFirst(E e) {
-        first.next = e;
+    private void add(E e) {
+        final Node<E> f = first;
+        first = new Node<>(e,f);
     }
 
-    private static class Linked<E> {
+    private static class Node<E> {
 
         E value;
 
-        public E next;
+        Node<E> next;
 
-        public Linked(E value) {
+        public Node(E value,Node<E> next) {
             this.value = value;
+            this.next = next;
         }
 
         @Override
         public String toString() {
-            return "Linked{" +
+            return "Node{" +
                     "value=" + value +
                     '}';
         }
