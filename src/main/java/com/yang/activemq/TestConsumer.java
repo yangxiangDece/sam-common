@@ -15,7 +15,7 @@ public class TestConsumer {
     //ActiveMq 的默认登录密码
     private static final String PASSWORD = "admin";
     //ActiveMQ 的链接地址 Openwire协议
-    private static final String BROKEN_URL = "tcp://192.168.75.128:61616";
+    private static final String BROKEN_URL = "tcp://192.168.248.129:61616";
 
     //事务管理
     private Session session;
@@ -39,6 +39,7 @@ public class TestConsumer {
 
     private void getMessage(String disName){
         try {
+            //创建队列模式，session.createTopic()可以创建topic模式
             Queue queue = session.createQueue(disName);
             MessageConsumer consumer = session.createConsumer(queue);
             while (true){

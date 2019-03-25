@@ -14,7 +14,7 @@ public class TestProducer {
     //ActiveMq 的默认登录密码
     private static final String PASSWORD = "admin";
     //ActiveMQ 的链接地址
-    private static final String BROKEN_URL = "tcp://192.168.75.128:61616";
+    private static final String BROKEN_URL = "tcp://192.168.248.129:61616";
 
     //事务管理
     private Session session;
@@ -38,6 +38,7 @@ public class TestProducer {
 
     private void sendMessage(String disName){
         try {
+            //创建队列模式，session.createTopic()可以创建topic模式
             //创建一个消息队列
             Queue queue=session.createQueue(disName);
             //消息生产者
@@ -45,7 +46,7 @@ public class TestProducer {
             int num = 0;
             while (true) {
                 Thread.sleep(1000);
-                TextMessage msg = session.createTextMessage("生产者生产消息,编号"+(++num));
+                TextMessage msg = session.createTextMessage("生产者生产的消息,编号"+(++num));
                 System.out.println("打印：生产者生产消息,编号"+num);
                 //发送消息
                 messageProducer.send(msg);
