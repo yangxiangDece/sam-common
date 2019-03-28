@@ -15,13 +15,13 @@ public class MergeSort {
     }
 
     private static void sort(int[] array){
-        int []temp = new int[array.length];//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
+        int[] temp = new int[array.length];//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
         sort(array,0,array.length-1,temp);
     }
 
-    private static void sort(int[] array,int left,int right,int []temp){
-        if(left<right){
-            int mid = (left+right)/2;
+    private static void sort(int[] array,int left,int right,int[] temp){
+        if(left < right) {
+            int mid = (left + right) / 2;
             sort(array,left,mid,temp);//左边归并排序，使得左子序列有序
             sort(array,mid+1,right,temp);//右边归并排序，使得右子序列有序
             merge(array,left,mid,right,temp);//将两个有序子数组合并操作
