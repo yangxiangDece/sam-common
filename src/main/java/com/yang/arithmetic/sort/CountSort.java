@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class CountSort {
 
     public static void main(String[] args) {
-        int[] array = {12,66,222,141,38,65,97,777,-888,62,111,98,54,56,17,18,23,34,15,35,25,53,51,1};
+        int[] array = {12,66,222,141,38,65,97,777,88,62,111,98,54,56,17,18,23,34,15,35,25,53,51,1};
         sort(array);
         System.out.println(Arrays.toString(array));
     }
@@ -27,7 +27,6 @@ public class CountSort {
         }
         bias = 0 - min;
         int[] temp = new int[max - min + 1];
-        Arrays.fill(temp, 0);
         for (int i = 0; i < array.length; i++) {
             temp[array[i] + bias]++;
         }
@@ -37,8 +36,9 @@ public class CountSort {
                 array[index] = i - bias;
                 temp[i]--;
                 index++;
-            } else
+            } else {
                 i++;
+            }
         }
     }
 }
