@@ -18,8 +18,8 @@ public class ReactorTest {
 }
 class Reactor implements Runnable {
 
-    final Selector selector;
-    final ServerSocketChannel serverSocket;
+    private final Selector selector;
+    private final ServerSocketChannel serverSocket;
 
     Reactor(int port) throws IOException {
         selector=Selector.open();
@@ -43,9 +43,8 @@ class Reactor implements Runnable {
             while (!Thread.interrupted()) {
                 selector.select();
                 Set<SelectionKey> selectionKeys = selector.selectedKeys();
-                Iterator<SelectionKey> it = selectionKeys.iterator();
-                while (it.hasNext()){
-                    dispatch(it.next());
+                for (SelectionKey selectionKey : selectionKeys) {
+                    dispatch(selectionKey);
                 }
                 selectionKeys.clear();
             }
@@ -53,7 +52,7 @@ class Reactor implements Runnable {
             e.printStackTrace();
         }
     }
-    void dispatch(SelectionKey k){
+    private void dispatch(SelectionKey k){
         Runnable r = (Runnable) k.attachment();
         if(r!=null){
             r.run();
@@ -76,12 +75,12 @@ class Reactor implements Runnable {
 }
 class Handler implements Runnable {
 
-    final SelectionKey sk;
-    final SocketChannel socket;
-    ByteBuffer input=ByteBuffer.allocate(1024);
-    ByteBuffer output=ByteBuffer.allocate(1024);
-    static final int READING=0,SENDING=1;
-    int state=READING;
+    private final SelectionKey sk;
+    private final SocketChannel socket;
+    private ByteBuffer input=ByteBuffer.allocate(1024);
+    private ByteBuffer output=ByteBuffer.allocate(1024);
+    private static final int READING=0,SENDING=1;
+    private int state=READING;
 
     Handler(Selector selector,SocketChannel socketChannel) throws IOException{
         this.socket=socketChannel;
