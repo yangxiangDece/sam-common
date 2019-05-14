@@ -125,7 +125,7 @@ public class MyXmlBeanDefinitionReader extends MyAbstractBeanDefinitionReader {
                                         + name + "' must specify a ref or value");
                     }
                     // 如果不为空，表示有ref引用 则创建建一个 “bean的引用” 实例，构造参数为名称，实例暂时为空
-                    MyBeanReference beanReference = new MyBeanReference(name);
+                    MyBeanReference beanReference = new MyBeanReference(name, ref);
                     // 向给定的 “bean定义” 中添加属性
                     beanDefinition.getPropertyValues().addPropertyValue(new MyPropertyValue(name, beanReference));
                 }

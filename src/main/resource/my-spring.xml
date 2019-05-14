@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/beans ">
+
+    <bean name="resourceBean" class="com.yang.spring.myspring.bean.ResourceBean">
+        <property name="text" value="Hello Resource..."/>
+    </bean>
+
+    <bean name="roleBean" class="com.yang.spring.myspring.bean.RoleBean">
+        <property name="resourceBean" ref="resourceBean"/>
+    </bean>
+
+    <bean name="userBean" class="com.yang.spring.myspring.bean.UserBean">
+        <property name="roleBean" ref="roleBean"/>
+    </bean>
+
+</beans>
