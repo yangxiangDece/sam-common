@@ -8,24 +8,24 @@ public class MyIdleServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if(evt instanceof IdleStateEvent){
-            IdleStateEvent event=(IdleStateEvent) evt;
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event = (IdleStateEvent) evt;
 
             String eventType;
-            switch (event.state()){
+            switch (event.state()) {
                 case ALL_IDLE:
-                    eventType="读写空闲";
+                    eventType = "读写空闲";
                     break;
                 case READER_IDLE:
-                    eventType="读空闲";
+                    eventType = "读空闲";
                     break;
                 case WRITER_IDLE:
-                    eventType="写空闲";
+                    eventType = "写空闲";
                     break;
                 default:
-                    eventType="";
+                    eventType = "";
             }
-            System.out.println(ctx.channel().remoteAddress()+"超时事件："+eventType);
+            System.out.println(ctx.channel().remoteAddress() + "超时事件：" + eventType);
             ctx.channel().close();
         }
     }

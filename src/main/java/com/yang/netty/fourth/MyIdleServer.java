@@ -9,26 +9,26 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
-*
-* @description 读、写、读写空闲
-* @author YangXiang
-* @time 2018/10/20 10:38
-*
-*/
+ * @author YangXiang
+ * @description 读、写、读写空闲
+ * @time 2018/10/20 10:38
+ */
 public class MyIdleServer {
 
     public static void main(String[] args) throws Exception {
-        EventLoopGroup bossGroup=new NioEventLoopGroup();
-        EventLoopGroup workerGroup=new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
-            ServerBootstrap serverBootstrap=new ServerBootstrap();
-            serverBootstrap.group(bossGroup,workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO)).
-                    childHandler(new MyIdleServerInitializer());
+            ServerBootstrap serverBootstrap = new ServerBootstrap();
+            serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new MyIdleServerInitializer());
 
-            ChannelFuture channelFuture=serverBootstrap.bind("localhost",9999).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind("localhost", 9999).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
         }
     }
 }
