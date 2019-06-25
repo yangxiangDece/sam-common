@@ -1,4 +1,4 @@
-package com.yang;
+package com.yang.common;
 
 import org.apache.commons.lang3.StringUtils;
 
