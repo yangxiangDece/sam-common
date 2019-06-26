@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
         @ComponentScan.Filter(type = FilterType.CUSTOM,classes = MyTypeFilter.class)},useDefaultFilters = false)
 //直接导入组件，可以使用applicationContext.getBean("com.yang.springannotation.bean.Color")获取bean，bean的id默认是bean的全类名
 @Import(value = {Color.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class})
-//可以直接通过@Value注解获取值，或者使用applicationContext.getEnvironment().getProperty("jdbc.url")也是可以的
+//使用这个注解以后，可以直接通过@Value注解获取值，会在这个配置文件中寻找，或者使用applicationContext.getEnvironment().getProperty("jdbc.url")也是可以的
 @PropertySource(value = {"classpath:jdbc.properties"})
 public class SpringConfig {
 
