@@ -18,12 +18,15 @@ public class SparseArray {
         arrays[3][3] = 1;
         arrays[4][4] = 2;
 
-        System.out.println("初始棋盘：");
+        System.out.println("初始棋盘(二维数组)：");
         printArray(arrays);
 
+        /**
+         * 二维数组转稀疏数组
+         */
         // 获取不为0的棋子个数 由于下标从0开始 所以稀疏数组的行的长度需要加一
-        int sum = getValid(arrays) + 1;
-        int[][] sparseArray = new int[sum][3];
+        int sum = getValid(arrays);
+        int[][] sparseArray = new int[sum + 1][3];
         // 稀疏数组的第一行是统计有多少行、多少列、共有多少个有效值
         sparseArray[0][0] = 8;
         sparseArray[0][1] = 8;
@@ -47,6 +50,17 @@ public class SparseArray {
         System.out.println("填充稀疏数组值后");
         System.out.println("行\t列\t值");
         printArray(sparseArray);
+
+        /**
+         * 稀疏数组转二维数组
+         */
+        // 稀疏数组的第一行第一列为 行 ，第一行第二列为 列
+        int[][] newArrays = new int[sparseArray[0][0]][sparseArray[0][1]];
+        for (int i = 1; i < sparseArray.length; i++) {
+            newArrays[sparseArray[i][0]][sparseArray[i][1]] = sparseArray[i][2];
+        }
+        System.out.println("稀疏数组转棋盘(二维数组)：");
+        printArray(newArrays);
     }
 
     private static int getValid(int[][] arrays) {
