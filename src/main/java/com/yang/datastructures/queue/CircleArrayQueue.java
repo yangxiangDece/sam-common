@@ -14,14 +14,10 @@ public class CircleArrayQueue {
         boolean loop = true;
         while (loop) {
             System.out.println("1：显示队列 2：添加队列 3：获取队列 4：队列头部数据 5：队列有效数据 6：队列指针情况 7：退出");
-            int op = scanner.nextInt();
-            switch (op) {
+            int option = scanner.nextInt();
+            switch (option) {
                 case 1:
-                    try {
-                        circleArray.showQueue();
-                    } catch (Exception e) {
-                        System.out.println("队列为空...");
-                    }
+                    circleArray.showQueue();
                     break;
                 case 2:
                     System.out.println("请输入数据：");
@@ -32,14 +28,14 @@ public class CircleArrayQueue {
                     try {
                         System.out.println("获取队列：" + circleArray.get());
                     } catch (Exception e) {
-                        System.out.println("队列为空...");
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 4:
                     try {
                         System.out.println("队列头部数据：" + circleArray.headQueue());
                     } catch (Exception e) {
-                        System.out.println("队列为空...");
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 5:
