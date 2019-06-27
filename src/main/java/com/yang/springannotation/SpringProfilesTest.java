@@ -3,6 +3,7 @@ package com.yang.springannotation;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.yang.springannotation.config.SpringProfilesConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 public class SpringProfilesTest {
 
@@ -21,6 +22,8 @@ public class SpringProfilesTest {
         for (String name:beanNamesForType) {
             System.out.println(name);
         }
+        ConfigurableEnvironment environment = applicationContext.getEnvironment();
+        System.out.println(environment);
         //获取所有的bean
 //        applicationContext.getBeanDefinitionNames();
     }

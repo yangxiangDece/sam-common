@@ -1,31 +1,38 @@
 package com.yang.datastructures.sparsearray;
 
 /**
- * @author YangXiang
- * @description 稀疏数组
- * @time 2019/6/26 20:33
+ * 稀疏数组
+ * <p>
+ * 稀疏数组特点：
+ * 第一行为统计数据：第一行第一列为总行数 第一行第二列为总列数 第一行第三列为有效值的个数
+ * 后面的就是通过 row 和 col 定位坐标位置 val表示那个坐标点上的值
+ * row   col   val
+ * 8     8     5
+ * 1     2     2
+ * 3     1     1
+ * 4     5     2
+ * 5     6     1
  */
 public class SparseArray {
 
     public static void main(String[] args) {
-
-        // 8 * 8 的棋盘
+        // 8 * 8 的棋盘(数组)
         int[][] arrays = new int[8][8];
         // 0-无子 1-黑子 2-白子
-        // 初始化棋盘
         arrays[1][2] = 1;
         arrays[2][3] = 2;
         arrays[3][3] = 1;
         arrays[4][4] = 2;
 
-        System.out.println("初始棋盘(二维数组)：");
+        System.out.println("初始二维数组：");
         printArray(arrays);
 
         /**
          * 二维数组转稀疏数组
          */
-        // 获取不为0的棋子个数 由于下标从0开始 所以稀疏数组的行的长度需要加一
-        int sum = getValid(arrays);
+        // 获取有效值的个数
+        int sum = getValidValueSum(arrays);
+        // 因为下标从0开始 所以sum + 1
         int[][] sparseArray = new int[sum + 1][3];
         // 稀疏数组的第一行是统计有多少行、多少列、共有多少个有效值
         sparseArray[0][0] = 8;
@@ -47,7 +54,7 @@ public class SparseArray {
                 }
             }
         }
-        System.out.println("填充稀疏数组值后");
+        System.out.println("二位数组 => 稀疏数组：");
         System.out.println("行\t列\t值");
         printArray(sparseArray);
 
@@ -59,11 +66,11 @@ public class SparseArray {
         for (int i = 1; i < sparseArray.length; i++) {
             newArrays[sparseArray[i][0]][sparseArray[i][1]] = sparseArray[i][2];
         }
-        System.out.println("稀疏数组转棋盘(二维数组)：");
+        System.out.println("稀疏数组 => 二位数组：");
         printArray(newArrays);
     }
 
-    private static int getValid(int[][] arrays) {
+    private static int getValidValueSum(int[][] arrays) {
         int sum = 0;
         for (int i = 0; i < arrays.length; i++) {
             for (int j = 0; j < arrays[0].length; j++) {
