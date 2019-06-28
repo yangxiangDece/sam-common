@@ -23,7 +23,7 @@ public class SingleLinkedList {
         System.out.println("获取逆序为K的节点的值：" + linked.getReversedByIndex(2));
         // 链表反转
         System.out.println("链表反转：");
-        linked.reversed();
+        linked.reversed2();
         linked.printLinked();
     }
 }
@@ -45,14 +45,33 @@ class SingleLinked<T> {
         // r：存储第二个节点的next节点，也就是第三个节点，依次类推
         // 然后循环遍历，q.next = p 就完成了节点反转，然后p、q、r向后移
         Node<T> p = head, q = head.next, r;
-        head.next = null;
         while (q != null) {
-            r = q.next; // 存放剩余节点
+            r = q.next; // 存放当前节点的下一个节点，后续移动指针使用
             q.next = p; // 反转
             p = q; // p 向后移
             q = r; // q 向后移
         }
+        // 这里设为空的原因是：这时候的头结点的next还执行了第二个节点，现在的这个头结点经过遍历后已经变成了尾节点，
+        // 如果尾节点不为空又指向第二个节点，而第二个节点经过反转后又指向了尾节点，就会出现最后两个节点相互引用永不为空，链表就出现了死循环
+        head.next = null;
         head = p;
+    }
+
+    public void reversed2() {
+        if (head == null || head.next == null) {
+            System.out.println("少于两个节点反转没有意义...");
+            return;
+        }
+        // 核心思想：利用一个临时节点，然后遍历所有节点插入到这个临时节点的前面，这样实现链表翻转
+        Node<T> cur = head, next, temp = new Node<>(null);
+        while (cur != null) {
+            next = cur.next; // 存放当前节点的下一个节点，后续移动指针使用
+            cur.next = temp.next; // 相当于将临时节点插入到当前节点的前面
+            temp.next = cur; // 然后将连接的节点拼接到新节点上
+            cur = next; // 后移
+        }
+        // 由于temp自身只是做中转，不存储值，所以赋值只能是temp的next，否则会多出一个节点，那就是temp这个空节点
+        head = temp.next;
     }
 
     public T getReversedByIndex(int index) {
