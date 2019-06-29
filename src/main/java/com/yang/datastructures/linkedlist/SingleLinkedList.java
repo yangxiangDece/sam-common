@@ -1,5 +1,7 @@
 package com.yang.datastructures.linkedlist;
 
+import java.util.Stack;
+
 /**
  * 单链表
  */
@@ -18,6 +20,10 @@ public class SingleLinkedList {
         System.out.println("删除后：");
         linked.remove(1);
         linked.printLinked();
+
+        // 逆序打印
+        System.out.println("逆序打印链表");
+        linked.reversedPrint();
 
         // 获取逆序为K的节点的值
         System.out.println("获取逆序为K的节点的值：" + linked.getReversedByIndex(2));
@@ -72,6 +78,22 @@ class SingleLinked<T> {
         }
         // 由于temp自身只是做中转，不存储值，所以赋值只能是temp的next，否则会多出一个节点，那就是temp这个空节点
         head = temp.next;
+    }
+
+    public void reversedPrint() {
+        if (head == null) {
+            System.out.println("链表为空...");
+            return;
+        }
+        Stack<Node> stack = new Stack<>();
+        Node<T> cur = head;
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next;
+        }
+        while (stack.size() > 0) {
+            System.out.println(stack.pop().item);
+        }
     }
 
     public T getReversedByIndex(int index) {
