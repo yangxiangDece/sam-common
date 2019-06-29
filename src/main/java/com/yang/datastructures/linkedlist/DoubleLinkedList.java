@@ -1,5 +1,10 @@
 package com.yang.datastructures.linkedlist;
 
+/**
+ * 双链表
+ * 1、顺序遍历、逆序遍历
+ * 2、增删改查
+ */
 public class DoubleLinkedList {
 
     public static void main(String[] args) {

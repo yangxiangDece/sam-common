@@ -4,6 +4,10 @@ import java.util.Stack;
 
 /**
  * 单链表
+ * 1、增删改查
+ * 2、逆序打印链表
+ * 3、获取逆序为k的节点的值
+ * 4、反转链表
  */
 public class SingleLinkedList {
 
