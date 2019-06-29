@@ -9,12 +9,15 @@ public class SingleLinkedList {
 
     public static void main(String[] args) {
         SingleLinked<Integer> linked = new SingleLinked<>();
+        linked.addFirst(1000);
         linked.addLast(1);
         linked.addLast(34);
         linked.addLast(11);
         linked.addLast(65);
         linked.addLast(79);
         linked.addLast(121);
+        linked.addFirst(66);
+        linked.addFirst(77);
         linked.add(2, 888);
         linked.printLinked();
         System.out.println("删除后：");
@@ -109,7 +112,7 @@ class SingleLinked<T> {
     }
 
     public void add(T value) {
-        addFirst(value);
+        addLast(value);
     }
 
     public void addLast(T value) {
@@ -135,12 +138,8 @@ class SingleLinked<T> {
         if (h == null) {
             head = newNode;
         } else {
-            if (h.next != null) {
-                newNode.next = h.next;
-                h.next = newNode;
-            } else {
-                h.next = newNode;
-            }
+            newNode.next = h;
+            head = newNode;
         }
         size++;
     }
@@ -207,12 +206,12 @@ class SingleLinked<T> {
         return size;
     }
 
-    class Node<T> {
+    class Node<E> {
 
-        private T item;
-        private Node<T> next;
+        private E item;
+        private Node<E> next;
 
-        Node(T item) {
+        Node(E item) {
             this.item = item;
         }
     }
