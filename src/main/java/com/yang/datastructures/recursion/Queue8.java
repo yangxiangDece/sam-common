@@ -13,11 +13,11 @@ public class Queue8 {
         System.out.printf("一共有%d种解法", count);
     }
 
-    static int count = 0;
+    private static int count = 0;
 
-    int max = 8;
+    private int max = 8;
     // 定义一个数组，保存皇后放置位置的结果，比如：array = {0, 4 ,5 ,2, 6, 1, 3}
-    int[] array = new int[max];
+    private int[] array = new int[max];
 
     /**
      * 放置皇后
