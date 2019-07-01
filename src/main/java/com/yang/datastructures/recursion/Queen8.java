@@ -3,13 +3,27 @@ package com.yang.datastructures.recursion;
 /**
  * 递归
  * 八皇后问题
+ *
+ *  0 0 0 0 0 0 0 0
+ *  0 0 0 0 0 0 0 0
+ *  0 0 0 0 0 0 0 0
+ *  0 0 0 0 0 0 0 0
+ *  0 0 0 0 0 0 0 0
+ *  0 0 0 0 0 0 0 0
+ *  0 0 0 0 0 0 0 0
+ *  0 0 0 0 0 0 0 0
+ *
+ * 1、八个皇后能放下一定是一行放一个，我们只需一个数组记录每个皇后的列数（默认第N个放第N行），
+ * 那么问题就被抽象成了数组的第N个数和前N-1个数不存在几个和差关系即可（比如差不为零代表不在同一列）。
+ *
+ *
  */
-public class Queue8 {
+public class Queen8 {
 
     public static void main(String[] args) {
 
-        Queue8 queue8 = new Queue8();
-        queue8.check(0);
+        Queen8 queen8 = new Queen8();
+        queen8.check(0);
         System.out.printf("一共有%d种解法", count);
     }
 
