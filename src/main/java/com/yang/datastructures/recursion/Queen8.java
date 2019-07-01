@@ -41,6 +41,7 @@ public class Queen8 {
      */
     private void check(int n) {
         if (n == max) {
+            count++;
             print();
             return;
         }
@@ -79,7 +80,6 @@ public class Queen8 {
         for (int i = 0; i < max; i++) {
             System.out.print(array[i] + " ");
         }
-        count++;
         System.out.println();
     }
 }
