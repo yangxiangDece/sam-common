@@ -2,10 +2,8 @@ package com.yang.encryption;
 
 import com.sun.crypto.provider.SunJCE;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import javax.crypto.*;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 
@@ -17,8 +15,14 @@ import java.security.Security;
  * 3DES解密过程为：P=Dk1((EK2(Dk3(C)))
  */
 public class ThreeDESHelper {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws Exception {
+        ThreeDESHelper threeDESHelper = new ThreeDESHelper();
+        String content = "SecretKey 负责保存对称密钥";
+        byte[] bytes = threeDESHelper.encrypt(content);
+        System.out.println("加密后：" + SignatureUtils.byte2hex(bytes));
+        byte[] decryptContent = threeDESHelper.decrypt(bytes);
+        System.out.println("解密后：" + new String(decryptContent));
     }
 
     /**
@@ -38,5 +42,21 @@ public class ThreeDESHelper {
         KeyGenerator keyGenerator = KeyGenerator.getInstance(DES_EDE);
         secretKey = keyGenerator.generateKey();
         cipher = Cipher.getInstance(DES_EDE);
+    }
+
+    // 加密
+    public byte[] encrypt(String content) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        // 根据密钥，对Cipher对象进行初始化，ENCRYPT_MODE表示加密模式
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] src = content.getBytes();
+        // 加密
+        return cipher.doFinal(src);
+    }
+
+    // 解密
+    public byte[] decrypt(byte[] bytes) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        // 根据密钥，对Cipher对象进行初始化，DECRYPT_MODE表示解密模式
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        return cipher.doFinal(bytes);
     }
 }
