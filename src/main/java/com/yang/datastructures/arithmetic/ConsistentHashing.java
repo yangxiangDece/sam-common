@@ -1,4 +1,4 @@
-package com.yang.arithmetic;
+package com.yang.datastructures.arithmetic;
 
 import java.util.*;
 

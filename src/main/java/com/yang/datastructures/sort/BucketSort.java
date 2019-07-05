@@ -1,4 +1,4 @@
-package com.yang.arithmetic.sort;
+package com.yang.datastructures.sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;

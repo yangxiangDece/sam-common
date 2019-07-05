@@ -1,4 +1,4 @@
-package com.yang.arithmetic;
+package com.yang.datastructures.arithmetic;
 
 /**
  * 二分查找算法
