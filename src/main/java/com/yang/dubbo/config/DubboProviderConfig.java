@@ -7,6 +7,9 @@ import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * dubbo 服务提供方 配置
+ */
 @DubboComponentScan(basePackages = "com.yang.dubbo.service.impl")
 @Configuration
 public class DubboProviderConfig {

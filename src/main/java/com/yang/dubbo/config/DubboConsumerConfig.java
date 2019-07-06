@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * dubbo原理：
- *
- *
+ * dubbo 服务消费方配置
  */
 @DubboComponentScan(basePackages = "com.yang.dubbo.api.service")
 @Configuration

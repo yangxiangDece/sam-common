@@ -13,7 +13,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrders(String orderId) {
-        LOGGER.info("orderId:{}",orderId);
-        return new Order(orderId,new BigDecimal(255.25));
+        LOGGER.info("orderId:{}", orderId);
+        return new Order(orderId, new BigDecimal(255.25));
     }
 }

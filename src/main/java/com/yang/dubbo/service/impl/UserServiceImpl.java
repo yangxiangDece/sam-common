@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(String id) {
-        LOGGER.info("UserServiceImpl...invoke,args:"+id);
-        return new User(id,"张三","1232324234");
+        LOGGER.info("UserServiceImpl...invoke,args:" + id);
+        return new User(id, "张三", "1232324234");
     }
 }

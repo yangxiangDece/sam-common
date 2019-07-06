@@ -6,9 +6,9 @@ import java.util.concurrent.RecursiveTask;
 
 public class ForkJoinPoolTest {
 
-    private final static int MAX=5000;
+    private final static int MAX=20;
 
-    private static int[] nums=new int[10000];
+    private static int[] nums=new int[500];
 
     private static Random r=new Random();
 
