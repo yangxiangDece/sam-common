@@ -23,8 +23,7 @@ public class StraightSelectionSort {
     }
 
     private static void sort(int[] array) {
-        int k;
-        int temp;
+        int k, temp;
         for (int i = 0; i < array.length; i++) {
             k = i;
             for (int j = i; j < array.length; j++) {
