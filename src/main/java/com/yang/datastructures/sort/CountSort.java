@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class CountSort {
 
     public static void main(String[] args) {
-        int[] arrays = {12, 4, 34, 23, -1, 3, -12, 0};
+        int[] arrays = {88, 4, 34, 23, -1, 3, -12, 0};
         System.out.print("before sort：");
         System.out.println(Arrays.toString(arrays));
         sort(arrays);
@@ -23,21 +23,22 @@ public class CountSort {
     }
 
     private static void sort(int[] array) {
-        int bias, min = array[0], max = array[0];
+        int min = array[0], max = array[0];
         //找出最大值，最小值，确定数组范围
         for (int i = 1; i < array.length; i++) {
             max = Math.max(max, array[i]);
             min = Math.min(min, array[i]);
         }
-        bias = 0 - min;
         int[] temp = new int[max - min + 1];
         for (int i = 0; i < array.length; i++) {
-            temp[array[i] + bias]++;
+            // array[i] - min 这里的min就是偏移量，因为当数过大的时候 通过max - min后 数组中是没有这么大的下标的，所以需要减去偏移量
+            temp[array[i] - min]++;
         }
         int index = 0, i = 0;
         while (index < array.length) {
             if (temp[i] > 0) {
-                array[index] = i - bias;
+                // 这里还原数据时，需要加上之前的偏移量min 得到本来的数据
+                array[index] = i + min;
                 temp[i]--;
                 index++;
             } else {
