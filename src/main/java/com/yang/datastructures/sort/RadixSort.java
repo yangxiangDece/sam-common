@@ -40,9 +40,9 @@ public class RadixSort {
         for (int i = 0, n = 1; i < maxLength; i++, n *= 10) {
             // 将数据放入到桶中 第一次个位，第二次十位，百位...
             for (int j = 0; j < arrays.length; j++) {
-                int di = arrays[j] / n % 10;
-                bucket[di][bucketElementCounts[di]] = arrays[j];
-                bucketElementCounts[di]++;
+                int d = arrays[j] / n % 10;
+                bucket[d][bucketElementCounts[d]] = arrays[j];
+                bucketElementCounts[d]++;
             }
             int index = 0;
             // 遍历每个桶并且将桶中的数据放入到原数组中
