@@ -1,4 +1,4 @@
-package com.yang.datastructures.sort;
+package com.yang.common;
 
 public class CreateArrays {
 
