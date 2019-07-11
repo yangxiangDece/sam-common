@@ -2,6 +2,8 @@ package com.yang.datastructures.search;
 
 /**
  * 插值查找算法
+ * 对于数据量较大，关键字分布比较均匀的查找算法来说，采用插值查找算法，速度较快
+ * 关键字分布不均匀的话，该方法不一定比折半查找算法要好
  */
 public class InsertValueSearch {
 
