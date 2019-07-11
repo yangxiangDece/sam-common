@@ -17,7 +17,7 @@ public class InsertValueSearch {
         System.out.println("查找次数：" + num);
     }
 
-    static int num = 0;
+    private static int num = 0;
 
     /**
      * @param array   原始数组
