@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * 斐波那契查找算法
+ * 斐波那契数列：后一项的值 = 前两项值的总和 aN= a(N-1)+ a(N-2)
  */
 public class FibonacciSearch {
 
