@@ -14,11 +14,10 @@ public class FibonacciSearch {
         System.out.println(index);
     }
 
-    private static int maxSize = 20;
-
     // mid = low + F(k - 1) - 1
     // 得到一个斐波那契数列
     private static int[] fib() {
+        int maxSize = 20;
         int[] f = new int[maxSize];
         f[0] = 1;
         f[1] = 1;

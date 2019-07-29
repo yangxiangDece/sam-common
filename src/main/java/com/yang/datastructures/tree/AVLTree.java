@@ -37,77 +37,6 @@ class AVLTreeU {
         return root;
     }
 
-    public void delNode(int value) {
-        if (root == null) {
-            return;
-        } else {
-            AVLNode targetNode = search(value);
-            if (targetNode == null) {
-                return;
-            }
-            if (root.left == null && root.right == null) {
-                // 表示只有一个父节点
-                root = null;
-                return;
-            }
-            AVLNode parent = searchParent(value);
-            if (targetNode.left == null && targetNode.right == null) {
-                // 如果要删除的节点是叶子节点 则判断targetNode 是 parent的 左节点还是右节点
-                if (parent.left != null && parent.left.value == value) {
-                    // 是左节点
-                    parent.left = null;
-                } else if (parent.right != null && parent.right.value == value) {
-                    // 是右节点
-                    parent.right = null;
-                }
-            } else if (targetNode.left != null && targetNode.right != null) {
-                // 删除的目标节点有两颗子树
-
-                // 从右边找最小的
-                AVLNode node = targetNode.right;
-                // 向左边递归查找 一直找到最小值
-                while (node.left != null) {
-                    node = node.left;
-                }
-                // 删除最小节点
-                delNode(node.value);
-                targetNode.value = node.value;
-            } else {
-                // 删除的目标节点有一颗子树
-                if (targetNode.left != null) {
-                    if (parent == null) {
-                        // 表示要删除的是根节点
-                        root = targetNode.left;
-                    } else {
-                        // 表示targetNode有左子节点
-                        if (parent.left.value == value) {
-                            // 表示targetNode是parent的左子节点
-                            parent.left = targetNode.left;
-                        } else {
-                            // 表示targetNode是parent的右子节点
-                            parent.right = targetNode.left;
-                        }
-                    }
-                }
-                if (targetNode.right != null) {
-                    if (parent == null) {
-                        // 表示要删除的是根节点
-                        root = targetNode.right;
-                    } else {
-                        // 表示targetNode有左子节点
-                        if (parent.left.value == value) {
-                            // 表示targetNode是parent的左子节点
-                            parent.left = targetNode.right;
-                        } else {
-                            // 表示targetNode是parent的右子节点
-                            parent.right = targetNode.right;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     public AVLNode search(int value) {
         if (root == null) {
             return null;
@@ -211,11 +140,29 @@ class AVLNode {
         }
         // 当添加完一个节点后，如果 右子树的高度 - 左子树的高度 > 1 则左旋转
         if (rightHeight() - leftHeight() > 1) {
-            leftRotate();
+            // 如果它的右子树的左子树高度大于右子树的高度
+            if (right != null && right.leftHeight() > right.rightHeight()) {
+                // 先对当前节点的右子树右旋转
+                right.rightRotate();
+                // 再对当前节点左旋转
+                leftRotate();
+            } else {
+                // 直接左旋转
+                leftRotate();
+            }
         }
         // 当添加完一个节点后，如果 左子树的高度 - 右子树的高度 > 1 则右旋转
         if (leftHeight() - rightHeight() > 1) {
-            rightRotate();
+            // 如果它的左子树的右子树高度大于它的左子树的高度
+            if (left != null && left.rightHeight() > left.leftHeight()) {
+                // 先对当前节点的左子树左旋转
+                left.leftRotate();
+                // 再对当前节点右旋转
+                rightRotate();
+            } else {
+                // 直接右旋转
+                rightRotate();
+            }
         }
     }
 

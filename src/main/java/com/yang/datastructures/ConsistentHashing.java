@@ -1,16 +1,26 @@
-package com.yang.datastructures.arithmetic;
+package com.yang.datastructures;
 
 import java.util.*;
 
 /**
- * <p>Title:ConsistentHashing</p>
- * <p>Description:一致性hash算法</p>
- * <p>Company:成都瑞智创家科技有限公司</p>
- *
- * @author Yang Xiang
- * @date 2019/6/24 13:59
+ * 一致性hash算法
  */
 public class ConsistentHashing {
+
+    public static void main(String[] args) {
+        ConsistentHashing consistentHashing = new ConsistentHashing();
+
+        // 初始情况
+        consistentHashing.dumpObjectNodeMap("初始情况", 0, 65536);
+
+        // 删除物理节点
+        consistentHashing.removePhysicalNode("192.168.1.103");
+        consistentHashing.dumpObjectNodeMap("删除物理节点", 0, 65536);
+
+        // 添加物理节点
+        consistentHashing.addPhysicalNode("192.168.1.108");
+        consistentHashing.dumpObjectNodeMap("删除物理节点", 0, 65536);
+    }
 
     // 物理节点
     private Set<String> physicalNodes = new TreeSet<>();
@@ -99,20 +109,5 @@ public class ConsistentHashing {
             long percent = (int) ((entry.getValue() / totalCount) * 100);
             System.out.println("IP=" + entry.getKey() + ":RATE=" + percent + "%");
         }
-    }
-
-    public static void main(String[] args) {
-        ConsistentHashing consistentHashing = new ConsistentHashing();
-
-        // 初始情况
-        consistentHashing.dumpObjectNodeMap("初始情况", 0, 65536);
-
-        // 删除物理节点
-        consistentHashing.removePhysicalNode("192.168.1.103");
-        consistentHashing.dumpObjectNodeMap("删除物理节点", 0, 65536);
-
-        // 添加物理节点
-        consistentHashing.addPhysicalNode("192.168.1.108");
-        consistentHashing.dumpObjectNodeMap("删除物理节点", 0, 65536);
     }
 }
