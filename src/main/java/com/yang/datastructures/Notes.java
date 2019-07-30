@@ -8,6 +8,8 @@ package com.yang.datastructures;
  *
  * 二分查找算法
  * 分治算法
+ * 动态规划算法
+ * KMP算法（字符串查找算法）
  *
  * B树：B-tree数即B树，B即Balanced，平衡的意思。有人把B-tree翻译成B-树，容易让人产生误解。会以为B-树是一种树，而B树又是另一种树，实际上B-tree就是指B树
  *      B树在叶子节点和非叶子节点都存放数据
