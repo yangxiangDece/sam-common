@@ -9,9 +9,9 @@ public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
-        ChannelPipeline pipeline=socketChannel.pipeline();
+        ChannelPipeline pipeline = socketChannel.pipeline();
 
-        pipeline.addLast("httpServerCodec",new HttpServerCodec());
-        pipeline.addLast("testHttpServerHandler",new TestHttpServerHandler());
+        pipeline.addLast("httpServerCodec", new HttpServerCodec());
+        pipeline.addLast("testHttpServerHandler", new TestHttpServerHandler());
     }
 }
