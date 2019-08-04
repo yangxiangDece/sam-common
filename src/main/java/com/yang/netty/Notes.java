@@ -44,7 +44,7 @@ package com.yang.netty;
  *          ChannelDuplexHandler 用于处理入站和出站事件。
  * 【ChannelHandlerContext】：
  *      保存 Channel 相关的所有上下文信息，同时关联一个 ChannelHandler 对象。
- * 【ChannelPipline】：
+ * 【ChannelPipeline】：
  *      保存 ChannelHandler 的 List，用于处理或拦截 Channel 的入站事件和出站操作。
  *      ChannelPipeline 实现了一种高级形式的拦截过滤器模式，使用户可以完全控制事件的处理方式，以及 Channel 中各个的 ChannelHandler 如何相互交互。
  *
