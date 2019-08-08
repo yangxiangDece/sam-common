@@ -45,12 +45,25 @@ package com.yang.netty;
  * 【ChannelHandlerContext】：
  *      保存 Channel 相关的所有上下文信息，同时关联一个 ChannelHandler 对象。
  * 【ChannelPipeline】：
+ *      在Channel创建的时候，会同时创建ChannelPipeline，在ChannelPipeline中也会持有Channel的引用
  *      保存 ChannelHandler 的 List，用于处理或拦截 Channel 的入站事件和出站操作。
  *      ChannelPipeline 实现了一种高级形式的拦截过滤器模式，使用户可以完全控制事件的处理方式，以及 Channel 中各个的 ChannelHandler 如何相互交互。
+ *      每个ChannelHandler通过add方法加入到ChannelPipeline中去的时候，会创建一个对应的ChannelHandlerContext，并且绑定，
+ *      ChannelPipeline实际维护的是ChannelHandlerContext 的关系
  *
  * 在 Netty 中每个 Channel 都有且仅有一个 ChannelPipeline 与之对应。一个 Channel 包含了一个 ChannelPipeline，而 ChannelPipeline 中又维护了一个由
  * ChannelHandlerContext 组成的双向链表，并且每个 ChannelHandlerContext 中又关联着一个 ChannelHandler。入站事件和出站事件在一个双向链表中，入站事件会
  * 从链表 head 往后传递到最后一个入站的 handler，出站事件会从链表 tail 往前传递到最前一个出站的 handler，两种类型的 handler 互不干扰。
+ *      1、每个Channel会绑定一个ChannelPipeline，ChannelPipeline中也会持有Channel的引用
+ *      2、ChannelPipeline持有ChannelHandlerContext链路，保留ChannelHandlerContext的头尾节点指针
+ *      3、每个ChannelHandlerContext会对应一个ChannelHandler，也就相当于ChannelPipeline持有ChannelHandler链路
+ *      4、ChannelHandlerContext同时也会持有ChannelPipeline引用，也就相当于持有Channel引用
+ *      5、ChannelHandler链路会根据Handler的类型，分为InBound和OutBound两条链路
+ *
+ * 在Netty中，有两种发送消息的方式：
+ *      直接写到Channel中去，ChannelHandlerContext引用了ChannelPipeline，所以也能间接操作channel的方法；这种方式会从ChannelPipeline的尾端开始流动。
+ *      写到ChannelHandlerContext对象中；这种方式发送消息会从ChannelPipeline的下一个ChannelHandler开始流动执行。
+ *
  *
  */
 public class Notes {
