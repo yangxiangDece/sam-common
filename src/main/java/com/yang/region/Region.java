@@ -225,7 +225,8 @@ public class Region {
                 .append("  `code` VARCHAR(50) DEFAULT NULL COMMENT '长途区号',\n")
                 .append("  `zip_code` VARCHAR(50) DEFAULT NULL COMMENT '邮编',\n")
                 .append("  `lng` DECIMAL(10,6) DEFAULT NULL COMMENT '经度',\n")
-                .append("  `lat` DECIMAL(10,6) DEFAULT NULL COMMENT '纬度'\n")
+                .append("  `lat` DECIMAL(10,6) DEFAULT NULL COMMENT '纬度',\n")
+                .append("  PRIMARY KEY (`id`)\n")
                 .append(") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='地区信息表';\n");
     }
 

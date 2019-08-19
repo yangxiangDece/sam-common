@@ -11,7 +11,8 @@ CREATE TABLE `region` (
   `code` VARCHAR(50) DEFAULT NULL COMMENT '长途区号',
   `zip_code` VARCHAR(50) DEFAULT NULL COMMENT '邮编',
   `lng` DECIMAL(10,6) DEFAULT NULL COMMENT '经度',
-  `lat` DECIMAL(10,6) DEFAULT NULL COMMENT '纬度'
+  `lat` DECIMAL(10,6) DEFAULT NULL COMMENT '纬度',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='地区信息表';
 INSERT INTO `region` VALUES ('370000000000', '0', '山东', '山东省', '中国,山东省', '1', 'SD', 'S', 'Shandong', '', '', '117.000923', '36.675807');
 INSERT INTO `region` VALUES ('370100000000', '370000000000', '济南', '济南市', '中国,山东省,济南市', '2', 'JN', 'J', 'Jinan', '0531', '250000', '117.000923', '36.675807');
