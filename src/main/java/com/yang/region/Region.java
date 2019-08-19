@@ -50,7 +50,11 @@ public class Region {
     private final static List<String> PROVINCES = new ArrayList<>();
     // 生成sql的存储容器
     private final static StringBuilder SQL_BUILDER = new StringBuilder();
-    private final static String SQL_FILE_PATH = "D:/region.sql";
+    private final static String SQL_FILE_PATH = "D:/region22.sql";
+    private final static String PROVINCE_LEVEL = "1";
+    private final static String CITY_LEVEL = "2";
+    private final static String DISTRICT_LEVEL = "3";
+    private final static String STREET_LEVEL = "4";
 
     static {
         // 初始化请求头部信息
@@ -64,12 +68,14 @@ public class Region {
     private static void generateSql() throws Exception {
         JSONArray provinceJsonArray;
         JSONArray cityJsonArray;
+        JSONArray districtJsonArray;
         String cities;
         String districts;
+        String streets;
         for (String name : PROVINCES) {
             // 获取到省份数据
             provinceJsonArray = JSONArray.parseArray(getProvince(name));
-            doGenerateSql(provinceJsonArray);
+            doGenerateSql(provinceJsonArray, PROVINCE_LEVEL);
             // 通过省份id查询城市数据
             cities = getByParentId(provinceJsonArray.getJSONObject(0).getString("id"));
             if (StringUtils.isBlank(cities)) {
@@ -77,12 +83,20 @@ public class Region {
             }
             // 获取到城市数据
             cityJsonArray = JSONArray.parseArray(cities);
-            doGenerateSql(cityJsonArray);
+            doGenerateSql(cityJsonArray, CITY_LEVEL);
             for (int i = 0; i < cityJsonArray.size(); i++) {
                 // 通过城市id查询区县数据
                 districts = getByParentId(cityJsonArray.getJSONObject(i).getString("id"));
                 if (StringUtils.isNotBlank(districts)) {
-                    doGenerateSql(JSONArray.parseArray(districts));
+                    districtJsonArray = JSONArray.parseArray(districts);
+                    doGenerateSql(districtJsonArray, DISTRICT_LEVEL);
+//                    for (int j = 0; j < districtJsonArray.size(); j++) {
+//                        // 通过区县查询街道数据
+//                        streets = getByParentId(districtJsonArray.getJSONObject(j).getString("id"));
+//                        if (StringUtils.isNotBlank(streets)) {
+//                            doGenerateSql(districtJsonArray, STREET_LEVEL);
+//                        }
+//                    }
                 }
                 System.out.println(provinceJsonArray.getJSONObject(0).getString("areaName") + ","
                         + cityJsonArray.getJSONObject(i).getString("areaName") + " - 添加完毕...");
@@ -94,7 +108,7 @@ public class Region {
         System.out.println("SQL脚本文件生成完毕...");
     }
 
-    private static void doGenerateSql(JSONArray jsonArray) {
+    private static void doGenerateSql(JSONArray jsonArray, String preLevel) {
         JSONObject data;
         String level;
         String simpleName;
@@ -103,8 +117,7 @@ public class Region {
             level = data.getString("level");
             simpleName = data.getString("simpleName");
             // 名称为空的数据 为老数据
-            if (!"4".equals(level)
-                    && StringUtils.isNotBlank(simpleName)) {
+            if (preLevel.equals(level) && StringUtils.isNotBlank(simpleName)) {
                 SQL_BUILDER.append("INSERT INTO `region` VALUES (")
                         .append("'").append(data.getString("id")).append("', ")
                         .append("'").append(data.getString("parentId")).append("', ")
@@ -182,7 +195,7 @@ public class Region {
             JSONObject jsonObject = JSONObject.parseObject(entity.getString("showapi_res_body"));
             Boolean flag = jsonObject.getBoolean("flag");
             if (!BooleanUtils.isTrue(flag)) {
-                System.out.println("查询数据失败：" + jsonObject.getString("msg"));
+                System.out.println("查询数据失败，原因：" + jsonObject.getString("msg"));
                 return null;
             }
             return jsonObject.getString("data");
