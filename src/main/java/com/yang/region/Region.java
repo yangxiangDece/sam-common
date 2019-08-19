@@ -2,6 +2,7 @@ package com.yang.region;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.yang.common.ThreadPoolExecutorFactory;
 import com.yang.common.httputil.HttpUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 /**
  * <p>Title:Region</p>
@@ -56,6 +58,8 @@ public class Region {
     private final static String DISTRICT_LEVEL = "3";
     private final static String STREET_LEVEL = "4";
 
+    private final static ExecutorService EXECUTOR_SERVICE = ThreadPoolExecutorFactory.getThreadPoolExecutor();
+
     static {
         // 初始化请求头部信息
         initHeaders();
@@ -69,6 +73,7 @@ public class Region {
         JSONArray provinceJsonArray;
         JSONArray cityJsonArray;
         JSONArray districtJsonArray;
+        JSONArray streetJsonArray;
         String cities;
         String districts;
         String streets;
@@ -90,13 +95,14 @@ public class Region {
                 if (StringUtils.isNotBlank(districts)) {
                     districtJsonArray = JSONArray.parseArray(districts);
                     doGenerateSql(districtJsonArray, DISTRICT_LEVEL);
-//                    for (int j = 0; j < districtJsonArray.size(); j++) {
-//                        // 通过区县查询街道数据
-//                        streets = getByParentId(districtJsonArray.getJSONObject(j).getString("id"));
-//                        if (StringUtils.isNotBlank(streets)) {
-//                            doGenerateSql(districtJsonArray, STREET_LEVEL);
-//                        }
-//                    }
+                    for (int j = 0; j < districtJsonArray.size(); j++) {
+                        // 通过区县查询街道数据
+                        streets = getByParentId(districtJsonArray.getJSONObject(j).getString("id"));
+                        if (StringUtils.isNotBlank(streets)) {
+                            streetJsonArray = JSONArray.parseArray(streets);
+                            doGenerateSql(streetJsonArray, STREET_LEVEL);
+                        }
+                    }
                 }
                 System.out.println(provinceJsonArray.getJSONObject(0).getString("areaName") + ","
                         + cityJsonArray.getJSONObject(i).getString("areaName") + " - 添加完毕...");
