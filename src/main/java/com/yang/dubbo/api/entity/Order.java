@@ -16,6 +16,18 @@ public class Order implements Serializable {
         this.price=price;
     }
 
+    private Order(String orderId) {
+        this.orderId=orderId;
+    }
+
+    protected String protectedMethod() {
+        return "aaa";
+    }
+
+    private String privateMethod() {
+        return "aaa";
+    }
+
     public String getOrderId() {
         return orderId;
     }
