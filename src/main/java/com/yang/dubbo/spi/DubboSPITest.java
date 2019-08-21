@@ -3,7 +3,6 @@ package com.yang.dubbo.spi;
 import org.apache.dubbo.common.compiler.Compiler;
 import org.apache.dubbo.common.compiler.support.JavassistCompiler;
 import org.apache.dubbo.common.extension.AdaptiveClassCodeGenerator;
-import org.apache.dubbo.common.extension.ExtensionFactory;
 import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.apache.dubbo.rpc.Protocol;
 
