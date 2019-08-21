@@ -29,7 +29,6 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-
         CHANNEL_GROUP.writeAndFlush("【系统消息】：" + channel.remoteAddress() + "加入了房间！");
         CHANNEL_GROUP.add(channel);
     }
@@ -47,7 +46,6 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-
         CHANNEL_GROUP.writeAndFlush("【系统消息】" + channel.remoteAddress() + "离开了房间！");
     }
 

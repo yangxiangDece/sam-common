@@ -1,7 +1,5 @@
 package com.yang.rmi;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.BasicConfigurator;
 
 import java.net.MalformedURLException;
@@ -11,8 +9,6 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public class RemoteClient {
-
-    private static final Log LOGGER = LogFactory.getLog(RemoteClient.class);
 
     static {
         BasicConfigurator.configure();
@@ -24,7 +20,5 @@ public class RemoteClient {
         RemoteUserService remoteUserService = (RemoteUserService) Naming.lookup("rmi://127.0.0.1/queryAllUserInfo");
 
         List<UserInfo> list = remoteUserService.queryAllUserInfo();
-
-        LOGGER.info(list);
     }
 }

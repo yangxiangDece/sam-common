@@ -1,6 +1,6 @@
 package com.yang.dubbo.spi;
 
-import com.alibaba.dubbo.common.extension.SPI;
+import org.apache.dubbo.common.extension.SPI;
 
 @SPI
 public interface Robot {

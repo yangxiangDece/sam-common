@@ -1,10 +1,10 @@
 package com.yang.dubbo.config;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import com.yang.dubbo.api.service.UserService;
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

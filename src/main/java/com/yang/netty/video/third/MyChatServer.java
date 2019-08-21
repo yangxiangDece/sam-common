@@ -16,7 +16,6 @@ public class MyChatServer {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new MyChatServerInitializer());
 
             ChannelFuture channelFuture = serverBootstrap.bind("localhost", 9999).sync();
