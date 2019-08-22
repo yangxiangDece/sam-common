@@ -2,6 +2,11 @@ package com.yang.dubbo.spi;
 
 import org.apache.dubbo.common.extension.ExtensionLoader;
 
+/**
+ * @see org.apache.dubbo.common.extension.Adaptive
+ *
+ * 当注解 @Adaptive 放到方法上时，会为这个方法生成代理，如下
+ */
 public class Protocol$Adaptive implements org.apache.dubbo.rpc.Protocol {
 
     public void destroy() {

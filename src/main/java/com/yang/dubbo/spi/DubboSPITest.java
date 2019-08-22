@@ -19,7 +19,7 @@ public class DubboSPITest {
         bumblebee.sayHello();
 
         ExtensionLoader<Protocol> loader = ExtensionLoader.getExtensionLoader(Protocol.class);
-        System.out.println(loader.getAdaptiveExtension());
+        System.out.println(loader.getExtension("dubbo"));
 
 //        generateProxy();
     }
