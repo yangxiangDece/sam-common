@@ -6,6 +6,7 @@ import org.apache.dubbo.common.extension.AdaptiveClassCodeGenerator;
 import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.apache.dubbo.remoting.Dispatcher;
 import org.apache.dubbo.rpc.Protocol;
+import org.apache.dubbo.rpc.cluster.LoadBalance;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -27,7 +28,7 @@ public class DubboSPITest {
 
     private static void generateProxy() throws Exception {
         // 如果没有指定的 adaptive就会 生成一个代理类
-        String code = new AdaptiveClassCodeGenerator(Dispatcher.class, "all").generate();
+        String code = new AdaptiveClassCodeGenerator(LoadBalance.class, "all").generate();
         System.out.println(code);
 //        Compiler compiler = new JdkCompiler();
         Compiler compiler = new JavassistCompiler();
