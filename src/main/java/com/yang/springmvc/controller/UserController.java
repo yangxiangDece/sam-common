@@ -51,7 +51,7 @@ public class UserController {
 
     /**
      * @ResponseBody 内部原理：
-     *      HttpMessageConverter<T> 是Spring3.0新添加的一个接口，负责将请求信息转换为一个对象（类型为T），将对象（类型为T）输出为响应信息
+     *      HttpMessageConverter<ProviderConsumer> 是Spring3.0新添加的一个接口，负责将请求信息转换为一个对象（类型为T），将对象（类型为T）输出为响应信息
      *
      * @return
      */

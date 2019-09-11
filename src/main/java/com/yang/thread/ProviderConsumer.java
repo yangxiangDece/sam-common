@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class T {
+public class ProviderConsumer {
 
     public static void main(String[] args) {
         MyLinkedList<String> list=new MyLinkedList<>();

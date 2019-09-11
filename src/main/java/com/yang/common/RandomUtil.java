@@ -16,10 +16,10 @@ public class RandomUtil {
     private static final String[] NUM_ARR = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
     private static final String[] UPPER_ALPHA_ARR = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-            "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+            "N", "O", "P", "Q", "R", "S", "ProviderConsumer", "U", "V", "W", "X", "Y", "Z"};
 
     private static final String[] ALPHA_NUM_ARR = {"1", "A", "B", "2", "C", "D", "3", "E", "F", "G", "7", "H", "I",
-            "5", "J", "K", "L", "M", "4", "N", "O", "P", "Q", "9", "R", "S", "T", "0", "U", "8", "V", "W", "X", "6",
+            "5", "J", "K", "L", "M", "4", "N", "O", "P", "Q", "9", "R", "S", "ProviderConsumer", "0", "U", "8", "V", "W", "X", "6",
             "Y", "Z"};
 
     private static final String[] TEL_FIRST_ARR = "134,135,136,137,138,139,150,151,152,157,158,159,130,131,132,155,156,133,153"
