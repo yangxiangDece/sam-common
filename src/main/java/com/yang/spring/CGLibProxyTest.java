@@ -31,7 +31,7 @@ public class CGLibProxyTest {
     }
 }
 
-// 不要再实现接口,就会用CGLIB去代理
+// 不实现接口,就会用CGLIB去代理
 class DemoT {
     public Integer age;
 
