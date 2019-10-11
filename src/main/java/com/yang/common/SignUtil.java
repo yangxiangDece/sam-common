@@ -179,8 +179,7 @@ public class SignUtil {
             signHeaderPrefixList.remove(HttpHeader.HTTP_HEADER_DATE);
             Collections.sort(signHeaderPrefixList);
             if (null != headers) {
-                Map<String, String> sortMap = new TreeMap<String, String>();
-                sortMap.putAll(headers);
+                Map<String, String> sortMap = new TreeMap<>(headers);
                 StringBuilder signHeadersStringBuilder = new StringBuilder();
                 for (Map.Entry<String, String> header : sortMap.entrySet()) {
                     if (isHeaderToSign(header.getKey(), signHeaderPrefixList)) {

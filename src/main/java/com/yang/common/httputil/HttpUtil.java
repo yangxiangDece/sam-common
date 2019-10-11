@@ -111,7 +111,7 @@ public class HttpUtil {
     public static Response httpPost(String host, String path, int connectTimeout, Map<String, String> headers, Map<String, String> querys, Map<String, String> bodys, List<String> signHeaderPrefixList, String appKey, String appSecret)
             throws Exception {
         if (headers == null) {
-            headers = new HashMap<String, String>();
+            headers = new HashMap<>();
         }
 
         headers.put(HttpHeader.HTTP_HEADER_CONTENT_TYPE, ContentType.CONTENT_TYPE_FORM);
@@ -378,7 +378,7 @@ public class HttpUtil {
                                                           String appKey, String appSecret)
             throws MalformedURLException {
         if (headers == null) {
-            headers = new HashMap<String, String>();
+            headers = new HashMap<>();
         }
 
         headers.put(SystemHeader.X_CA_TIMESTAMP, String.valueOf(new Date().getTime()));
@@ -483,9 +483,7 @@ public class HttpUtil {
             ClientConnectionManager ccm = httpClient.getConnectionManager();
             SchemeRegistry registry = ccm.getSchemeRegistry();
             registry.register(new Scheme("https", 443, ssf));
-        } catch (KeyManagementException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (KeyManagementException | NoSuchAlgorithmException ex) {
             throw new RuntimeException(ex);
         }
     }

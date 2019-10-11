@@ -82,7 +82,7 @@ public class HttpUtils {
         }
 
         if (bodys != null) {
-            List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+            List<NameValuePair> nameValuePairList = new ArrayList<>();
 
             for (String key : bodys.keySet()) {
                 nameValuePairList.add(new BasicNameValuePair(key, bodys.get(key)));
@@ -306,9 +306,7 @@ public class HttpUtils {
             ClientConnectionManager ccm = httpClient.getConnectionManager();
             SchemeRegistry registry = ccm.getSchemeRegistry();
             registry.register(new Scheme("https", 443, ssf));
-        } catch (KeyManagementException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (KeyManagementException | NoSuchAlgorithmException ex) {
             throw new RuntimeException(ex);
         }
     }
