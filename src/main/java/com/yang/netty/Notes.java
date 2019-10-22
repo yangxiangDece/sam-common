@@ -16,8 +16,8 @@ package com.yang.netty;
  *          5）支持关联 I/O 操作与对应的处理程序。
  *      不同协议、不同的阻塞类型的连接都有不同的 Channel 类型与之对应。
  *      下面是一些常用的 Channel 类型：
- *          NioSocketChannel，异步的客户端 TCP Socket 连接。
- *          NioServerSocketChannel，异步的服务器端 TCP Socket 连接。
+ *          NioSocketChannel，异步的客户端 TCP SocketServer 连接。
+ *          NioServerSocketChannel，异步的服务器端 TCP SocketServer 连接。
  *          NioDatagramChannel，异步的 UDP 连接。
  *          NioSctpChannel，异步的客户端 Sctp 连接。
  *          NioSctpServerChannel，异步的 Sctp 服务器端连接，这些通道涵盖了 UDP 和 TCP 网络 IO 以及文件 IO。

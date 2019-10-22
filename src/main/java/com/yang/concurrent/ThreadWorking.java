@@ -1,4 +1,4 @@
-package com.yang.thread;
+package com.yang.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.concurrent.locks.LockSupport;
  * 有若干条线程 假设十个 必须按照特定顺序循环执行
  * 0执行 1执行 2执行..... 9执行完 0继续执行 不该执行的线程必须被阻塞 不能空跑 创建的线程数不能超过循环规模
  */
-public class ThreadWroking {
+public class ThreadWorking {
 
     private static int value = 0;
     private final static int size = 10;

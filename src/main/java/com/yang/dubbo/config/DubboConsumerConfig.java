@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class DubboConsumerConfig {
 
     //消费者可以直接连服务提供者
-//    @Reference(url = "127.0.0.1:20881")
+//    @reference(url = "127.0.0.1:20881")
     @Reference
     private UserService userService;
 

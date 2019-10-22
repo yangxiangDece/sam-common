@@ -1,4 +1,4 @@
-package com.yang.thread;
+package com.yang.concurrent;
 
 import java.util.concurrent.locks.StampedLock;
 
