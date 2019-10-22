@@ -10,7 +10,7 @@ public class SpringApplicationTest {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
 
         String[] names = applicationContext.getBeanDefinitionNames();
-        for (String name:names) {
+        for (String name : names) {
             System.out.println(name);
         }
 
@@ -20,10 +20,10 @@ public class SpringApplicationTest {
 
 //        System.out.println(applicationContext.getBean("person"));
 //        System.out.println(applicationContext.getBean("com.yang.springannotation.bean.Color"));
-        System.out.println("获取colorFactoryBean，但是默认拿到的却是Color对象："+applicationContext.getBean("colorFactoryBean"));
-        System.out.println("bean的id前面加上&，就可获取到FactoryBean工厂bean本身："+applicationContext.getBean("&colorFactoryBean"));
+        System.out.println("获取colorFactoryBean，但是默认拿到的却是Color对象：" + applicationContext.getBean("colorFactoryBean"));
+        System.out.println("bean的id前面加上&，就可获取到FactoryBean工厂bean本身：" + applicationContext.getBean("&colorFactoryBean"));
 //        System.out.println("init,destroy方法的调用:"+applicationContext.getBean("car"));
 
-        System.out.println("配置注解@PropertySource、@Value测试："+applicationContext.getBean("propertiesBean"));
+        System.out.println("配置注解@PropertySource、@Value测试：" + applicationContext.getBean("propertiesBean"));
     }
 }

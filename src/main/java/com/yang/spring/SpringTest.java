@@ -3,69 +3,6 @@ package com.yang.spring;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
-/**
- *
-     [MyBeanDefinitionRegistryPostProcessor] postProcessBeanDefinitionRegistry invoke...bean的数量：6
-     [MyBeanDefinitionRegistryPostProcessor] postProcessBeanFactory invoke...bean的数量：7
-     BeanFactoryPostProcessor 构造器 invoke...
-     [BeanFactoryPostProcessor] postProcessBeanFactory invoke...
-     BeanPostProcessor 构造器 invoke...
-     InstantiationAwareBeanPostProcessorAdapter 构造器 invoke ...
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessBeforeInstantiation()...
-     【构造器】调用Student的构造器实例化...
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessAfterInstantiation()...
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessProperties()...
-     【属性注入】name
-     【属性注入】address
-     【属性注入】phone
-     [BeanNameAware] 调用了 setBeanName() ... ：Student{name='张三', address='成都软件园', phone=12456, beanFactory=null, beanName='student'}
-     [BeanFactoryAware] 调用 setBeanFactory()... ：Student{name='张三', address='成都软件园', phone=12456, beanFactory=org.springframework.beans.factory.support.DefaultListableBeanFactory@598067a5: defining beans [student,com.yang.spring.processor.MyBeanPostProcessor#0,com.yang.spring.processor.MyBeanFactoryPostProcessor#0,com.yang.spring.processor.MyInstantiationAwareBeanPostProcessor#0,com.yang.spring.processor.MyApplicationContext#0,com.yang.spring.processor.MyBeanDefinitionRegistryPostProcessor#0,BeanDefinitionRegistryPostProcessor--Blue]; root of factory hierarchy, beanName='student'}
-     [ApplicationContextAware] student setApplicationContext
-     [BeanPostProcessor] postProcessBeforeInitialization bean:student
-     [InitializingBean] 调用 afterPropertiesSet()... ：Student{name='张三', address='成都软件园', phone=12456, beanFactory=org.springframework.beans.factory.support.DefaultListableBeanFactory@598067a5: defining beans [student,com.yang.spring.processor.MyBeanPostProcessor#0,com.yang.spring.processor.MyBeanFactoryPostProcessor#0,com.yang.spring.processor.MyInstantiationAwareBeanPostProcessor#0,com.yang.spring.processor.MyApplicationContext#0,com.yang.spring.processor.MyBeanDefinitionRegistryPostProcessor#0,BeanDefinitionRegistryPostProcessor--Blue]; root of factory hierarchy, beanName='student'}
-     调用了 bean 的 init-abstracts ....
-     [BeanPostProcessor] postProcessAfterInitialization bean:student
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessBeforeInstantiation()...
-     [ApplicationContextAware] 构造器 invoke...
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessAfterInstantiation()...
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessProperties()...
-     [ApplicationContextAware] setApplicationContext invoke ...
-     [BeanPostProcessor] postProcessBeforeInitialization bean:com.yang.spring.processor.MyApplicationContext#0
-     [BeanPostProcessor] postProcessAfterInitialization bean:com.yang.spring.processor.MyApplicationContext#0
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessBeforeInstantiation()...
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessAfterInstantiation()...
-     [InstantiationAwareBeanPostProcessorAdapter] 调用了 postProcessProperties()...
-     [BeanPostProcessor] postProcessBeforeInitialization bean:BeanDefinitionRegistryPostProcessor--Blue
-     [BeanPostProcessor] postProcessAfterInitialization bean:BeanDefinitionRegistryPostProcessor--Blue
-     spring容器初始化完成
-     关闭spring容器
-     [DisposableBean] 调用了 destroy()...
-     调用了 bean 的 destroy-abstracts ...
- *
- *
- * 这Spring框架中，一旦把一个bean纳入到Spring IoC容器之中，这个bean的生命周期就会交由容器进行管理，一般担当管理者角色的是BeanFactory或ApplicationContext。
- * 认识一下Bean的生命周期活动，对更好的利用它有很大的帮助下面以BeanFactory为例，说明一个Bean的生命周期活动：
- *
- * 1、Bean的建立：由BeanFactory读取Bean定义文件，并生成各个实例。
- * 2、Setter注入：执行Bean的属性依赖注入。
- * 3、BeanNameAware的setBeanName()：如果Bean类实现了org.springframework.beans.factory.BeanNameAware接口，则执行其setBeanName()方法。
- * 4、BeanFactoryAware的setBeanFactory() 或者 ApplicationContextAware的setApplicationContext() ：
- *      如果Bean类实现了org.springframework.beans.factory.BeanFactoryAware接口，则执行其setBeanFactory()方法。
- *      如果Bean类实现了org.springframework.context.ApplicationContextAware接口，则执行其setApplicationContext()方法。
- * 5、BeanPostProcessors的processBeforeInitialization()：容器中如果有实现org.springframework.beans.factory.BeanPostProcessors接口的实例，则任何Bean在初始化之前都会执行这个实例的processBeforeInitialization()方法。
- * 6、InitializingBean的afterPropertiesSet()：如果Bean类实现了org.springframework.beans.factory.InitializingBean接口，则执行其afterPropertiesSet()方法。
- * 7、Bean定义文件中定义的init-method方法
- * 8、BeanPostProcessors的processAfterInitialization()：容器中如果有实现org.springframework.beans.factory.BeanPostProcessors接口的实例，则任何Bean在初始化之前都会执行这个实例的processAfterInitialization()方法。
- * 9、DisposableBean的destroy()：在容器关闭时，如果Bean类实现了org.springframework.beans.factory.DisposableBean接口，则执行它的destroy()方法。
- * 10、Bean定义文件中定义destroy-abstracts
- *
- * 如果使用ApplicationContext来维护一个Bean的生命周期，则基本上与上边的流程相同，只不过在执行BeanNameAware的setBeanName()后，
- * 若有Bean类实现了org.springframework.context.ApplicationContextAware接口，则执行其setApplicationContext()方法，
- * 然后再进行BeanPostProcessors的processBeforeInitialization()
- *
- */
-
 /**
  * BeanFactory：采用延迟加载，第一次getBean时才会初始化Bean
  * ApplicationContext：容器启动初始化上下文就会实例化所有单例的bean，是对BeanFactory扩展，提供了更多的功能
@@ -89,8 +26,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *      5、调用Bean的属性设置方法设置属性值
  *      6、如果Bean实现了BeanNameAware接口，则将调用setBeanName()方法，将该配置文件中该Bean对应的名称设置到Bean中
  *      7、如果Bean实现了BeanFactoryAware接口，则将调用setBeanFactory()方法，将BeanFactory容器实例设置到Bean中
- *
- *      如果Bean实现了ApplicationContextAware接口，则将调用setApplicationContext()方法，将ApplicationContext容器实例设置到Bean中
+ *         如果Bean实现了ApplicationContextAware接口，则将调用setApplicationContext()方法，将ApplicationContext容器实例设置到Bean中
  *
  *      8、如果BeanFactory装配了BeanPostProcessor后置处理器，则将调用BeanPostProcessor的postProcessBeforeInitialization(Object bean, String beanName)方法
  *          对Bean进行加工操作，其中，入参bean是当前正在处理的Bean，而beanName是当前Bean的配置名，返回的对象为加工后的Bean。用户可以使用该方法对某些Bean进行特殊处理，
@@ -127,8 +63,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *      2、如果配置文件中声明了工厂后处理器接口BeanFactoryPostProcessor的实现类，则应用上下文在装载配置文件之后，初始化Bean实例之前将调用这些BeanFactoryPostProcessor对配置
  *          信息进行加工处理
  *
- *  ApplicationContext和BeanFactory最大的不同之处在于：前者会利用Java反射机制自动识别出配置文件中定义的BeanPostProcessor、InstantiationAwareBeanPostProcessor
- *      和BeanFactoryPostProcessor，并自动将他们注册到应用上下文中；而后者需要在代码中通过手工调用addBeanPostProcessor()方法进行注册
+ *  ApplicationContext和BeanFactory最大的不同之处在于：
+ *      前者会利用Java反射机制自动识别出配置文件中定义的BeanPostProcessor、InstantiationAwareBeanPostProcessor和BeanFactoryPostProcessor，并自动将他们注册到应用上下文中；
+ *      而后者需要在代码中通过手工调用addBeanPostProcessor()方法进行注册
  *
  *  Spring内部工作机制：
  *      prepareRefresh();

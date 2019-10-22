@@ -10,6 +10,6 @@ public class SpringTransactionalTest {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringTransactionalConfig.class);
         MathCalculatorService mathCalculatorService = (MathCalculatorService) applicationContext.getBean("mathCalculatorService2");
         double div = mathCalculatorService.div(12, 6);
-        System.out.println("执行结果："+div);
+        System.out.println("执行结果：" + div);
     }
 }

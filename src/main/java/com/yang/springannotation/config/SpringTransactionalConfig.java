@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * @EnableAspectJAutoProxy 注解表示开启AOP注解的功能，是在使用AspectJ AOP 功能的时候使用
  * @EnableTransactionManagement 表示开启注解事务，当使用@Transactional注解时需要开启它，并且需要配置事务管理数据源
- *
  */
 @Configuration
 @EnableTransactionManagement
@@ -20,8 +19,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SpringTransactionalConfig {
 
     @Bean("dataSource")
-    public DruidDataSource dataSource(){
-        DruidDataSource druidDataSource=new DruidDataSource();
+    public DruidDataSource dataSource() {
+        DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setUrl("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8");
         druidDataSource.setUsername("root");
         druidDataSource.setPassword("123456");
@@ -31,7 +30,7 @@ public class SpringTransactionalConfig {
     }
 
     @Bean
-    public PlatformTransactionManager platformTransactionManager(){
+    public PlatformTransactionManager platformTransactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 }

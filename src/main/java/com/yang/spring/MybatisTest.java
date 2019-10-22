@@ -11,7 +11,7 @@ public class MybatisTest {
 
     public static void main(String[] args) throws Exception {
 
-        String resource="mybatis-config2.xml";
+        String resource = "mybatis-config2.xml";
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader(resource));
 
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {

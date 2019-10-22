@@ -10,6 +10,6 @@ public class SpringAopTest {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringAopConfig.class);
         MathCalculatorService mathCalculatorService = (MathCalculatorService) applicationContext.getBean("mathCalculatorService");
         double div = mathCalculatorService.div(12, 6);
-        System.out.println("执行结果："+div);
+        System.out.println("执行结果：" + div);
     }
 }

@@ -10,7 +10,7 @@ public class MyEvent extends ApplicationEvent {
 
     public MyEvent(Object source, String msg) {
         super(source);
-        this.msg=msg;
+        this.msg = msg;
     }
 
     public String getMsg() {

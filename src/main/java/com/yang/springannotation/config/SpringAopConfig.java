@@ -15,7 +15,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class SpringAopConfig {
 
     @Bean
-    public LogAspects logAspects(){
+    public LogAspects logAspects() {
         return new LogAspects();
     }
 }

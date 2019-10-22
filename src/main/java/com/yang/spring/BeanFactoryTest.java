@@ -11,8 +11,8 @@ public class BeanFactoryTest {
     public static void main(String[] args) {
         //XmlBeanFactory 已被废弃，可以使用下面这种方式
         Resource resource = new ClassPathResource("spring-context.xml");
-        DefaultListableBeanFactory beanFactory=new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader reader=new XmlBeanDefinitionReader(beanFactory);
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
         reader.loadBeanDefinitions(resource);
 
         UserService userService = (UserService) beanFactory.getBean("userService");

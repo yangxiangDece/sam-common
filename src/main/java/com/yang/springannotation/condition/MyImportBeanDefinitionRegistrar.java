@@ -14,14 +14,15 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
 
     /**
      * 把所有需要添加到容器中的bean
-     * @param importingClassMetadata    当前类的注解信息
-     * @param registry                  BeanDefinition注册类
+     *
+     * @param importingClassMetadata 当前类的注解信息
+     * @param registry               BeanDefinition注册类
      */
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
         boolean isColor = registry.containsBeanDefinition("com.yang.springannotation.bean.Color");
-        //如果容器中有Color这个bean，那么就注册rainRow 这个bean到容器中
-        if(isColor){
+        // 如果容器中有Color这个bean，那么就注册rainRow 这个bean到容器中
+        if (isColor) {
             BeanDefinition beanDefinition = new RootBeanDefinition(RainBow.class);
             registry.registerBeanDefinition("rainRow", beanDefinition);
         }

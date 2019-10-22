@@ -8,9 +8,9 @@ public class MyProxy implements InvocationHandler {
 
     private Object target;
 
-    public Object getInstance(Object target){
+    public Object getInstance(Object target) {
         this.target = target;
-        return Proxy.newProxyInstance(target.getClass().getClassLoader(),target.getClass().getInterfaces(),this);
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
     }
 
     @Override

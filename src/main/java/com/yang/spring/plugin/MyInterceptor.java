@@ -8,7 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import java.util.Properties;
 
-@Intercepts({@Signature(type = Executor.class,method = "query",args = {MappedStatement.class,Object.class, RowBounds.class, ResultHandler.class})})
+@Intercepts({@Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})})
 public class MyInterceptor implements Interceptor {
 
     @Override
@@ -21,7 +21,7 @@ public class MyInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
-        return Plugin.wrap(target,this);
+        return Plugin.wrap(target, this);
     }
 
     @Override

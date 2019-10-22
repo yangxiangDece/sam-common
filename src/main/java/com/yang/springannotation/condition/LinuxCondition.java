@@ -10,9 +10,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 public class LinuxCondition implements Condition {
 
     /**
-     *
-     * @param context   判断条件能使用的上下文（环境）
-     * @param metadata  注释信息
+     * @param context  判断条件能使用的上下文（环境）
+     * @param metadata 注释信息
      * @return
      */
     @Override

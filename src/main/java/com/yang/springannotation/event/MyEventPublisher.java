@@ -10,7 +10,7 @@ public class MyEventPublisher {
     @Autowired
     private ApplicationContext applicationContext;
 
-    public void publish(String msg){
-        applicationContext.publishEvent(new MyEvent(this,msg));
+    public void publish(String msg) {
+        applicationContext.publishEvent(new MyEvent(this, msg));
     }
 }

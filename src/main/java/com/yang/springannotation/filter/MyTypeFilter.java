@@ -12,7 +12,6 @@ import java.io.IOException;
 public class MyTypeFilter implements TypeFilter {
 
     /**
-     *
      * @param metadataReader        读取到当前正在扫描的类的信息
      * @param metadataReaderFactory 可以获取到其他位置任何类的信息
      * @return
@@ -29,7 +28,7 @@ public class MyTypeFilter implements TypeFilter {
         Resource resource = metadataReader.getResource();
 
         String className = classMetadata.getClassName();
-        System.out.println("[TypeFilter] className："+className);
+        System.out.println("[TypeFilter] className：" + className);
 
         //包含service的就通过
         return className.contains("service");
