@@ -140,7 +140,7 @@ public class Graph {
     }
 
     // 广度优先算法
-    private void bfs(){
+    private void bfs() {
         isVisited = new boolean[n];
         for (int i = 0; i < getNumOfVertex(); i++) {
             if (!isVisited[i]) {

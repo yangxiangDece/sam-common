@@ -49,252 +49,252 @@ public class BinaryTrees {
         System.out.println("删除节点后：");
         binaryTree.preOrder();
     }
-}
 
-class BinaryTree {
-    private TreeNode root;
+    static class BinaryTree {
+        private TreeNode root;
 
-    public void setRoot(TreeNode root) {
-        this.root = root;
-    }
-
-    // 前序遍历 父-左-右
-    public void preOrder() {
-        if (this.root != null) {
-            this.root.preOrder();
-        } else {
-            System.out.println("二叉树为空，无法遍历...");
+        public void setRoot(TreeNode root) {
+            this.root = root;
         }
-    }
 
-    // 中序遍历 左-父-右
-    public void infixOrder() {
-        if (this.root != null) {
-            this.root.infixOrder();
-        } else {
-            System.out.println("二叉树为空，无法遍历...");
-        }
-    }
-
-    // 后续遍历 左-右-父
-    public void postOrder() {
-        if (this.root != null) {
-            this.root.postOrder();
-        } else {
-            System.out.println("二叉树为空，无法遍历...");
-        }
-    }
-
-    // 前序遍历查找 父-左-右
-    public TreeNode preOrderSearch(int no) {
-        if (this.root != null) {
-            return this.root.preOrderSearch(no);
-        } else {
-            System.out.println("二叉树为空，无法查找...");
-            return null;
-        }
-    }
-
-    // 中序遍历查找 左-父-右
-    public TreeNode infixOrderSearch(int no) {
-        if (this.root != null) {
-            return this.root.infixOrderSearch(no);
-        } else {
-            System.out.println("二叉树为空，无法查找...");
-            return null;
-        }
-    }
-
-    // 后续遍历查找 左-右-父
-    public TreeNode postOrderSearch(int no) {
-        if (this.root != null) {
-            return this.root.postOrderSearch(no);
-        } else {
-            System.out.println("二叉树为空，无法查找...");
-            return null;
-        }
-    }
-
-    // 删除节点
-    public void delNode(int no) {
-        if (this.root != null) {
-            this.root.delNode(no);
-        } else {
-            System.out.println("二叉树为空，无法删除...");
-        }
-    }
-}
-
-class TreeNode {
-    private int no;
-    private String name;
-    private TreeNode left;
-    private TreeNode right;
-
-    public TreeNode(int no, String name) {
-        this.no = no;
-        this.name = name;
-    }
-
-    public int getNo() {
-        return no;
-    }
-
-    public void setNo(int no) {
-        this.no = no;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public TreeNode getLeft() {
-        return left;
-    }
-
-    public void setLeft(TreeNode left) {
-        this.left = left;
-    }
-
-    public TreeNode getRight() {
-        return right;
-    }
-
-    public void setRight(TreeNode right) {
-        this.right = right;
-    }
-
-    @Override
-    public String toString() {
-        return "TreeNode{" +
-                "no=" + no +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    // 前序遍历 父-左-右
-    public void preOrder() {
-        System.out.println(this);
-        if (this.left != null) {
-            this.left.preOrder();
-        }
-        if (this.right != null) {
-            this.right.preOrder();
-        }
-    }
-
-    // 中序遍历 左-父-右
-    public void infixOrder() {
-        if (this.left != null) {
-            this.left.infixOrder();
-        }
-        System.out.println(this);
-        if (this.right != null) {
-            this.right.infixOrder();
-        }
-    }
-
-    // 后续遍历 左-右-父
-    public void postOrder() {
-        if (this.left != null) {
-            this.left.postOrder();
-        }
-        if (this.right != null) {
-            this.right.postOrder();
-        }
-        System.out.println(this);
-    }
-
-    // 前序遍历查找 父-左-右
-    public TreeNode preOrderSearch(int no) {
-        System.out.println("进入前序遍历查找...");
-        if (this.no == no) {
-            return this;
-        }
-        // 如果左节点不为空 继续递归前序遍历查找
-        TreeNode resNode = null;
-        if (this.left != null) {
-            resNode = this.left.preOrderSearch(no);
-        }
-        if (resNode != null) {
-            // 在左子树找到
-            return resNode;
-        }
-        // 如果左边未找到 则向右边递归前序遍历查找
-        if (this.right != null) {
-            resNode = this.right.preOrderSearch(no);
-        }
-        return resNode;
-    }
-
-    // 中序遍历查找 左-父-右
-    public TreeNode infixOrderSearch(int no) {
-        System.out.println("进入中序遍历查找...");
-        // 如果左节点不为空 继续递归中序遍历查找
-        TreeNode resNode = null;
-        if (this.left != null) {
-            resNode = this.left.infixOrderSearch(no);
-        }
-        // 如果左边未找到，则判断是否是父节点
-        if (resNode == null) {
-            if (this.no == no) {
-                resNode = this;
+        // 前序遍历 父-左-右
+        public void preOrder() {
+            if (this.root != null) {
+                this.root.preOrder();
+            } else {
+                System.out.println("二叉树为空，无法遍历...");
             }
         }
-        // 如果左边和父节点都未找到，则向右递归中序遍历查找
-        if (this.right != null) {
-            resNode = this.right.infixOrderSearch(no);
+
+        // 中序遍历 左-父-右
+        public void infixOrder() {
+            if (this.root != null) {
+                this.root.infixOrder();
+            } else {
+                System.out.println("二叉树为空，无法遍历...");
+            }
         }
-        return resNode;
+
+        // 后续遍历 左-右-父
+        public void postOrder() {
+            if (this.root != null) {
+                this.root.postOrder();
+            } else {
+                System.out.println("二叉树为空，无法遍历...");
+            }
+        }
+
+        // 前序遍历查找 父-左-右
+        public TreeNode preOrderSearch(int no) {
+            if (this.root != null) {
+                return this.root.preOrderSearch(no);
+            } else {
+                System.out.println("二叉树为空，无法查找...");
+                return null;
+            }
+        }
+
+        // 中序遍历查找 左-父-右
+        public TreeNode infixOrderSearch(int no) {
+            if (this.root != null) {
+                return this.root.infixOrderSearch(no);
+            } else {
+                System.out.println("二叉树为空，无法查找...");
+                return null;
+            }
+        }
+
+        // 后续遍历查找 左-右-父
+        public TreeNode postOrderSearch(int no) {
+            if (this.root != null) {
+                return this.root.postOrderSearch(no);
+            } else {
+                System.out.println("二叉树为空，无法查找...");
+                return null;
+            }
+        }
+
+        // 删除节点
+        public void delNode(int no) {
+            if (this.root != null) {
+                this.root.delNode(no);
+            } else {
+                System.out.println("二叉树为空，无法删除...");
+            }
+        }
     }
 
-    // 后序遍历查找 左-右-父
-    public TreeNode postOrderSearch(int no) {
-        System.out.println("进入后序遍历查找...");
-        TreeNode resNode = null;
-        // 如果左节点不为空 继续递归后序遍历查找
-        if (this.left != null) {
-            resNode = this.left.postOrderSearch(no);
-        }
-        // 如果左边未找到，则向右递归后序遍历查找
-        if (resNode == null && this.right != null) {
-            resNode = this.right.postOrderSearch(no);
-        }
-        // 如果左边和右边都未找到，则判断是否是父节点
-        if (resNode == null && this.no == no) {
-            resNode = this;
-        }
-        return null;
-    }
+    static class TreeNode {
+        private int no;
+        private String name;
+        private TreeNode left;
+        private TreeNode right;
 
-    // 删除节点
-    // 因为当前的二叉树是单向的，所以我们是判断当前节点的子节点是否需要删除，而不能判断当前节点是否需要删除。
-    // 如果删除了当前节点，按理来说需要将它的父类的左子节点或右子节点设为null，但是当前二叉树是单向，无法完成。
-    public void delNode(int no) {
-        if (this.left != null && this.left.no == no) {
-            // 找到了要删除的节点
-            System.out.println("成功删除第" + this.left.no + "节点");
-            this.left = null;
-            return;
+        public TreeNode(int no, String name) {
+            this.no = no;
+            this.name = name;
         }
-        if (this.right != null && this.right.no == no) {
-            // 找到了要删除的节点
-            System.out.println("成功删除第" + this.right.no + "节点");
-            this.right = null;
-            return;
+
+        public int getNo() {
+            return no;
         }
-        // 如果当前节点的左右子节点都不是要删除的节点，则开始递归左右节点找到并删除
-        // 向左递归查找并删除
-        if (this.left != null) {
-            this.left.delNode(no);
+
+        public void setNo(int no) {
+            this.no = no;
         }
-        // 向右递归查找并删除
-        if (this.right != null) {
-            this.right.delNode(no);
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public TreeNode getLeft() {
+            return left;
+        }
+
+        public void setLeft(TreeNode left) {
+            this.left = left;
+        }
+
+        public TreeNode getRight() {
+            return right;
+        }
+
+        public void setRight(TreeNode right) {
+            this.right = right;
+        }
+
+        @Override
+        public String toString() {
+            return "TreeNode{" +
+                    "no=" + no +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+
+        // 前序遍历 父-左-右
+        public void preOrder() {
+            System.out.println(this);
+            if (this.left != null) {
+                this.left.preOrder();
+            }
+            if (this.right != null) {
+                this.right.preOrder();
+            }
+        }
+
+        // 中序遍历 左-父-右
+        public void infixOrder() {
+            if (this.left != null) {
+                this.left.infixOrder();
+            }
+            System.out.println(this);
+            if (this.right != null) {
+                this.right.infixOrder();
+            }
+        }
+
+        // 后续遍历 左-右-父
+        public void postOrder() {
+            if (this.left != null) {
+                this.left.postOrder();
+            }
+            if (this.right != null) {
+                this.right.postOrder();
+            }
+            System.out.println(this);
+        }
+
+        // 前序遍历查找 父-左-右
+        public TreeNode preOrderSearch(int no) {
+            System.out.println("进入前序遍历查找...");
+            if (this.no == no) {
+                return this;
+            }
+            // 如果左节点不为空 继续递归前序遍历查找
+            TreeNode resNode = null;
+            if (this.left != null) {
+                resNode = this.left.preOrderSearch(no);
+            }
+            if (resNode != null) {
+                // 在左子树找到
+                return resNode;
+            }
+            // 如果左边未找到 则向右边递归前序遍历查找
+            if (this.right != null) {
+                resNode = this.right.preOrderSearch(no);
+            }
+            return resNode;
+        }
+
+        // 中序遍历查找 左-父-右
+        public TreeNode infixOrderSearch(int no) {
+            System.out.println("进入中序遍历查找...");
+            // 如果左节点不为空 继续递归中序遍历查找
+            TreeNode resNode = null;
+            if (this.left != null) {
+                resNode = this.left.infixOrderSearch(no);
+            }
+            // 如果左边未找到，则判断是否是父节点
+            if (resNode == null) {
+                if (this.no == no) {
+                    resNode = this;
+                }
+            }
+            // 如果左边和父节点都未找到，则向右递归中序遍历查找
+            if (this.right != null) {
+                resNode = this.right.infixOrderSearch(no);
+            }
+            return resNode;
+        }
+
+        // 后序遍历查找 左-右-父
+        public TreeNode postOrderSearch(int no) {
+            System.out.println("进入后序遍历查找...");
+            TreeNode resNode = null;
+            // 如果左节点不为空 继续递归后序遍历查找
+            if (this.left != null) {
+                resNode = this.left.postOrderSearch(no);
+            }
+            // 如果左边未找到，则向右递归后序遍历查找
+            if (resNode == null && this.right != null) {
+                resNode = this.right.postOrderSearch(no);
+            }
+            // 如果左边和右边都未找到，则判断是否是父节点
+            if (resNode == null && this.no == no) {
+                resNode = this;
+            }
+            return null;
+        }
+
+        // 删除节点
+        // 因为当前的二叉树是单向的，所以我们是判断当前节点的子节点是否需要删除，而不能判断当前节点是否需要删除。
+        // 如果删除了当前节点，按理来说需要将它的父类的左子节点或右子节点设为null，但是当前二叉树是单向，无法完成。
+        public void delNode(int no) {
+            if (this.left != null && this.left.no == no) {
+                // 找到了要删除的节点
+                System.out.println("成功删除第" + this.left.no + "节点");
+                this.left = null;
+                return;
+            }
+            if (this.right != null && this.right.no == no) {
+                // 找到了要删除的节点
+                System.out.println("成功删除第" + this.right.no + "节点");
+                this.right = null;
+                return;
+            }
+            // 如果当前节点的左右子节点都不是要删除的节点，则开始递归左右节点找到并删除
+            // 向左递归查找并删除
+            if (this.left != null) {
+                this.left.delNode(no);
+            }
+            // 向右递归查找并删除
+            if (this.right != null) {
+                this.right.delNode(no);
+            }
         }
     }
 }

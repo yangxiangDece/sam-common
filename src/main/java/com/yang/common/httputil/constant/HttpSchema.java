@@ -21,10 +21,9 @@ package com.yang.common.httputil.constant;
 /**
  * HTTP Schema常量
  */
-public class HttpSchema {
+public interface HttpSchema {
     //HTTP
-    public static final String HTTP = "http://";
+    String HTTP = "http://";
     //HTTPS
-    public static final String HTTPS = "https://";
-
+    String HTTPS = "https://";
 }

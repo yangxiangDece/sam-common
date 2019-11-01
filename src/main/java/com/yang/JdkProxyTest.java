@@ -10,40 +10,40 @@ public class JdkProxyTest {
         UserService userService = new JDKDynamicProxy(new UserServiceImpl()).getProxy();
         userService.addUser("sam");
     }
-}
 
-interface UserService {
+    interface UserService {
 
-    void addUser(String username);
-}
-
-class UserServiceImpl implements UserService {
-
-    @Override
-    public void addUser(String username) {
-        System.out.println("add " + username + " success...");
-    }
-}
-
-class JDKDynamicProxy implements InvocationHandler {
-
-    private Object target;
-
-    public JDKDynamicProxy(Object target) {
-        this.target = target;
+        void addUser(String username);
     }
 
-    public <T> T getProxy() {
-        return (T) Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
+    static class UserServiceImpl implements UserService {
+
+        @Override
+        public void addUser(String username) {
+            System.out.println("add " + username + " success...");
+        }
     }
 
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    static class JDKDynamicProxy implements InvocationHandler {
 
-        System.out.println("before method invoke...");
-        Object result = method.invoke(target,args);
-        System.out.println("after method invoke...");
+        private Object target;
 
-        return result;
+        public JDKDynamicProxy(Object target) {
+            this.target = target;
+        }
+
+        public <T> T getProxy() {
+            return (T) Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
+        }
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+            System.out.println("before method invoke...");
+            Object result = method.invoke(target, args);
+            System.out.println("after method invoke...");
+
+            return result;
+        }
     }
 }

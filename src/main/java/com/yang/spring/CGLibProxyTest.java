@@ -29,22 +29,22 @@ public class CGLibProxyTest {
         System.out.println(demo.age); //null 对你没看错，这里是null
         System.out.println(demo.findAge()); //null 对你没看错，这里是null
     }
-}
 
-// 不实现接口,就会用CGLIB去代理
-class DemoT {
-    public Integer age;
+    // 不实现接口,就会用CGLIB去代理
+    static class DemoT {
+        public Integer age;
 
-    // 此处用final修饰了  CGLIB也不会代理此方法了
-    public final Integer findAge() {
-        return age;
-    }
+        // 此处用final修饰了  CGLIB也不会代理此方法了
+        public final Integer findAge() {
+            return age;
+        }
 
-    public Integer getAge() {
-        return age;
-    }
+        public Integer getAge() {
+            return age;
+        }
 
-    public void setAge(Integer age) {
-        this.age = age;
+        public void setAge(Integer age) {
+            this.age = age;
+        }
     }
 }

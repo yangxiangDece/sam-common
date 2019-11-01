@@ -5,11 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Random;
 
 /**
- * <pre>
- * <p>Title: 随机数工具类</p>
- * <p>Description: </p>
- * <p>Company: chuangjia</p>
- * </pre>
+ * 随机数工具类
  */
 public class RandomUtil {
     private final static Random random = new Random(System.currentTimeMillis());

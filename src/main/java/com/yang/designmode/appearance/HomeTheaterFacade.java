@@ -25,7 +25,7 @@ public class HomeTheaterFacade {
         this.popper = popper;
     }
 
-    //watchMovie()将我们之气手动进行的每项任务依次处理，请注意，每项任务都是委托子系统中相应的组件处理的
+    //watchMovie()将我们之前手动进行的每项任务依次处理，请注意，每项任务都是委托子系统中相应的组件处理的
     public void watchMovie(String movie) {
         System.out.println("Get ready to watch a movie...");
         popper.on();

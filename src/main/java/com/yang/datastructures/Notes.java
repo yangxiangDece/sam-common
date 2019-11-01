@@ -4,8 +4,6 @@ package com.yang.datastructures;
  * 稀疏数组
  * 数组模拟队列
  *
- *
- *
  * 二分查找算法
  * 分治算法
  * 动态规划算法

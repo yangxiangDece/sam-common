@@ -231,41 +231,41 @@ public class HuffmanCode {
         // 返回赫夫曼树
         return nodes.get(0);
     }
-}
 
-class CodeNode implements Comparable<CodeNode> {
+    static class CodeNode implements Comparable<CodeNode> {
 
-    Byte data; // 存放数据(字符)本身，比如'a' -> 97
-    int weight; // 权值 表示字符出现的次数
-    CodeNode left;
-    CodeNode right;
+        Byte data; // 存放数据(字符)本身，比如'a' -> 97
+        int weight; // 权值 表示字符出现的次数
+        CodeNode left;
+        CodeNode right;
 
-    public CodeNode(Byte data, int weight) {
-        this.data = data;
-        this.weight = weight;
-    }
-
-    public void preOrder() {
-        System.out.println(this);
-        if (this.left != null) {
-            this.left.preOrder();
+        public CodeNode(Byte data, int weight) {
+            this.data = data;
+            this.weight = weight;
         }
-        if (this.right != null) {
-            this.right.preOrder();
+
+        public void preOrder() {
+            System.out.println(this);
+            if (this.left != null) {
+                this.left.preOrder();
+            }
+            if (this.right != null) {
+                this.right.preOrder();
+            }
         }
-    }
 
-    @Override
-    public int compareTo(CodeNode o) {
-        // 从小到大 排序
-        return this.weight - o.weight;
-    }
+        @Override
+        public int compareTo(CodeNode o) {
+            // 从小到大 排序
+            return this.weight - o.weight;
+        }
 
-    @Override
-    public String toString() {
-        return "CodeNode{" +
-                "data=" + data +
-                ", weight=" + weight +
-                '}';
+        @Override
+        public String toString() {
+            return "CodeNode{" +
+                    "data=" + data +
+                    ", weight=" + weight +
+                    '}';
+        }
     }
 }

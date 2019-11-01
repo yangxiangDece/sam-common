@@ -17,33 +17,34 @@ public class ArrayBinaryTree {
         System.out.println("顺序存储二叉树的前序遍历：");
         binaryTree.preOrder();
     }
-}
 
-class ArrBinaryTree {
-    private int[] array;
+    static class ArrBinaryTree {
 
-    public ArrBinaryTree(int[] array) {
-        this.array = array;
-    }
+        private int[] array;
 
-    public void preOrder() {
-        preOrder(0);
-    }
-
-    // 顺序存储二叉树的前序遍历
-    private void preOrder(int index) {
-        if (array == null || array.length == 0) {
-            System.out.println("数组为空，无法遍历");
+        public ArrBinaryTree(int[] array) {
+            this.array = array;
         }
-        // 输出当前元素
-        System.out.println(array[index]);
-        // 向左递归遍历
-        if ((index * 2 + 1) < array.length) {
-            preOrder(2 * index + 1);
+
+        public void preOrder() {
+            preOrder(0);
         }
-        // 向右递归
-        if ((index * 2 + 2) < array.length) {
-            preOrder(2 * index + 2);
+
+        // 顺序存储二叉树的前序遍历
+        private void preOrder(int index) {
+            if (array == null || array.length == 0) {
+                System.out.println("数组为空，无法遍历");
+            }
+            // 输出当前元素
+            System.out.println(array[index]);
+            // 向左递归遍历
+            if ((index * 2 + 1) < array.length) {
+                preOrder(2 * index + 1);
+            }
+            // 向右递归
+            if ((index * 2 + 2) < array.length) {
+                preOrder(2 * index + 2);
+            }
         }
     }
 }

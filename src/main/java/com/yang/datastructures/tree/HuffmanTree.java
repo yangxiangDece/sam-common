@@ -51,38 +51,38 @@ public class HuffmanTree {
         // 返回赫夫曼树的根节点
         return nodes.get(0);
     }
-}
 
-class Node implements Comparable<Node> {
+    static class Node implements Comparable<Node> {
 
-    int value;
-    Node left;
-    Node right;
+        int value;
+        Node left;
+        Node right;
 
-    public Node(int value) {
-        this.value = value;
-    }
-
-    // 前序遍历
-    public void preOrder() {
-        System.out.println(this);
-        if (this.left != null) {
-            this.left.preOrder();
+        public Node(int value) {
+            this.value = value;
         }
-        if (this.right != null) {
-            this.right.preOrder();
+
+        // 前序遍历
+        public void preOrder() {
+            System.out.println(this);
+            if (this.left != null) {
+                this.left.preOrder();
+            }
+            if (this.right != null) {
+                this.right.preOrder();
+            }
         }
-    }
 
-    @Override
-    public int compareTo(Node o) {
-        return this.value - o.value;
-    }
+        @Override
+        public int compareTo(Node o) {
+            return this.value - o.value;
+        }
 
-    @Override
-    public String toString() {
-        return "Node{" +
-                "value=" + value +
-                '}';
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    '}';
+        }
     }
 }

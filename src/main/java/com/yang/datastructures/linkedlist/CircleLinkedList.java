@@ -77,117 +77,117 @@ public class CircleLinkedList {
         } while (helper != head);
         System.out.printf("小孩 %d 出圈\n", helper.getItem());
     }
-}
 
-class CircleLinked<T> {
+    static class CircleLinked<T> {
 
-    private Node<T> head;
-    private int size;
+        private Node<T> head;
+        private int size;
 
-    public Node<T> getHead() {
-        return head;
-    }
-
-    public void addLast(T value) {
-        if (value == null) {
-            return;
+        public Node<T> getHead() {
+            return head;
         }
-        final Node<T> newNode = new Node<>(value);
-        Node<T> cur = head;
-        if (cur == null) {
-            head = newNode;
-            newNode.next = head;
-        } else {
-            while (cur.next != head) {
-                cur = cur.next;
+
+        public void addLast(T value) {
+            if (value == null) {
+                return;
             }
-            newNode.next = cur.next;
-            cur.next = newNode;
-        }
-        size++;
-    }
-
-    public void add(T value) {
-        addLast(value);
-    }
-
-    public void addFirst(T value) {
-        if (value == null) {
-            return;
-        }
-        final Node<T> newNode = new Node<>(value);
-        Node<T> h = head;
-        if (h == null) {
-            head = newNode;
-            newNode.next = head;
-        } else {
-            // 2 口 口 口
-            // 头结点发生了变化，所以需要将尾节点的下一个节点指向新的头节点
+            final Node<T> newNode = new Node<>(value);
             Node<T> cur = head;
-            while (cur.next != head) {
-                cur = cur.next;
-            }
-            newNode.next = h;
-            head = newNode;
-            cur.next = head;
-        }
-        size++;
-    }
-
-    public void remove(T value) {
-        if (size == 0) {
-            System.out.println("链表为空...");
-            return;
-        }
-        Node<T> cur = head;
-        Node<T> p = head;
-        do {
-            if (value.equals(cur.item)) {
-                // 口 口 口
-                p.next = cur.next;
-                if (cur == head) {
-                    head = cur.next;
+            if (cur == null) {
+                head = newNode;
+                newNode.next = head;
+            } else {
+                while (cur.next != head) {
+                    cur = cur.next;
                 }
+                newNode.next = cur.next;
+                cur.next = newNode;
             }
-            // 保存上一个节点
-            p = cur;
-        } while ((cur = cur.next) != head);
-    }
-
-    public void printLinked() {
-        if (size == 0) {
-            System.out.println("链表为空...");
-            return;
-        }
-        Node<T> cur = head;
-        do {
-            System.out.println(cur.item);
-        } while ((cur = cur.next) != head);
-    }
-
-    class Node<E> {
-
-        private E item;
-        private Node<E> next;
-
-        Node(E item) {
-            this.item = item;
+            size++;
         }
 
-        public E getItem() {
-            return item;
+        public void add(T value) {
+            addLast(value);
         }
 
-        public void setItem(E item) {
-            this.item = item;
+        public void addFirst(T value) {
+            if (value == null) {
+                return;
+            }
+            final Node<T> newNode = new Node<>(value);
+            Node<T> h = head;
+            if (h == null) {
+                head = newNode;
+                newNode.next = head;
+            } else {
+                // 2 口 口 口
+                // 头结点发生了变化，所以需要将尾节点的下一个节点指向新的头节点
+                Node<T> cur = head;
+                while (cur.next != head) {
+                    cur = cur.next;
+                }
+                newNode.next = h;
+                head = newNode;
+                cur.next = head;
+            }
+            size++;
         }
 
-        public Node<E> getNext() {
-            return next;
+        public void remove(T value) {
+            if (size == 0) {
+                System.out.println("链表为空...");
+                return;
+            }
+            Node<T> cur = head;
+            Node<T> p = head;
+            do {
+                if (value.equals(cur.item)) {
+                    // 口 口 口
+                    p.next = cur.next;
+                    if (cur == head) {
+                        head = cur.next;
+                    }
+                }
+                // 保存上一个节点
+                p = cur;
+            } while ((cur = cur.next) != head);
         }
 
-        public void setNext(Node<E> next) {
-            this.next = next;
+        public void printLinked() {
+            if (size == 0) {
+                System.out.println("链表为空...");
+                return;
+            }
+            Node<T> cur = head;
+            do {
+                System.out.println(cur.item);
+            } while ((cur = cur.next) != head);
+        }
+
+        class Node<E> {
+
+            private E item;
+            private Node<E> next;
+
+            Node(E item) {
+                this.item = item;
+            }
+
+            public E getItem() {
+                return item;
+            }
+
+            public void setItem(E item) {
+                this.item = item;
+            }
+
+            public Node<E> getNext() {
+                return next;
+            }
+
+            public void setNext(Node<E> next) {
+                this.next = next;
+            }
         }
     }
 }

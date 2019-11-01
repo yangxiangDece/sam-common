@@ -21,13 +21,13 @@ package com.yang.common.httputil.constant;
 /**
  * HTTP方法常量
  */
-public class HttpMethod {
+public interface HttpMethod {
     //GET
-    public static final String GET = "GET";
+    String GET = "GET";
     //POST
-    public static final String POST = "POST";
+    String POST = "POST";
     //PUT
-    public static final String PUT = "PUT";
+    String PUT = "PUT";
     //DELETE
-    public static final String DELETE = "DELETE";
+    String DELETE = "DELETE";
 }

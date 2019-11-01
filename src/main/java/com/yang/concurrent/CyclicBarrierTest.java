@@ -16,11 +16,12 @@ public class CyclicBarrierTest {
                     TimeUnit.SECONDS.sleep(1L);
                     System.out.println("线程" + finalI + "准备好了，等待其他线程...");
                     cyclicBarrier.await();
-                    System.out.println("线程" + finalI + "等待完毕！！");
+                    System.out.println("线程" + finalI + "执行完毕！！");
                 } catch (InterruptedException | BrokenBarrierException e) {
                     e.printStackTrace();
                 }
             }).start();
         }
+        System.out.println("主线程结束....");
     }
 }

@@ -71,7 +71,7 @@ public class MessageDigestUtil {
      */
     public static String utf8ToIso88591(String str) {
         if (str == null) {
-            return str;
+            return null;
         }
 
         try {
@@ -89,7 +89,7 @@ public class MessageDigestUtil {
      */
     public static String iso88591ToUtf8(String str) {
         if (str == null) {
-            return str;
+            return null;
         }
 
         try {

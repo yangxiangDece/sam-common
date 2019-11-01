@@ -55,16 +55,16 @@ public class ProxyFactoryTest {
         // com.fsx.maintest.Demo@643b1d11
         System.out.println(demo.toString());
     }
-}
 
-interface DemoInterface {
-    void hello();
-}
+    interface DemoInterface {
+        void hello();
+    }
 
-class Demo implements DemoInterface {
+    static class Demo implements DemoInterface {
 
-    @Override
-    public void hello() {
-        System.out.println("this demo show");
+        @Override
+        public void hello() {
+            System.out.println("this demo show");
+        }
     }
 }
