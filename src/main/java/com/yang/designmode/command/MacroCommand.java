@@ -5,7 +5,7 @@ package com.yang.designmode.command;
  */
 public class MacroCommand implements Command {
 
-    Command[] commands;
+    private Command[] commands;
 
     public MacroCommand(Command[] commands) {
         this.commands = commands;

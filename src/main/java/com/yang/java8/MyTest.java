@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class MyTest {
 
     public static void main(String[] args) {
-        Student student1=new Student("zhangsan",20,100);
-        Student student2=new Student("lisi",30,80);
-        Student student3=new Student("wangwu",40,90);
-        Student student4=new Student("wangwu",33,90);
-        List<Student> list=Arrays.asList(student1,student2,student3,student4);
+        Student student1 = new Student("zhangsan", 20, 100);
+        Student student2 = new Student("lisi", 30, 80);
+        Student student3 = new Student("wangwu", 40, 90);
+        Student student4 = new Student("wangwu", 33, 90);
+        List<Student> list = Arrays.asList(student1, student2, student3, student4);
 
         Map<String, List<Student>> collect = list.stream().collect(Collectors.groupingBy(Student::getName));
         System.out.println(collect);
@@ -54,41 +54,39 @@ public class MyTest {
 
         System.out.println(list.stream().map(Student::getName).collect(Collectors.joining()));
         System.out.println(list.stream().map(Student::getName).collect(Collectors.joining(",")));
-        System.out.println(list.stream().map(Student::getName).collect(Collectors.joining(",","<begin>","<end>")));
+        System.out.println(list.stream().map(Student::getName).collect(Collectors.joining(",", "<begin>", "<end>")));
 
         System.out.println("=======");
 
-        MyTest myTest=new MyTest();
+        MyTest myTest = new MyTest();
 
-        Consumer<Integer> consumer= System.out::println;
-        IntConsumer intConsumer=System.out::println;
+        Consumer<Integer> consumer = System.out::println;
+        IntConsumer intConsumer = System.out::println;
         System.out.println(consumer instanceof Consumer);
         System.out.println(intConsumer instanceof IntConsumer);
 
         myTest.test(consumer);
         myTest.test(consumer::accept);
         myTest.test(intConsumer::accept);
-        //也就是说对于当前自定义这个test方法，它既可以传递一个引用，比如consumer，可以传递一个lamdba表达式，比如：intConsumer::accept，其实这是一个lamdba表达式
-
-        
     }
 
-    public void test(Consumer<Integer> consumer){
+    public void test(Consumer<Integer> consumer) {
         consumer.accept(100);
     }
 
-    public static String convert(String a,Function<String,String> function){
+    public static String convert(String a, Function<String, String> function) {
         return function.apply(a);
     }
 
-    public static String composeTest(double a,Function<Integer,String> function1,Function<Number,Integer> function2){
+    public static String composeTest(double a, Function<Integer, String> function1, Function<Number, Integer> function2) {
         return function1.compose(function2).apply(a);
     }
-    public static String composeTest2(Double a,Function<Double,Double> function1,Function<Number,String> function2){
+
+    public static String composeTest2(Double a, Function<Double, Double> function1, Function<Number, String> function2) {
         return function1.andThen(function2).apply(a);
     }
 
-    public static int compute(int a, int b, BiFunction<Integer,Integer,Integer> function){
-        return function.apply(a,b);
+    public static int compute(int a, int b, BiFunction<Integer, Integer, Integer> function) {
+        return function.apply(a, b);
     }
 }

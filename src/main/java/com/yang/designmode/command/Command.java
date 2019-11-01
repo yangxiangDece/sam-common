@@ -4,6 +4,7 @@ package com.yang.designmode.command;
  * 所有遥控器命令都实现这个Command接口，此接口包含一个方法，execute()，命令封装了某个特定厂商类的一组动作，遥控器可以通过调用execute()方法，执行这些动作，而不需要关系具体如何执行。
  */
 public interface Command {
+
     void execute();
 
     /**

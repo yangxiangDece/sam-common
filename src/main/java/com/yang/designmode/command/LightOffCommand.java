@@ -10,7 +10,7 @@ public class LightOffCommand implements Command {
 
     private Light light;
 
-    //构造器被传入了某个电灯，以便让这个命令控制，然后记录在实例变量中，一旦调用execute()，就由这个电灯对象成为接收者，负债接收请求。
+    // 构造器被传入了某个电灯，以便让这个命令控制，然后记录在实例变量中，一旦调用execute()，就由这个电灯对象成为接收者，负债接收请求。
     public LightOffCommand(Light light) {
         this.light = light;
     }

@@ -9,9 +9,7 @@ public class MainTest {
 
         Beverage darkRoast = new DarkRoast();
         darkRoast = new Mocha(darkRoast);
-        darkRoast = new Mocha(darkRoast);
         darkRoast = new Whip(darkRoast);
         System.out.println(darkRoast.getDescription() + " $" + darkRoast.cost());
-
     }
 }

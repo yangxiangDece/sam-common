@@ -4,6 +4,7 @@ package com.yang.designmode.factory.abstracts;
  * 具体产品类
  */
 public class CheesePizza extends Pizza {
+
     private PizzaIngredientFactory pizzaIngredientFactory;
 
     //要制造比萨，需要工厂提供原料。所以每个比萨类都需要从构造器参数中得到一个工厂，并将这个工厂存储在一个实例变量中

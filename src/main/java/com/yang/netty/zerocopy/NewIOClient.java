@@ -1,4 +1,4 @@
-package com.yang.zerocopy;
+package com.yang.netty.zerocopy;
 
 import java.io.FileInputStream;
 import java.net.InetSocketAddress;

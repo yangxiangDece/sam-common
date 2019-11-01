@@ -8,10 +8,7 @@ public class ComparatorTest {
 
     public static void main(String[] args) {
         List<String> list= Arrays.asList("comparator","stream","function","accept");
-
         list.sort(Comparator.comparingInt(String::length).reversed());
-
         System.out.println(list);
-
     }
 }

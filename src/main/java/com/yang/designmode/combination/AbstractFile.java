@@ -11,6 +11,7 @@ package com.yang.designmode.combination;
  * 组合模式的引入将在一定程度上解决这些问题。
  */
 public abstract class AbstractFile {
+
     public abstract void add(AbstractFile file);
 
     public abstract void remove(AbstractFile file);

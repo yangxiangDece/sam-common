@@ -34,7 +34,7 @@ public class Folder extends AbstractFile {
     @Override
     public void killVirus() {
         System.out.println("*******开始对文件夹：" + name + "进行杀毒");
-        //递归调用成员构件的killVirus()方法
+        // 递归调用成员构件的killVirus()方法
         list.forEach(AbstractFile::killVirus);
     }
 }

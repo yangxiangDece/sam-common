@@ -3,7 +3,7 @@ package com.yang.designmode.command;
 /**
  * 这个是命令模式的客户端
  */
-public class RemoteControlTest {
+public class MainTest {
 
     public static void main(String[] args) {
         //1、遥控器就是调用者，会传入一个命令对象，可以发出请求
@@ -18,7 +18,7 @@ public class RemoteControlTest {
         remoteControl.buttonWasPressed();
         remoteControl.undoButtonWasPressed();
 
-        //关闭电灯
+        // 关闭电灯
         LightOffCommand lightOffCommand = new LightOffCommand(light);
         remoteControl.setSlot(lightOffCommand);
         remoteControl.buttonWasPressed();

@@ -10,10 +10,10 @@ import com.yang.designmode.factory.abstracts.material.Sauce;
  */
 public abstract class Pizza {
 
-    String name;
-    Dough dough;
-    Sauce sauce;
-    Cheese cheese;
+    protected String name;
+    protected Dough dough;
+    protected Sauce sauce;
+    protected Cheese cheese;
     Clams clams;
 
     abstract void prepare();
