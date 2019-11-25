@@ -1,4 +1,4 @@
-package com.yang.datastructures.tree.threadbinarytree;
+package com.yang.datastructures.tree;
 
 
 /**
@@ -369,7 +369,7 @@ public class ThreadBinaryTree {
             if (resNode == null && this.no == no) {
                 resNode = this;
             }
-            return null;
+            return resNode;
         }
 
         // 删除节点

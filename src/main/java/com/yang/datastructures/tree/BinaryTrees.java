@@ -267,7 +267,7 @@ public class BinaryTrees {
             if (resNode == null && this.no == no) {
                 resNode = this;
             }
-            return null;
+            return resNode;
         }
 
         // 删除节点
