@@ -41,14 +41,6 @@ import java.util.List;
  *      动态代理织入，在运行期为目标类添加增强生成子类的方式
  *      Spring采用的是动态代理织入，而AspectJ采用编译期织入和类装载期织入。
  *
- * @Before: 方法执行之前通知
- * @After: 方法执行之后通知，无论方法是否抛出异常，都会执行，由于方法可能抛出异常，所以可能得不到方法的返回值
- * @AfterReturning: 方法正常返回通知
- * @AfterThrowing: 方法异常通知
- * @Aroud: 环绕通知，环绕通知类似于动态代理的全过程，ProceedingJoinPoint为方法的参数，ProceedingJoinPoint可以决定是否执行目标方法
- * @PointCut: 切面切入点，抽取公共的切入点，其他方法直接引用被这个注解标注的方法，比如@Before("pointCut()")
- * @Aspect: 告诉spring 当前类是一个切面类。
- *
  *  Spring 中 JDK与Cglib：
  *      如果目标对象实现了接口，默认情况下会采用JDK的动态代理实现AOP
  *      如果目标对象实现了接口，可以强制使用CGLIB实现AOP
