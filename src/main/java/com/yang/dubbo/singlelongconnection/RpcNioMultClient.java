@@ -23,7 +23,7 @@ public class RpcNioMultClient {
     private RpcNioMultClient() {
         // 初始化client
         initClient();
-        new Thread(this::linsten).start();
+        new Thread(this::listen).start();
     }
 
     private static class RpcNioMultClientHolder {
@@ -54,7 +54,7 @@ public class RpcNioMultClient {
         }
     }
 
-    public void linsten() {
+    public void listen() {
         try {
             while (true) {
                 // 绑定到通道管理器，监听可读事件，因为客户端只需要从服务端获得数据然后读取，所以只需要监听READ事件
