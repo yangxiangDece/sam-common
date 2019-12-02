@@ -18,6 +18,8 @@ public class BIOServer {
         ServerSocket serverSocket = new ServerSocket(8085);
         System.out.println("服务端已启动...");
         while (true) {
+            printThread();
+            System.out.println("等待连接...");
             Socket socket = serverSocket.accept();
             System.out.println("连接到一个客户端");
             executorService.execute(() -> handler(socket));
@@ -25,19 +27,28 @@ public class BIOServer {
     }
 
     private static void handler(Socket socket) {
-        System.out.println("线程id：" + Thread.currentThread().getId() + ",线程名称：" + Thread.currentThread().getName());
+        printThread();
         byte[] bytes = new byte[1024];
         InputStream inputStream = null;
         try {
             inputStream = socket.getInputStream();
-            int read;
-            while ((read = inputStream.read(bytes)) != -1) {
-                System.out.println(new String(bytes, 0, read));
+            while (true) {
+                System.out.println("等待读...");
+                int read = inputStream.read(bytes);
+                if (read != -1) {
+                    System.out.println(new String(bytes, 0, read));
+                } else {
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             CloseStreamUtil.close(inputStream);
         }
+    }
+
+    private static void printThread() {
+        System.out.println("线程id：" + Thread.currentThread().getId() + ",线程名称：" + Thread.currentThread().getName());
     }
 }
