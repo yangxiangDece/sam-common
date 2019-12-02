@@ -16,12 +16,14 @@ public class NIOTest8 {
     private static final Map<String, SocketChannel> CHANNEL_MAP = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
+
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.configureBlocking(false);
         serverSocketChannel.bind(new InetSocketAddress(9999));
 
         Selector selector = Selector.open();
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+        System.out.println("服务器启动完成...");
         while (true) {
             try {
                 //一直阻塞
