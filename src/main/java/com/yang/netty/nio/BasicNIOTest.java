@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * NIO一个重要的特点是：socket主要的读、写、注册和接收函数，在等待就绪阶段都是非阻塞的，真正的I/O操作是同步阻塞的（消耗CPU但性能非常高）。
+ */
 public class BasicNIOTest {
 
     public static void main(String[] args) throws Exception {
@@ -43,7 +46,7 @@ public class BasicNIOTest {
         serverSocketChannel.configureBlocking(false);
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         System.out.println("服务端已启动...");
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             int numbers = selector.select();
             System.out.println("numbers:" + numbers);
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();

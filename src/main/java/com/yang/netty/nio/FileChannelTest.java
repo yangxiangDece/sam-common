@@ -19,10 +19,9 @@ public class FileChannelTest {
 //        ByteBuffer byteBuffer=ByteBuffer.allocate(1024);
         //直接内存
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024);
-        while ((inputChannel.read(byteBuffer)) != -1) {
+        while ((inputChannel.read(byteBuffer)) > 0) {
             byteBuffer.flip();
             outputChannel.write(byteBuffer);
-            byteBuffer.clear();
             byteBuffer.flip();
         }
 

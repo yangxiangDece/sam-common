@@ -26,7 +26,7 @@ public class ChatServerTest {
         serverSocketChannel.configureBlocking(false);
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         System.out.println("服务端已启动...");
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             //一直阻塞
             int numbers = selector.select();
             System.out.println("numbers:" + numbers);

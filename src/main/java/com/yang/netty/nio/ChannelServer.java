@@ -12,7 +12,7 @@ public class ChannelServer {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.bind(new InetSocketAddress(8085));
         System.out.println("服务端启动完成...");
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             SocketChannel socketChannel = serverSocketChannel.accept();
             System.out.println("有可读数据...");
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
