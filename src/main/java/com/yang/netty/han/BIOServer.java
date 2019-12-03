@@ -21,7 +21,7 @@ public class BIOServer {
             printThread();
             System.out.println("等待连接...");
             Socket socket = serverSocket.accept();
-            System.out.println("连接到一个客户端");
+            System.out.println("连接到一个客户端：" + socket.hashCode());
             executorService.execute(() -> handler(socket));
         }
     }

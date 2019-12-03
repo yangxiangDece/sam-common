@@ -46,9 +46,7 @@ public class BasicNIOTest {
         while (true) {
             int numbers = selector.select();
             System.out.println("numbers:" + numbers);
-            Set<SelectionKey> selectionKeys = selector.selectedKeys();
-            System.out.println("selectionKeys:" + selectionKeys);
-            Iterator<SelectionKey> iterator = selectionKeys.iterator();
+            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
             while (iterator.hasNext()) {
                 SelectionKey selectionKey = iterator.next();
                 if (selectionKey.isAcceptable()) {

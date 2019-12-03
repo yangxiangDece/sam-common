@@ -1,5 +1,7 @@
 package com.yang.netty.nio;
 
+import com.yang.dubbo.singlelongconnection.utils.CloseStreamUtil;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
@@ -21,10 +23,9 @@ public class FileChannelTest {
             byteBuffer.flip();
             outputChannel.write(byteBuffer);
             byteBuffer.clear();
+            byteBuffer.flip();
         }
-        inputChannel.close();
-        outputChannel.close();
-        fileInputStream.close();
-        fileOutputStream.close();
+
+        CloseStreamUtil.close(inputChannel, outputChannel, fileInputStream, fileOutputStream);
     }
 }
