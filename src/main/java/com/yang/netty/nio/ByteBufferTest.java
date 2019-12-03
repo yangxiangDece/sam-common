@@ -1,11 +1,11 @@
-package com.yang.netty.zhang.nio;
+package com.yang.netty.nio;
 
 import java.nio.ByteBuffer;
 
-public class NIOTest4 {
+public class ByteBufferTest {
 
     public static void main(String[] args) {
-        ByteBuffer byteBuffer=ByteBuffer.allocate(64);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(64);
 
         byteBuffer.putInt(22);
         byteBuffer.putInt(23);

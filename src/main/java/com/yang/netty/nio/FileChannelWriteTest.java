@@ -1,17 +1,17 @@
-package com.yang.netty.zhang.nio;
+package com.yang.netty.nio;
 
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-public class NIOTest2 {
+public class FileChannelWriteTest {
 
     public static void main(String[] args) throws Exception {
-        FileOutputStream fileOutputStream=new FileOutputStream("nio_file/NioFileTest2.txt");
-        FileChannel fileChannel=fileOutputStream.getChannel();
+        FileOutputStream fileOutputStream = new FileOutputStream("nio_file/NioFileTest2.txt");
+        FileChannel fileChannel = fileOutputStream.getChannel();
 
-        ByteBuffer byteBuffer=ByteBuffer.allocate(1024);
-        String content="ni hao a, i'm super hero!";
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        String content = "ni hao a, i'm super hero!";
         byteBuffer.put(content.getBytes("UTF-8"));
 
         byteBuffer.flip();

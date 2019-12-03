@@ -1,4 +1,4 @@
-package com.yang.netty.zhang.nio;
+package com.yang.netty.nio;
 
 import java.net.InetSocketAddress;
 import java.nio.Buffer;
@@ -7,12 +7,15 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
 
-public class NIOTest6 {
+/**
+ * Scatting：将数据写入到buffer时，可以采用buffer数组，依次写入
+ * Gathering：从buffer读取数据时，可以采用buffer数组，依次读取
+ */
+public class ScatteringGatheringTest {
 
     public static void main(String[] args) throws Exception {
 
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.configureBlocking(false);
         InetSocketAddress address = new InetSocketAddress(9999);
         serverSocketChannel.socket().bind(address);
 
@@ -30,17 +33,19 @@ public class NIOTest6 {
                 long r = socketChannel.read(byteBuffers);
                 read += r;
                 System.out.println("read:" + read);
-
+                // 打印buffers数组中的信息
                 Arrays.stream(byteBuffers).map(buffer -> "position:" + buffer.position() + "," + buffer.limit()).forEach(System.out::println);
             }
+            // 将所有的buffer进行filip
             Arrays.stream(byteBuffers).forEach(Buffer::flip);
+            // 将数据读出显示到客户端
             long write = 0;
             while (write < messageLength) {
                 long r = socketChannel.write(byteBuffers);
                 write += r;
             }
+            // 将所有的buffer进行clear
             Arrays.stream(byteBuffers).forEach(Buffer::clear);
-
             System.out.println("read:" + read + ",write:" + write + ",messageLength:" + messageLength);
         }
     }
