@@ -15,17 +15,17 @@ public class ChatServer {
     }
 
     private Selector selector;
-    private ServerSocketChannel listenChannel;
+    private ServerSocketChannel serverSocketChannel;
     private static final int PORT = 8089;
 
     public ChatServer() {
         // 初始化
         try {
             selector = Selector.open();
-            listenChannel = ServerSocketChannel.open();
-            listenChannel.bind(new InetSocketAddress(PORT));
-            listenChannel.configureBlocking(false);
-            listenChannel.register(selector, SelectionKey.OP_ACCEPT);
+            serverSocketChannel = ServerSocketChannel.open();
+            serverSocketChannel.bind(new InetSocketAddress(PORT));
+            serverSocketChannel.configureBlocking(false);
+            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,23 +34,23 @@ public class ChatServer {
     private void listen() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                int count = selector.select(1000);
+                int count = selector.select(2000);
                 if (count > 0) {
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
                         if (key.isAcceptable()) {
-                            SocketChannel socketChannel = ((ServerSocketChannel) key.channel()).accept();
+                            SocketChannel socketChannel = serverSocketChannel.accept();
                             socketChannel.configureBlocking(false);
                             socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
+                            System.out.println(socketChannel.getRemoteAddress() + "上线了...");
                         } else if (key.isReadable()) {
-                            // 准备读
                             readData(key);
                         }
                         iterator.remove();
                     }
                 } else {
-                    System.out.println("没有连接，继续监听...");
+                    System.out.println("监听中...");
                 }
             }
         } catch (IOException e) {
@@ -59,19 +59,16 @@ public class ChatServer {
     }
 
     private void readData(SelectionKey key) {
+        System.out.println("读取数据...");
         SocketChannel socketChannel = (SocketChannel) key.channel();
         ByteBuffer byteBuffer = (ByteBuffer) key.attachment();
         try {
-            int read;
-            while ((read = socketChannel.read(byteBuffer)) > 0) {
-                byteBuffer.flip();
-                String msg = new String(byteBuffer.array(), 0, read);
-                System.out.println("form 客户端：" + msg);
-
-                // 向其他客户端转发消息
-                sendInfoToOtherClients(msg, socketChannel);
-                byteBuffer.flip();
-            }
+            int read = socketChannel.read(byteBuffer);
+            byteBuffer.flip();
+            String msg = new String(byteBuffer.array(), 0, read);
+            System.out.println(socketChannel.getRemoteAddress() + "：" + msg);
+            // 向其他客户端转发消息
+            sendInfoToOtherClients(msg, socketChannel);
         } catch (IOException e) {
             try {
                 System.out.println(socketChannel.getRemoteAddress() + " 离线了...");
@@ -87,7 +84,6 @@ public class ChatServer {
 
     private void sendInfoToOtherClients(String msg, SocketChannel self) {
         System.out.println("服务器消息转发中...");
-
         try {
             for (SelectionKey selectionKey : selector.keys()) {
                 Channel targetChannel = selectionKey.channel();

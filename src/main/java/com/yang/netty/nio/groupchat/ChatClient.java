@@ -9,6 +9,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class ChatClient {
 
@@ -20,7 +21,7 @@ public class ChatClient {
            while (!Thread.currentThread().isInterrupted()) {
                chatClient.read();
                try {
-                   Thread.currentThread().sleep(3000);
+                   TimeUnit.SECONDS.sleep(3);
                } catch (InterruptedException e) {
                    e.printStackTrace();
                }
@@ -49,7 +50,7 @@ public class ChatClient {
             socketChannel = SocketChannel.open();
             socketChannel.connect(new InetSocketAddress(HOST, PORT));
             socketChannel.configureBlocking(false);
-            socketChannel.register(selector, SelectionKey.OP_ACCEPT);
+            socketChannel.register(selector, SelectionKey.OP_READ);
             username = socketChannel.getLocalAddress().toString().substring(1);
             System.out.println(username + " is ok...");
         } catch (IOException e) {
