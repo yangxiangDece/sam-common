@@ -15,7 +15,7 @@ public class WightRandomRange {
         Map<String, Integer> mapIps = ServiceIps.getMapIps();
 
         // 计算总权重值
-        int totalWight = mapIps.entrySet().stream().mapToInt(Map.Entry::getValue).sum();
+        int totalWight = mapIps.values().stream().mapToInt(i -> i).sum();
 
         Random random = new Random();
         for (int i = 0; i < 10; i++) {

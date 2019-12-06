@@ -17,7 +17,7 @@ public class WightRoundRobinBest {
         Map<String, Integer> mapIps = ServiceIps.getMapIps();
 
         // 计算总权重值
-        int totalWight = mapIps.entrySet().stream().mapToInt(Map.Entry::getValue).sum();
+        int totalWight = mapIps.values().stream().mapToInt(i -> i).sum();
 
         // 构建权重
         List<Wight> wights = mapIps.entrySet().stream().map(item -> new Wight(item.getKey(), item.getValue(), 0)).collect(Collectors.toList());
@@ -44,8 +44,10 @@ public class WightRoundRobinBest {
                     wight = w;
                 }
             }
-            wight.setConcurrentWight(wight.getConcurrentWight() - totalWight);
-            System.out.println(wight.getIp());
+            if (wight != null) {
+                wight.setConcurrentWight(wight.getConcurrentWight() - totalWight);
+                System.out.println(wight.getIp());
+            }
         }
     }
 

@@ -18,7 +18,7 @@ public class WightRandomNum {
 
         List<String> ips = new ArrayList<>();
         mapIps.forEach((key, value) -> {
-            for (Integer i = 0; i < value; i++) {
+            for (int i = 0; i < value; i++) {
                 ips.add(key);
             }
         });
