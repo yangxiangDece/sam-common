@@ -1,11 +1,11 @@
 package com.yang.netty;
 
-/**
+/*
  * 【Bootstrap、ServerBootstrap】：
  *      Bootstrap 意思是引导，一个 Netty 应用通常由一个 Bootstrap 开始，主要作用是配置整个 Netty 程序，
  *      串联各个组件，Netty 中 Bootstrap 类是客户端程序的启动引导类，ServerBootstrap 是服务端启动引导类。
  * 【Future、ChannelFuture】：
- *      正如前面介绍，在 Netty 中所有的 IO 操作都是异步的，不能立刻得知消息是否被正确处理。但是可以过一会等它执行完成或者直接注册一个监听，
+ *      在 Netty 中所有的 IO 操作都是异步的，不能立刻得知消息是否被正确处理。但是可以过一会等它执行完成或者直接注册一个监听，
  *      具体的实现就是通过 Future 和 ChannelFutures，他们可以注册一个监听，当操作执行成功或失败时监听会自动触发注册的监听事件。
  * 【Channel】：
  *      Netty 网络通信的组件，能够用于执行网络 I/O 操作。Channel 为用户提供：
@@ -85,6 +85,17 @@ package com.yang.netty;
  *      JDK所提供的Future只能通过手工的方式检查执行结果，而且这个操作时阻塞的，Netty则对ChannelFuture进行了增强，通过ChannelFutureListener以回调的方式获取执行结果，
  *      ChannelFutureListener方法中的operationComplete方法是由I/O线程执行的，因此要注意的是不要在这里进行耗时的操作，否则需要通过另外的线程或线程池来执行。
  *
+ */
+
+/*
+    Netty抽象出两组线程池，BossGroup负责接收客户端连接，WorkerGroup负责网络读写操作。
+    NioEventLoop表示一个不断循环处理执行任务的线程，每个NioEventLoop都有一个selector，用于监听绑定在其上的socket网络通道。
+    NioEventLoop内部采用串行化设计，从消息的读取->解码->处理->编码->发送，始终由IO线程NioEventLoop负责，所以也不存在线程安全的问题。
+        NioEventLoopGroup 下包含多个NioEventLoop
+        每个NioEventLoop中包含一个Selector、taskQueue、scheduleTaskQueue等等
+        每个NioEventLoop的Selector上可以注册监听多个NioChannel
+        每个NioChannel只会绑定在唯一的NioEventLoop上
+        每个NioChannel都绑定有一个自己的ChannelPipeline
  */
 public class Notes {
 
