@@ -1,40 +1,48 @@
-package com.yang.netty.han;
+package com.yang.netty.han.chat;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
-public class NettyServer {
+public class GroupChatServer {
 
     public static void main(String[] args) throws Exception {
+        new GroupChatServer(8086).start();
+    }
 
-        // bossGroup 处理客户端连接
-        // workGroup 处理网络读写操作
+    private int port;
 
+    public GroupChatServer(int port) {
+        this.port = port;
+    }
+
+    private void start() throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup(4);
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    // ChannelOption.SO_BACKLOG 对应TCP/IP协议listen函数中的backlog参数，用来初始化服务器可选连接队列大小。
-                    // 服务端处理客户端请求是串行处理的，所以同一时间只能处理一个客户端连接，
-                    // 多个客户端来的时候，服务端将不能处理的客户端请求放在队列中等待处理，backlog参数指定了队列的大小。
                     .option(ChannelOption.SO_BACKLOG, 128)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast(new NettyServerHandlerTaskQueue());
+                            // 加入解码器 入栈处理器
+                            pipeline.addLast("decoder", new StringDecoder());
+                            // 加入编码器 出栈处理器
+                            pipeline.addLast("encoder", new StringEncoder());
+                            pipeline.addLast(new GroupChatServerHandler());
                         }
                     });
-            ChannelFuture channelFuture = serverBootstrap.bind(8085).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
             channelFuture.addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {
-                    System.out.println("监听端口8085成功...");
+                    System.out.println("监听" + port + "端口成功...");
                 }
             });
             channelFuture.channel().closeFuture().sync();
