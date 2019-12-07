@@ -1,4 +1,4 @@
-package com.yang.netty.zhang.fifth;
+package com.yang.netty.han.websocket;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -6,13 +6,14 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 import java.time.LocalDateTime;
 
-public class MyWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+// TextWebSocketFrame 类型，表示一个文本帧（frame）
+public class WebSocketServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
-        System.out.println("收到消息：" + msg.text());
-
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间：" + LocalDateTime.now()));
+    protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
+        System.out.println("服务器收到的消息：" + msg.text());
+        // 回复消息
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间：" + LocalDateTime.now() + " " + msg.text()));
     }
 
     @Override
@@ -27,7 +28,7 @@ public class MyWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWeb
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+        System.out.println("出错了..." + cause);
         ctx.close();
     }
 }
