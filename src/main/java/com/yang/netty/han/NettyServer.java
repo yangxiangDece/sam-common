@@ -5,8 +5,12 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.DefaultEventExecutorGroup;
+import io.netty.util.concurrent.EventExecutorGroup;
 
 public class NettyServer {
+
+    private static EventExecutorGroup eventExecutors = new DefaultEventExecutorGroup(8);
 
     public static void main(String[] args) throws Exception {
 
@@ -28,7 +32,8 @@ public class NettyServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast(new NettyServerHandlerTaskQueue());
+//                            pipeline.addLast(new NettyServerHandlerTaskQueue());
+                            pipeline.addLast(eventExecutors, new NettyServerHandlerTaskQueue());
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind(8085).sync();

@@ -4,11 +4,15 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.concurrent.DefaultEventExecutorGroup;
+import io.netty.util.concurrent.EventExecutorGroup;
 
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 public class NettyServerHandlerTaskQueue extends ChannelInboundHandlerAdapter {
+
+    private static EventExecutorGroup eventExecutors = new DefaultEventExecutorGroup(8);
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -20,6 +24,8 @@ public class NettyServerHandlerTaskQueue extends ChannelInboundHandlerAdapter {
         ctx.channel().eventLoop().execute(() -> langTime("A"));
         // 可以增加多个 但是taskQueue中的任务是串行执行的 因为只有一个线程 即NioEventLoop
         ctx.channel().eventLoop().execute(() -> langTime("B"));
+
+        eventExecutors.execute(() -> langTime("F"));
 
         // 定时任务
         // 通过schedule方法指定定时任务

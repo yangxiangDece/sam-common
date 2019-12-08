@@ -88,34 +88,26 @@ package com.yang.netty;
  *      ChannelFutureListener方法中的operationComplete方法是由I/O线程执行的，因此要注意的是不要在这里进行耗时的操作，否则需要通过另外的线程或线程池来执行。
  *
  */
+
+/*
+    EventLoop执行流程：
+        每次执行execute方法都是想队列中添加任务。当第一次添加的时候会启动线程，执行run方法，而run方法是整个EventLoop的核心，会不停的loop loop，主要做三件事：
+            1、调用selector的select方法，默认阻塞1秒，如果有定时任务，则在定时任务剩余时间的基础上在加上0.5s进行阻塞。当执行execute方法的时候，也就是添加任务的时候，会唤醒selector，防止selector阻塞时间过长。
+            2、当selector返回的时候，会调用processSelectedKeys方法对selectKey进行处理。
+            3、当processSelectedKeys方法执行结束后，则按照isRatio的比例进行runAllTasks方法，默认是IO任务时间和非IO任务时间是相同的，你也可以根据你的应用特点进行调优，比如非IO任务比价多，那么你
+            就将ioRatio调小一点，这样非IO任务就能执行的长一点。防止队列中积攒过多的任务。
+
+   任务加入异步线程池
+        1、通过 ctx.channel().eventLoop().execute()  加入线程池 这个会使用workerGroup的线程池
+        2、在handler里自定义业务线程 EventExecutorGroup eventExecutors = new DefaultEventExecutorGroup(8);  通过 eventExecutors.execute() 加入线程池 不影响主流程
+        3、在ChannelInitializer 中 initChannel 方法中就可以直接指定handler使用线程池  pipeline.addLast(eventExecutors，new NettyServerHandlerTaskQueue())
+    通常采用第二种，比较灵活，按业务来确定是否异步
+
+
+ */
 public class Notes {
 
     public static void main(String[] args) {
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
