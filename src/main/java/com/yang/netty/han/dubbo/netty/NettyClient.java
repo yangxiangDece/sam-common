@@ -2,7 +2,10 @@ package com.yang.netty.han.dubbo.netty;
 
 import com.yang.common.ThreadPoolExecutorFactory;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -57,13 +60,10 @@ public class NettyClient {
                             pipeline.addLast(clientHandler);
                         }
                     });
-            ChannelFuture channelFuture = bootstrap.connect(hostname, port).sync();
+            bootstrap.connect(hostname, port).sync();
             System.out.println("客户端连接成功...");
-            channelFuture.channel().closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            eventLoopGroup.shutdownGracefully();
         }
     }
 }
