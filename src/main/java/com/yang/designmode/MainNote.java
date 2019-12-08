@@ -15,8 +15,8 @@ package com.yang.designmode;
  * 设计模式：
  *      1、策略模式：定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。
  *      2、观察者模式：定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。
- *          com.yang.designmode.observer.myself包：自定义的观察者模式
- *          com.yang.designmode.observer.jdk包：Java jdk自带的观察者模式(Observer(观察者)接口和Observable(可观察者)类)
+ *          com.yang.designmode.headfirst.observer.myself包：自定义的观察者模式
+ *          com.yang.designmode.headfirst.observer.jdk包：Java jdk自带的观察者模式(Observer(观察者)接口和Observable(可观察者)类)
  *      3、装饰模式：动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案。
  *          装饰者可以在所委托的被装饰者的行为之前/或之后，加上自己的行为，以达到特定的目的。
  *      4、工厂方法模式：定义了一个创建对象的接口，但由子类绝对要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。
