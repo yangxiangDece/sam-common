@@ -1,5 +1,8 @@
 package com.yang.designpattern.han.flywight;
 
+/**
+ * 享元模式
+ */
 public class MainTest {
 
     public static void main(String[] args) {

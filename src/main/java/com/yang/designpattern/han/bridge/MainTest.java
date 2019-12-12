@@ -1,5 +1,8 @@
 package com.yang.designpattern.han.bridge;
 
+/**
+ * 桥接模式
+ */
 public class MainTest {
 
     public static void main(String[] args) {

@@ -15,14 +15,17 @@ public class HomeTheaterFacade {
     private PopcornPopper popper;
 
     //外观将子系统中每一个组件的引用都传入它的构造器中。然后外观把它们赋值给相应的实例变量
-    HomeTheaterFacade(Amplifier amp, DvdPlayer dvd, Projector projector, TheaterLights lights,
-                      Screen screen, PopcornPopper popper) {
-        this.amp = amp;
-        this.dvd = dvd;
-        this.projector = projector;
-        this.lights = lights;
-        this.screen = screen;
-        this.popper = popper;
+    HomeTheaterFacade() {
+        init();
+    }
+
+    private void init() {
+        this.amp = new Amplifier();
+        this.dvd = new DvdPlayer();
+        this.projector = new Projector();
+        this.lights = new TheaterLights();
+        this.screen = new Screen();
+        this.popper = new PopcornPopper();
     }
 
     //watchMovie()将我们之前手动进行的每项任务依次处理，请注意，每项任务都是委托子系统中相应的组件处理的
