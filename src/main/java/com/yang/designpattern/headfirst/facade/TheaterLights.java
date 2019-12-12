@@ -1,4 +1,4 @@
-package com.yang.designpattern.headfirst.appearance;
+package com.yang.designpattern.headfirst.facade;
 
 public class TheaterLights {
 
