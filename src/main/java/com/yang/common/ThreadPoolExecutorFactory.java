@@ -33,12 +33,12 @@ public class ThreadPoolExecutorFactory {
     }
 
     private static class ThreadPoolExecutorHolder {
-        private final static ExecutorService executorService = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS,
+        private final static ExecutorService EXECUTOR_SERVICE = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(capacity), new ThreadPoolExecutor.DiscardOldestPolicy());
     }
 
     public static ExecutorService getThreadPoolExecutor() {
-        return ThreadPoolExecutorHolder.executorService;
+        return ThreadPoolExecutorHolder.EXECUTOR_SERVICE;
     }
 
 }
