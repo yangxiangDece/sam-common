@@ -58,10 +58,8 @@ public class SignUtil {
             byte[] keyBytes = secret.getBytes(Constants.ENCODING);
             hmacSha256.init(new SecretKeySpec(keyBytes, 0, keyBytes.length, Constants.HMAC_SHA256));
 
-            return new String(Base64.encodeBase64(
-                    hmacSha256.doFinal(buildStringToSign(method, path, headers, querys, bodys, signHeaderPrefixList)
-                            .getBytes(Constants.ENCODING))),
-                    Constants.ENCODING);
+            byte[] bytes = Base64.encodeBase64(hmacSha256.doFinal(buildStringToSign(method, path, headers, querys, bodys, signHeaderPrefixList).getBytes(Constants.ENCODING)));
+            return new String(bytes, Constants.ENCODING);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -86,12 +84,12 @@ public class SignUtil {
         StringBuilder sb = new StringBuilder();
 
         sb.append(method.toUpperCase()).append(Constants.LF);
-        if (null != headers) {
-            if (null != headers.get(HttpHeader.HTTP_HEADER_ACCEPT)) {
+        if (headers != null) {
+            if (headers.get(HttpHeader.HTTP_HEADER_ACCEPT) != null) {
                 sb.append(headers.get(HttpHeader.HTTP_HEADER_ACCEPT));
             }
             sb.append(Constants.LF);
-            if (null != headers.get(HttpHeader.HTTP_HEADER_CONTENT_MD5)) {
+            if (headers.get(HttpHeader.HTTP_HEADER_CONTENT_MD5) != null) {
                 sb.append(headers.get(HttpHeader.HTTP_HEADER_CONTENT_MD5));
             }
             sb.append(Constants.LF);
