@@ -55,7 +55,7 @@ public class FileCutMergeUtils {
         //文件后部分名称 abc.zip 得到：.zip
         String sourceFileEnd = sourceFile.getName().substring(sourceFile.getName().indexOf("."));
         //每一份文件的大小
-        Long partSize = sourceFile.length() / part;
+        long partSize = sourceFile.length() / part;
         //创建源文件输入流
         FileInputStream fileInputStream = null;
         try {
@@ -67,7 +67,7 @@ public class FileCutMergeUtils {
                 //拆分文件
                 File tempFile = new File(tempPath + "\\" + sourceFileStart + "_data" + i + sourceFileEnd);
                 //创建缓冲区
-                byte[] bytes = new byte[partSize.intValue()];
+                byte[] bytes = new byte[(int) partSize];
                 //创建输出流
                 fileOutputStream = new FileOutputStream(tempFile);
                 //判断读取文件不能为-1

@@ -11,7 +11,6 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class ThreadWorking {
 
-    private static int value = 0;
     private final static int size = 10;
     private final static List<Thread> THREADS = new ArrayList<>(size);
 
@@ -37,10 +36,10 @@ public class ThreadWorking {
             for (; ; ) {
                 LockSupport.park();
                 try {
-                    TimeUnit.MILLISECONDS.sleep(500L);
+                    TimeUnit.MILLISECONDS.sleep(800);
                 } catch (InterruptedException ignored) {
                 }
-                System.out.println(Thread.currentThread().getName() + "输出" + (value++));
+                System.out.println("第" + num + "个线程工作...");
                 LockSupport.unpark(THREADS.get(num == size - 1 ? 0 : num + 1));
             }
         }

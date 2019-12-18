@@ -20,6 +20,7 @@ package com.yang.common;
 
 import com.yang.common.httputil.constant.Constants;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -74,7 +75,6 @@ public class MessageDigestUtil {
         if (str == null) {
             return null;
         }
-
         return new String(str.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
     }
 
@@ -85,10 +85,9 @@ public class MessageDigestUtil {
      * @return
      */
     public static String iso88591ToUtf8(String str) {
-        if (str == null) {
+        if (StringUtils.isBlank(str)) {
             return null;
         }
-
         return new String(str.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
 
@@ -99,7 +98,7 @@ public class MessageDigestUtil {
      * @return
      */
     private static byte[] toBytes(final String str) {
-        if (str == null) {
+        if (StringUtils.isBlank(str)) {
             return null;
         }
         try {
