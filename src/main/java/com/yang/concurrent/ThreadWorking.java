@@ -25,6 +25,7 @@ public class ThreadWorking {
     }
 
     static class Task implements Runnable {
+
         private int num;
 
         public Task(int num) {
@@ -39,7 +40,7 @@ public class ThreadWorking {
                     TimeUnit.MILLISECONDS.sleep(800);
                 } catch (InterruptedException ignored) {
                 }
-                System.out.println("第" + num + "个线程工作...");
+                System.out.println((Thread.currentThread().getName()) + " 开始工作了...");
                 LockSupport.unpark(THREADS.get(num == size - 1 ? 0 : num + 1));
             }
         }
