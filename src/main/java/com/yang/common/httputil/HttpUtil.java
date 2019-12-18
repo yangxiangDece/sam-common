@@ -311,7 +311,7 @@ public class HttpUtil {
     private static UrlEncodedFormEntity buildFormEntity(Map<String, String> formParam)
             throws UnsupportedEncodingException {
         if (formParam != null) {
-            List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+            List<NameValuePair> nameValuePairList = new ArrayList<>();
 
             for (String key : formParam.keySet()) {
                 nameValuePairList.add(new BasicNameValuePair(key, formParam.get(key)));

@@ -84,20 +84,20 @@ public class SignUtil {
         StringBuilder sb = new StringBuilder();
 
         sb.append(method.toUpperCase()).append(Constants.LF);
-        if (headers != null) {
-            if (headers.get(HttpHeader.HTTP_HEADER_ACCEPT) != null) {
+        if (headers != null && headers.size() > 0) {
+            if (StringUtils.isNotBlank(headers.get(HttpHeader.HTTP_HEADER_ACCEPT))) {
                 sb.append(headers.get(HttpHeader.HTTP_HEADER_ACCEPT));
+                sb.append(Constants.LF);
             }
-            sb.append(Constants.LF);
-            if (headers.get(HttpHeader.HTTP_HEADER_CONTENT_MD5) != null) {
+            if (StringUtils.isNotBlank(headers.get(HttpHeader.HTTP_HEADER_CONTENT_MD5))) {
                 sb.append(headers.get(HttpHeader.HTTP_HEADER_CONTENT_MD5));
+                sb.append(Constants.LF);
             }
-            sb.append(Constants.LF);
-            if (null != headers.get(HttpHeader.HTTP_HEADER_CONTENT_TYPE)) {
+            if (StringUtils.isNotBlank(headers.get(HttpHeader.HTTP_HEADER_CONTENT_TYPE))) {
                 sb.append(headers.get(HttpHeader.HTTP_HEADER_CONTENT_TYPE));
+                sb.append(Constants.LF);
             }
-            sb.append(Constants.LF);
-            if (null != headers.get(HttpHeader.HTTP_HEADER_DATE)) {
+            if (StringUtils.isNotBlank(headers.get(HttpHeader.HTTP_HEADER_DATE))) {
                 sb.append(headers.get(HttpHeader.HTTP_HEADER_DATE));
             }
         }
@@ -119,21 +119,21 @@ public class SignUtil {
     private static String buildResource(String path, Map<String, String> querys, Map<String, String> bodys) {
         StringBuilder sb = new StringBuilder();
 
-        if (!StringUtils.isBlank(path)) {
+        if (StringUtils.isNotBlank(path)) {
             sb.append(path);
         }
-        Map<String, String> sortMap = new TreeMap<String, String>();
-        if (null != querys) {
+        Map<String, String> sortMap = new TreeMap<>();
+        if (querys != null) {
             for (Map.Entry<String, String> query : querys.entrySet()) {
-                if (!StringUtils.isBlank(query.getKey())) {
+                if (StringUtils.isNotBlank(query.getKey())) {
                     sortMap.put(query.getKey(), query.getValue());
                 }
             }
         }
 
-        if (null != bodys) {
+        if (bodys != null) {
             for (Map.Entry<String, String> body : bodys.entrySet()) {
-                if (!StringUtils.isBlank(body.getKey())) {
+                if (StringUtils.isNotBlank(body.getKey())) {
                     sortMap.put(body.getKey(), body.getValue());
                 }
             }
@@ -141,17 +141,17 @@ public class SignUtil {
 
         StringBuilder sbParam = new StringBuilder();
         for (Map.Entry<String, String> item : sortMap.entrySet()) {
-            if (!StringUtils.isBlank(item.getKey())) {
-                if (0 < sbParam.length()) {
+            if (StringUtils.isNotBlank(item.getKey())) {
+                if (sbParam.length() > 0) {
                     sbParam.append(Constants.SPE3);
                 }
                 sbParam.append(item.getKey());
-                if (!StringUtils.isBlank(item.getValue())) {
+                if (StringUtils.isNotBlank(item.getValue())) {
                     sbParam.append(Constants.SPE4).append(item.getValue());
                 }
             }
         }
-        if (0 < sbParam.length()) {
+        if (sbParam.length() > 0) {
             sb.append(Constants.SPE5);
             sb.append(sbParam);
         }
@@ -169,25 +169,25 @@ public class SignUtil {
     private static String buildHeaders(Map<String, String> headers, List<String> signHeaderPrefixList) {
         StringBuilder sb = new StringBuilder();
 
-        if (null != signHeaderPrefixList) {
+        if (signHeaderPrefixList != null) {
             signHeaderPrefixList.remove(SystemHeader.X_CA_SIGNATURE);
             signHeaderPrefixList.remove(HttpHeader.HTTP_HEADER_ACCEPT);
             signHeaderPrefixList.remove(HttpHeader.HTTP_HEADER_CONTENT_MD5);
             signHeaderPrefixList.remove(HttpHeader.HTTP_HEADER_CONTENT_TYPE);
             signHeaderPrefixList.remove(HttpHeader.HTTP_HEADER_DATE);
             Collections.sort(signHeaderPrefixList);
-            if (null != headers) {
+            if (headers != null) {
                 Map<String, String> sortMap = new TreeMap<>(headers);
                 StringBuilder signHeadersStringBuilder = new StringBuilder();
                 for (Map.Entry<String, String> header : sortMap.entrySet()) {
                     if (isHeaderToSign(header.getKey(), signHeaderPrefixList)) {
                         sb.append(header.getKey());
                         sb.append(Constants.SPE2);
-                        if (!StringUtils.isBlank(header.getValue())) {
+                        if (StringUtils.isNotBlank(header.getValue())) {
                             sb.append(header.getValue());
                         }
                         sb.append(Constants.LF);
-                        if (0 < signHeadersStringBuilder.length()) {
+                        if (signHeadersStringBuilder.length() > 0) {
                             signHeadersStringBuilder.append(Constants.SPE1);
                         }
                         signHeadersStringBuilder.append(header.getKey());
@@ -212,14 +212,13 @@ public class SignUtil {
             return true;
         }
 
-        if (null != signHeaderPrefixList) {
+        if (signHeaderPrefixList != null && signHeaderPrefixList.size() > 0) {
             for (String signHeaderPrefix : signHeaderPrefixList) {
                 if (headerName.equalsIgnoreCase(signHeaderPrefix)) {
                     return true;
                 }
             }
         }
-
         return false;
     }
 }

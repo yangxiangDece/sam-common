@@ -65,7 +65,7 @@ public class Response {
 
     public void setHeader(String key, String value) {
         if (null == this.headers) {
-            this.headers = new HashMap<String, String>();
+            this.headers = new HashMap<>();
         }
         this.headers.put(key, value);
     }

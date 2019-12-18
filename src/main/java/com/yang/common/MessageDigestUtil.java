@@ -22,6 +22,7 @@ import com.yang.common.httputil.constant.Constants;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -74,11 +75,7 @@ public class MessageDigestUtil {
             return null;
         }
 
-        try {
-            return new String(str.getBytes("UTF-8"), "ISO-8859-1");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
+        return new String(str.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
     }
 
     /**
@@ -92,11 +89,7 @@ public class MessageDigestUtil {
             return null;
         }
 
-        try {
-            return new String(str.getBytes("ISO-8859-1"), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
+        return new String(str.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
 
     /**

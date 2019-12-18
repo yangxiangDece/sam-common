@@ -188,7 +188,7 @@ public class Region {
 
     private static String request(String path) {
         try {
-            HttpResponse response = HttpUtils.doGet(HOST, path, REQUEST_METHOD, HEADERS, QUERYS);
+            HttpResponse response = HttpUtils.doGet(HOST, path, HEADERS, QUERYS);
             JSONObject entity = JSONObject.parseObject(EntityUtils.toString(response.getEntity()));
             if (entity == null) {
                 System.out.println("查询数据失败----");

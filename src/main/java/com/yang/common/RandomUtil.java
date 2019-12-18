@@ -149,5 +149,4 @@ public class RandomUtil {
         String thrid = String.valueOf(randomNumRange(1, 9100) + 10000).substring(1);
         return first + second + thrid;
     }
-
 }

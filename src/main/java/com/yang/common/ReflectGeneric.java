@@ -127,7 +127,6 @@ public class ReflectGeneric {
      * @return
      */
     public static String getSQLColumn(Field field, String name) {
-
         if (field == null || StringUtils.isBlank(name) || field.isAnnotationPresent(Transient.class)) {
             return null;
         }
@@ -172,13 +171,10 @@ public class ReflectGeneric {
                         break;
                     }
                 } catch (NoSuchFieldException | SecurityException e) {
-
                 }
-
                 tempClass = tempClass.getSuperclass(); // 得到父类,然后赋给自己
             }
         }
-
         return field;
     }
 
@@ -192,16 +188,15 @@ public class ReflectGeneric {
         if (StringUtils.isBlank(fieldName)) {
             return null;
         }
-
         int index = 0;
         StringBuilder builder = new StringBuilder();
         for (Integer temp : getUpperIndex(fieldName)) {
             if (index != temp) {
-                builder.append("_").append(fieldName.substring(index, temp));
+                builder.append("_").append(fieldName, index, temp);
                 index = temp;
             }
         }
-        builder.append("_").append(fieldName.substring(index, fieldName.length()));
+        builder.append("_").append(fieldName.substring(index));
         return builder.deleteCharAt(0).toString().toLowerCase();
     }
 
@@ -229,7 +224,7 @@ public class ReflectGeneric {
      * @return
      */
     private static List<Integer> getUpperIndex(String str) {
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         for (int i = 0; i < str.length(); i++) {
             char temp = str.charAt(i);
             if (String.valueOf(temp).matches("[A-Z]")) {
