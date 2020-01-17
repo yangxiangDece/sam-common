@@ -4,6 +4,7 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -18,9 +19,9 @@ public class HMacHelper {
         String content = "aallaaallallaa";
         String key = "111111113234243";
         HMacHelper hMacHelper = new HMacHelper(key);
-        byte[] bytes = hMacHelper.sign(content.getBytes(Charset.forName("UTF-8")));
+        byte[] bytes = hMacHelper.sign(content.getBytes(StandardCharsets.UTF_8));
         System.out.println("加密后转为十六进制为：" + SignatureUtils.byte2hex(bytes));
-        System.out.println("验证加密结果：" + hMacHelper.verify(bytes, content.getBytes(Charset.forName("UTF-8"))));
+        System.out.println("验证加密结果：" + hMacHelper.verify(bytes, content.getBytes(StandardCharsets.UTF_8)));
     }
 
     private Mac mac;
@@ -35,7 +36,7 @@ public class HMacHelper {
 
     public HMacHelper(String key) {
         try {
-            SecretKey secretKey = new SecretKeySpec(key.getBytes(Charset.forName("UTF-8")), KEY_MAC);
+            SecretKey secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), KEY_MAC);
             mac = Mac.getInstance(secretKey.getAlgorithm());
             mac.init(secretKey);
         } catch (Exception e) {

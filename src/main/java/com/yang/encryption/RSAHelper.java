@@ -5,6 +5,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -44,7 +45,7 @@ public class RSAHelper {
 
         // 用私钥解密
         byte[] decBytes = rsaHelper.decrypt(privateKey, resultBytes);
-        System.out.println("用私钥解密后：" + new String(decBytes, 0, decBytes.length, Charset.forName("UTF-8")));
+        System.out.println("用私钥解密后：" + new String(decBytes, 0, decBytes.length, StandardCharsets.UTF_8));
     }
 
     private final static String RSA = "RSA";

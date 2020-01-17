@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Md5Helper {
 
-    public static void main(String args[]) throws NoSuchAlgorithmException {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
 
         String content = "MD5 即Message-Digest Algorithm 5（信息-摘要算法 5）a";
         byte[] resultBytes = Md5Helper.encrypt(content);

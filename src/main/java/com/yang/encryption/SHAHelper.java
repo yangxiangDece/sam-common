@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class SHAHelper {
 
-    public static void main(String args[]) throws NoSuchAlgorithmException {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
 
         String content = "SHA1算法：SHA1 是和 MD5 一样流行的 消息摘要算法";
         byte[] resultBytes = SHAHelper.encrypt(content);
