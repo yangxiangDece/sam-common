@@ -7,6 +7,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -61,7 +62,7 @@ public class ChatClient {
     public void send(String msg) {
         msg = username + " 说：" + msg;
         try {
-            socketChannel.write(ByteBuffer.wrap(msg.getBytes(Charset.forName("UTF-8"))));
+            socketChannel.write(ByteBuffer.wrap(msg.getBytes(StandardCharsets.UTF_8)));
         } catch (IOException e) {
             e.printStackTrace();
         }

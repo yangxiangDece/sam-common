@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class ChatClientTest {
 
@@ -19,7 +20,7 @@ public class ChatClientTest {
         }
         // 客户端已完成连接
         String content = "你好啊，我是客户端003";
-        ByteBuffer byteBuffer = ByteBuffer.wrap(content.getBytes(Charset.forName("UTF-8")));
+        ByteBuffer byteBuffer = ByteBuffer.wrap(content.getBytes(StandardCharsets.UTF_8));
         socketChannel.write(byteBuffer);
 
         System.in.read();

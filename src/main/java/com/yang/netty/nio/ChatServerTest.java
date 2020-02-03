@@ -9,6 +9,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class ChatServerTest {
                         for (Map.Entry<String, SocketChannel> entry : CHANNEL_MAP.entrySet()) {
                             message = entry.getKey().equals(sendKey) ? ("我：" + message) : (sendKey + "：" + message);
                             System.out.println("send message:" + message);
-                            ByteBuffer writeBuffer = ByteBuffer.wrap(message.getBytes(Charset.forName("UTF-8")));
+                            ByteBuffer writeBuffer = ByteBuffer.wrap(message.getBytes(StandardCharsets.UTF_8));
                             writeBuffer.flip();
                             entry.getValue().write(writeBuffer);
                         }

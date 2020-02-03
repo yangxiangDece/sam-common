@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 public class ChatServer {
@@ -90,7 +91,7 @@ public class ChatServer {
                 // 排除自己
                 if (targetChannel instanceof SocketChannel && targetChannel != self) {
                     SocketChannel dest = (SocketChannel) targetChannel;
-                    ByteBuffer byteBuffer = ByteBuffer.wrap(msg.getBytes(Charset.forName("UTF-8")));
+                    ByteBuffer byteBuffer = ByteBuffer.wrap(msg.getBytes(StandardCharsets.UTF_8));
                     dest.write(byteBuffer);
                 }
             }

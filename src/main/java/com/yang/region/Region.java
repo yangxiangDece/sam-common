@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -152,7 +153,7 @@ public class Region {
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(path);
-            fileOutputStream.write(content.getBytes(Charset.forName("UTF-8")));
+            fileOutputStream.write(content.getBytes(StandardCharsets.UTF_8));
             fileOutputStream.flush();
         } catch (Exception e) {
             e.printStackTrace();

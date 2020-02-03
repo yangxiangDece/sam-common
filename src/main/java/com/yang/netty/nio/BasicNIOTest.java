@@ -7,6 +7,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -82,7 +83,7 @@ public class BasicNIOTest {
         }
         // 客户端已完成连接
         String content = "你好啊，我是客户端003";
-        ByteBuffer byteBuffer = ByteBuffer.wrap(content.getBytes(Charset.forName("UTF-8")));
+        ByteBuffer byteBuffer = ByteBuffer.wrap(content.getBytes(StandardCharsets.UTF_8));
         socketChannel.write(byteBuffer);
     }
 }

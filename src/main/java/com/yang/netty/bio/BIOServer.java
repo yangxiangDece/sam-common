@@ -11,11 +11,12 @@ import java.util.concurrent.ExecutorService;
 
 public class BIOServer {
 
+    private final static ExecutorService executorService = ThreadPoolExecutorFactory.getThreadPoolExecutor();
+    private final static int port = 8085;
+
     public static void main(String[] args) throws Exception {
 
-        ExecutorService executorService = ThreadPoolExecutorFactory.getThreadPoolExecutor();
-
-        ServerSocket serverSocket = new ServerSocket(8085);
+        ServerSocket serverSocket = new ServerSocket(port);
         System.out.println("服务端已启动...");
         while (true) {
             printThread();
