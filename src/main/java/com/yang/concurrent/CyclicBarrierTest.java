@@ -1,27 +1,39 @@
 package com.yang.concurrent;
 
+import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.TimeUnit;
 
 public class CyclicBarrierTest {
 
-    public static void main(String[] args) throws Exception {
-        int size = 10;
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(size);
-        for (int i = 0; i < size; i++) {
-            int finalI = i + 1;
-            new Thread(() -> {
+    public static void main(String[] args) {
+        CyclicBarrier barrier = new CyclicBarrier(3);
+        for (int i = 0; i < barrier.getParties(); i++) {
+            new Thread(new MyRunnable(barrier), "队友" + i).start();
+        }
+        System.out.println("main function is finished.");
+    }
+
+    private static class MyRunnable implements Runnable {
+        private CyclicBarrier cyclicBarrier;
+
+        public MyRunnable(CyclicBarrier cyclicBarrier) {
+            this.cyclicBarrier = cyclicBarrier;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < 3; i++) {
                 try {
-                    TimeUnit.SECONDS.sleep(1L);
-                    System.out.println("线程" + finalI + "准备好了，等待其他线程...");
+                    Random rand = new Random();
+                    int randomNum = rand.nextInt((3000 - 1000) + 1) + 1000;//产生1000到3000之间的随机整数
+                    Thread.sleep(randomNum);
+                    System.out.println(Thread.currentThread().getName() + ", 通过了第" + i + "个障碍物, 使用了 " + ((double) randomNum / 1000) + "s");
                     cyclicBarrier.await();
-                    System.out.println("线程" + finalI + "执行完毕！！");
-                } catch (InterruptedException | BrokenBarrierException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }).start();
+            }
         }
-        System.out.println("主线程结束....");
     }
 }
