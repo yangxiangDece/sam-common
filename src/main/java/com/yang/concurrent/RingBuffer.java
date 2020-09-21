@@ -44,7 +44,7 @@ public class RingBuffer<T> {
         this.tail = 0;
     }
 
-    public Boolean put(String v) {
+    public Boolean put(Object v) {
         if (full()) {
             return false;
         }
