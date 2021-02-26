@@ -17,6 +17,16 @@ public class PinYinTools {
 
     private static final Logger log = LoggerFactory.getLogger(PinYinTools.class);
 
+    public static void main(String[] args) {
+        String name = "北京市";
+        System.out.println(getHanyuPinyin(name, HanyuPinyinCaseType.LOWERCASE));
+        System.out.println(getAllFirstLetters(name, HanyuPinyinCaseType.LOWERCASE));
+        System.out.println(getFirstLettersUp(name));
+        System.out.println(getFirstLettersLow(name));
+        System.out.println(getFirstLetter(name));
+        System.out.println(chineseToSpell(name));
+    }
+
     /**
      * 将文字转为汉语拼音 字符串中有数字或者字母，都会显示出来
      *
