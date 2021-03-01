@@ -26,7 +26,7 @@ public class CyclicBarrierTest {
             for (int i = 0; i < 3; i++) {
                 try {
                     Random rand = new Random();
-                    int randomNum = rand.nextInt((3000 - 1000) + 1) + 1000;//产生1000到3000之间的随机整数
+                    int randomNum = rand.nextInt(3000 + 1) + 1000;
                     Thread.sleep(randomNum);
                     System.out.println(Thread.currentThread().getName() + ", 通过了第" + i + "个障碍物, 使用了 " + ((double) randomNum / 1000) + "s");
                     cyclicBarrier.await();
