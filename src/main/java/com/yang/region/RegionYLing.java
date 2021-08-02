@@ -28,8 +28,10 @@ public class RegionYLing {
     // key
 //    private final static String KEY = "7fee610e8bbcafe5d840cb7d668d770d";
 //    private final static String U_ID = "11516";
-    private final static String KEY = "ecf00925693fc2090d9e3ecbc24bfda8";
-    private final static String U_ID = "11518";
+//    private final static String KEY = "ecf00925693fc2090d9e3ecbc24bfda8";
+//    private final static String U_ID = "11518";
+    private final static String KEY = "54423b9c128d3c79245e405264befbc4";
+    private final static String U_ID = "11788";
     // 生成sql的存储容器
     private final static StringBuffer STRING_BUFFER = new StringBuffer();
     private final static String ZERO = "0000000000000000";
@@ -43,7 +45,7 @@ public class RegionYLing {
 
     private static void generateSql() throws Exception {
         // 查询省份
-        doGenerateSql(request("0"), 1,"");
+        doGenerateSql(request("900000000000"), 1,"");
         // 生成SQL脚本文件
         generateSqlFile(STRING_BUFFER.toString(), SQL_FILE_PATH);
         System.out.println("SQL脚本文件生成完毕...");
@@ -58,6 +60,8 @@ public class RegionYLing {
             String name = data.getString("areaName");
             String id = data.getString("id");
             String zipCode = data.getString("zipCode");
+            String wholeName = data.getString("wholeName");
+            Integer level1 = data.getInteger("level");
             zipCode = StringUtils.isBlank(zipCode) ? "" : zipCode;
             String mn = StringUtils.isNotBlank(mergerName) ? mergerName + "," + name : name;
             STRING_BUFFER.append("INSERT INTO `region` VALUES (")
@@ -65,8 +69,8 @@ public class RegionYLing {
                     .append("'").append(data.getString("parentId")).append("', ")
                     .append("'").append(getSimpleName(name)).append("', ")
                     .append("'").append(name).append("', ")
-                    .append("'").append(mn).append("', ")
-                    .append("'").append(level).append("', ")
+                    .append("'").append(wholeName).append("', ")
+                    .append("'").append(level1).append("', ")
                     .append("'").append(data.getString("prePinYin")).append("', ")
                     .append("'").append(data.getString("simplePy")).append("', ")
                     .append("'").append(data.getString("pinYin")).append("', ")
@@ -75,7 +79,7 @@ public class RegionYLing {
                     .append("'").append(numberOfString(data.getString("lon"))).append("', ")
                     .append("'").append(numberOfString(data.getString("lat"))).append("'")
                     .append(");\n");
-            if (level < 4) {
+            if (level <= 4) {
                 System.out.println(mn + "   -- 已添加...");
                 doGenerateSql(request(id), level + 1, mn);
             }

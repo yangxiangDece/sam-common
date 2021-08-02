@@ -83,6 +83,10 @@ public class Resource implements Serializable {
      */
     private Resource parent;
 
+    private Integer flowCode;
+
+    private String tagName;
+
     public String getName() {
         return name;
     }
@@ -203,6 +207,22 @@ public class Resource implements Serializable {
         this.parent = parent;
     }
 
+    public Integer getFlowCode() {
+        return flowCode;
+    }
+
+    public void setFlowCode(Integer flowCode) {
+        this.flowCode = flowCode;
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
     @Override
     public String toString() {
         return "Resource{" +
@@ -222,6 +242,8 @@ public class Resource implements Serializable {
                 ", userver=" + userver +
                 ", children=" + children +
                 ", parent=" + parent +
+                ", flowCode=" + flowCode +
+                ", tagName='" + tagName + '\'' +
                 '}';
     }
 }
