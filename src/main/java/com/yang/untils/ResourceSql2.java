@@ -2,6 +2,7 @@ package com.yang.untils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
@@ -18,12 +19,12 @@ public class ResourceSql2 {
     private final static AtomicInteger ATOMIC_INTEGER = new AtomicInteger(1);
 
     public static void main(String[] args) throws Exception {
-        FileInputStream fileInputStream = new FileInputStream("D:/download/config20210731.js");
+        FileInputStream fileInputStream = new FileInputStream("D:/download/config20210803.json");
         byte[] bytes = new byte[1024];
         int read;
         StringBuilder builder = new StringBuilder();
         while ((read = fileInputStream.read(bytes)) > -1) {
-            builder.append(new String(bytes, 0, read));
+            builder.append(new String(bytes, 0, read, StandardCharsets.UTF_8));
         }
         String sqlPath = "D:/resource.sql";
         toSql(builder.toString(), sqlPath);
@@ -70,9 +71,9 @@ public class ResourceSql2 {
                     .append((String) null).append(", ")
                     .append(now).append(", ")
                     .append((String) null).append(", ")
-                    .append(now)
+                    .append(now).append(", ")
                     .append(re.getFlowCode()).append(", ")
-                    .append(re.getTagName()).append(", ")
+                    .append(StringUtils.isNotBlank(re.getTagName()) ? "'" + re.getTagName() + "'" : null)
                     .append(");\n")
             ;
             buildSql(re.getChildren(), builder, now);
@@ -105,13 +106,13 @@ public class ResourceSql2 {
             resource.setLevel(level);
             resource.setUrl(jsonObject.getString("path"));
             resource.setType(0);
+            resource.setFlowCode(jsonObject.getInteger("flowCode"));
             JSONObject meta = jsonObject.getJSONObject("meta");
             if (meta != null) {
                 resource.setName(meta.getString("title"));
                 resource.setIcon(meta.getString("icon"));
                 resource.setTagName(meta.getString("tagTitle"));
-                resource.setFlowCode(meta.getInteger("flowCode"));
-                if (StringUtils.isNotBlank(meta.getString("activeMenu"))) {
+                if (BooleanUtils.isTrue(meta.getBoolean("hidden"))) {
                     resource.setType(1);
                 }
             }
