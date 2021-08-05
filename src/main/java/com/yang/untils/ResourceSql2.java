@@ -106,15 +106,15 @@ public class ResourceSql2 {
             resource.setLevel(level);
             resource.setUrl(jsonObject.getString("path"));
             resource.setType(0);
+            if (BooleanUtils.isTrue(jsonObject.getBoolean("hidden"))) {
+                resource.setType(1);
+            }
             resource.setFlowCode(jsonObject.getInteger("flowCode"));
             JSONObject meta = jsonObject.getJSONObject("meta");
             if (meta != null) {
                 resource.setName(meta.getString("title"));
                 resource.setIcon(meta.getString("icon"));
                 resource.setTagName(meta.getString("tagTitle"));
-                if (BooleanUtils.isTrue(meta.getBoolean("hidden"))) {
-                    resource.setType(1);
-                }
             }
             resources.add(resource);
             JSONArray children = jsonObject.getJSONArray("children");
