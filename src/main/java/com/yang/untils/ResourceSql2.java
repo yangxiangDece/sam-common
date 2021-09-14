@@ -118,9 +118,6 @@ public class ResourceSql2 {
             JSONObject meta = jsonObject.getJSONObject("meta");
             if (meta != null) {
                 String title = meta.getString("title");
-                if (title.contains("�")) {
-                    System.out.println(title);
-                }
                 resource.setName(title);
                 resource.setIcon(meta.getString("icon"));
                 resource.setTagName(meta.getString("tagTitle"));
