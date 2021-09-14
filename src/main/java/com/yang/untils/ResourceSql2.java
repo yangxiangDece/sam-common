@@ -6,8 +6,10 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,15 +21,18 @@ public class ResourceSql2 {
     private final static AtomicInteger ATOMIC_INTEGER = new AtomicInteger(1);
 
     public static void main(String[] args) throws Exception {
-        FileInputStream fileInputStream = new FileInputStream("D:/download/config20210803.json");
-        byte[] bytes = new byte[1024];
-        int read;
-        StringBuilder builder = new StringBuilder();
-        while ((read = fileInputStream.read(bytes)) > -1) {
-            builder.append(new String(bytes, 0, read, StandardCharsets.UTF_8));
+        try (FileInputStream fileInputStream = new FileInputStream("/Users/yangxiang/Downloads/router.json");
+             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        ) {
+            String line;
+            StringBuilder builder = new StringBuilder();
+            while ((line = bufferedReader.readLine()) != null) {
+                builder.append(line);
+            }
+            String sqlPath = "/Users/yangxiang/Downloads/resource.sql";
+            toSql(builder.toString(), sqlPath);
         }
-        String sqlPath = "D:/resource.sql";
-        toSql(builder.toString(), sqlPath);
     }
 
     private static void toSql(String json, String sqlPath) throws Exception {
@@ -112,7 +117,11 @@ public class ResourceSql2 {
             resource.setFlowCode(jsonObject.getInteger("flowCode"));
             JSONObject meta = jsonObject.getJSONObject("meta");
             if (meta != null) {
-                resource.setName(meta.getString("title"));
+                String title = meta.getString("title");
+                if (title.contains("�")) {
+                    System.out.println(title);
+                }
+                resource.setName(title);
                 resource.setIcon(meta.getString("icon"));
                 resource.setTagName(meta.getString("tagTitle"));
             }

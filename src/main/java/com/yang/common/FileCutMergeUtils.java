@@ -58,10 +58,10 @@ public class FileCutMergeUtils {
         long partSize = sourceFile.length() / part;
         //创建源文件输入流
         FileInputStream fileInputStream = null;
+        //创建输出流
+        FileOutputStream fileOutputStream = null;
         try {
             fileInputStream = new FileInputStream(sourceFile);
-            //创建输出流
-            FileOutputStream fileOutputStream;
             for (int i = 1; i <= part; i++) {
                 //获取拆分文件的名称
                 //拆分文件
@@ -81,14 +81,12 @@ public class FileCutMergeUtils {
                         break;
                     }
                 }
-                //关闭输出流
-                fileOutputStream.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             //关闭输入流
-            close(fileInputStream);
+            close(fileOutputStream, fileInputStream);
         }
     }
 
